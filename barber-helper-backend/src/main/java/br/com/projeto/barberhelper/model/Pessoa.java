@@ -21,8 +21,6 @@ public class Pessoa extends EntidadeGenerica {
 
     private boolean flagFuncionario;
 
-    private String funcaoFuncionario;
-
     private String descricaoFuncionario;
 
 }
