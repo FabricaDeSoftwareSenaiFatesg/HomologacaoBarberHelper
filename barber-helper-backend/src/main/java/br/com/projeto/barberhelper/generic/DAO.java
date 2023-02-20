@@ -1,4 +1,4 @@
-package br.com.projeto.barberhelper.repository;
+package br.com.projeto.barberhelper.generic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

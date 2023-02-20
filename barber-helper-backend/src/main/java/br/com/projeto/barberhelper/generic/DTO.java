@@ -1,4 +1,4 @@
-package br.com.projeto.barberhelper.model.dto;
+package br.com.projeto.barberhelper.generic;
 
 import br.com.projeto.barberhelper.model.EntidadeGenerica;
 import lombok.Getter;
