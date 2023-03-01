@@ -14,7 +14,7 @@ Sistema WEB com foco agendamento de horários para barbeiros
 - Instalar o Font Awesome com o comando "npm install font-awesome --save"
 - Instalar o Angular CDK com o comando "npm install @angular/cdk --save"
 - npm install --save @angular/material @angular/cdk @angular/animations
-
+- Instalar o LiveReload com o comando "npm i -g livereload"
 
 ## Configurações Backend
 
