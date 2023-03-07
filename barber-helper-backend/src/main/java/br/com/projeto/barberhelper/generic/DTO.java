@@ -16,12 +16,6 @@ public class DTO {
 
     private Date dataCadastro;
 
-    private String usuarioAutorCadastro;
-
-    private Date dataAlteracao;
-
-    private String usuarioAutorAlteracao;
-
     public DTO() {
 
     }

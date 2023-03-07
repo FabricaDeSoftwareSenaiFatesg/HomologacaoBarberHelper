@@ -2,13 +2,23 @@ package br.com.projeto.barberhelper.generic;
 
 import br.com.projeto.barberhelper.model.EntidadeGenerica;
 import br.com.projeto.barberhelper.utils.DateUtil;
+import br.com.projeto.barberhelper.utils.TransformerTuple;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class ServiceGenerico<ID extends Serializable, E extends EntidadeGenerica> implements Service<ID, E> {
+
+    @Autowired
+    protected EntityManager em;
 
     @Override
     public E get(ID id) {
@@ -115,6 +125,34 @@ public abstract class ServiceGenerico<ID extends Serializable, E extends Entidad
     }
 
     public void preRemover(E entidade) {
+
+    }
+
+    protected <T> List<T> executeQueryAndTransforResult(CriteriaQuery<Tuple> query, Class<T> clazz) {
+
+        final TypedQuery<Tuple> typedQuery = em.createQuery(query);
+
+        final List<Tuple> tuples = typedQuery.getResultList();
+
+        final List<T> result =  tuples
+
+                .stream()
+
+                .map(tuple -> TransformerTuple.transformer(tuple, clazz))
+
+                .collect(Collectors.toList());
+
+        this.cleanAndCloseEntityConnection();
+
+        return result;
+
+    }
+
+    protected void cleanAndCloseEntityConnection() {
+
+        em.clear();
+
+        em.close();
 
     }
 
