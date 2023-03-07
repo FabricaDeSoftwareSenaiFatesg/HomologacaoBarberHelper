@@ -32,7 +32,7 @@ public class ReservaController extends ManutencaoController<Reserva> {
         return service;
     }
 
-    @GetMapping(value = "/fidelidade")
+    @GetMapping(value = "/fidelidade/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<FidelidadeDTO> obterFidelidadeCliente(@PathVariable Long idCliente) {

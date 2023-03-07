@@ -28,7 +28,7 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
     HistoricoPagamentoDAO historicoPagamentoDAO;
 
     @Override
-    public void createPayment(ProdutoPagamentoDTO produtoPagamentoDTO, ClientePagamentoDTO clientePagamentoDTO) throws MPException, MPApiException {
+    public void criarPagamento(ProdutoPagamentoDTO produtoPagamentoDTO, ClientePagamentoDTO clientePagamentoDTO) throws MPException, MPApiException {
 
         MercadoPagoConfig.setAccessToken(this.getAccessToken());
 
@@ -100,7 +100,7 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
     }
 
     @Override
-    public Payment getPayment(String id) throws MPException, MPApiException {
+    public Payment pegarPagamento(String id) throws MPException, MPApiException {
 
         MercadoPagoConfig.setAccessToken(this.getAccessToken());
 

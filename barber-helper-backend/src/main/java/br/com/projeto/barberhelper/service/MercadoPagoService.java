@@ -8,8 +8,8 @@ import com.mercadopago.resources.payment.Payment;
 
 public interface MercadoPagoService {
 
-    void createPayment(ProdutoPagamentoDTO produtoPagamentoDTO, ClientePagamentoDTO clientePagamentoDTO) throws MPException, MPApiException;
+    void criarPagamento(ProdutoPagamentoDTO produtoPagamentoDTO, ClientePagamentoDTO clientePagamentoDTO) throws MPException, MPApiException;
 
-    Payment getPayment(String id) throws MPException, MPApiException;
+    Payment pegarPagamento(String id) throws MPException, MPApiException;
 
 }
