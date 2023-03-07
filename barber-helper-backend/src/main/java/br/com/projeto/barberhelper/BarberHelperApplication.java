@@ -37,7 +37,8 @@ public class BarberHelperApplication {
     CommandLineRunner initDatabase(PessoaService pessoaService) {
         return args -> {
             Pessoa pessoa = new Pessoa();
-            pessoa.setNome("Pessoa Teste");
+            pessoa.setPrimeiroNome("Pessoa");
+            pessoa.setSegundoNome("teste");
             pessoa.setAtivo(true);
             pessoa.setCpf("0000000000");
             pessoa.setTelefone("549684984");
