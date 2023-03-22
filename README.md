@@ -8,13 +8,13 @@ Sistema WEB com foco agendamento de horários para barbeiros
 - Rodar projeto do front com o comando `ng s`
 - Link para acessar o projeto no navegador `http://localhost:4200/`
 
-- Instalar o Angular Material com o comando "npm install angular-material"
-- Instalar o PrimeNG com o comando "npm install primeng --save"
-- Instalar o PrimeIcons com o comando "npm install primeicons --save"
-- Instalar o Font Awesome com o comando "npm install font-awesome --save"
-- Instalar o Angular CDK com o comando "npm install @angular/cdk --save"
-- npm install --save @angular/material @angular/cdk @angular/animations
-- Instalar o LiveReload com o comando "npm i -g livereload"
+- Instalar o Angular Material com o comando `npm install angular-material`
+- Instalar o PrimeNG com o comando `npm install primeng --save`
+- Instalar o PrimeIcons com o comando `npm install primeicons --save`
+- Instalar o Font Awesome com o comando `npm install font-awesome --save`
+- Instalar o Angular CDK com o comando `npm install @angular/cdk --save`
+- `npm install --save @angular/material @angular/cdk @angular/animations`
+- Instalar o LiveReload com o comando `npm i -g livereload`
 
 ## Configurações Backend
 
