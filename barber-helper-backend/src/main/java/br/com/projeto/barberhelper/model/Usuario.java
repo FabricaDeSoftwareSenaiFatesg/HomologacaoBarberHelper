@@ -1,13 +1,13 @@
 package br.com.projeto.barberhelper.model;
 
+import br.com.projeto.barberhelper.model.enuns.TipoUsuarioEnum;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -21,6 +21,10 @@ public class Usuario extends EntidadeGenerica {
     private String senha;
 
     private String login;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo")
+    private TipoUsuarioEnum tipo;
 
     @OneToOne
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")

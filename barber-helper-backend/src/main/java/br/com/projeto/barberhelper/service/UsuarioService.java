@@ -4,4 +4,7 @@ import br.com.projeto.barberhelper.generic.Service;
 import br.com.projeto.barberhelper.model.Usuario;
 
 public interface UsuarioService extends Service<Long, Usuario> {
+
+    Usuario autenticarUsuario(final String login, final String senha);
+
 }
