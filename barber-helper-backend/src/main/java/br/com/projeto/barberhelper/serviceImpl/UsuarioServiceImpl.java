@@ -23,4 +23,8 @@ public class UsuarioServiceImpl extends ServiceGenerico<Long, Usuario> implement
     public void preSalvar(final Usuario entidade) {
     }
 
+    @Override
+    public Usuario autenticarUsuario(String login, String senha) {
+        return null;
+    }
 }

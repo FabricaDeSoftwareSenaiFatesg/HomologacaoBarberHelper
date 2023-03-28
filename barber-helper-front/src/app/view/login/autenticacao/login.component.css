@@ -1,5 +1,9 @@
-
-
-.logo {
+.logo-barbearia {
   background-color: black;
+  text-align: center;
+  height: 100%;
+}
+
+.pagina {
+  height: 915px;
 }

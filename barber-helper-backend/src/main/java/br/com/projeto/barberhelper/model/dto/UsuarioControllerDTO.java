@@ -28,7 +28,6 @@ public class UsuarioControllerDTO {
         setId(usuario.getId());
         setLogin(usuario.getLogin());
         setNome(usuario.getPessoa().getPrimeiroNome());
-        setSenhaInicial(usuario.getSenhaInicial());
         setTipo(usuario.getTipo().toString());
     }
 
