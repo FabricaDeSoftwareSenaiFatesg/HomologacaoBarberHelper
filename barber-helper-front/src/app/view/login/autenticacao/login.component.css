@@ -4,6 +4,10 @@
   height: 100%;
 }
 
-.pagina {
-  height: 915px;
+.login-container {
+  padding: 15px;
+}
+
+.div-logo {
+  padding: 0;
 }
