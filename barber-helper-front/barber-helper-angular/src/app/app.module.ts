@@ -7,10 +7,12 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { ReservaComponent } from './view/reserva/reserva.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReservaComponent
   ],
   imports: [
     BrowserModule,
