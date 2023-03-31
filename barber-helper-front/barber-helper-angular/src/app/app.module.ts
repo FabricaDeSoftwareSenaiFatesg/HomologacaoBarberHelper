@@ -3,24 +3,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { ReservaComponent } from './view/reserva/reserva.component';
+import { LoginComponent } from './view/login/login.component';
+import { ArquiteturaModule } from './arquitetura/arquitetura.module';
+import { ViewModule } from './view/view.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReservaComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ButtonModule,
-    CalendarModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    ArquiteturaModule,
+    ViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

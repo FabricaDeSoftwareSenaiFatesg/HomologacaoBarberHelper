@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import {Observable} from "rxjs";
-import {SelectItem} from "primeng/api";
 import {BaseService} from "./base.service";
 import {environment} from "../../../enviroments/enviroments";
 import {Entidade} from "../modelo/entidade.model";
@@ -38,7 +37,22 @@ export abstract class ConsultaServico<E extends Entidade> extends BaseService {
    */
   protected url(path: string) {
 
-    return `${environment.api}/${this.path}/${path}`
+    return `${environment.api}/${this.path}/${path}`;
+
+  }
+
+  /**
+   * Método responsável por listar os dados inerentes a entidade parametrizada <E>
+   *
+   * @param {Paginacao} parâmetro opcional. Caso definido, será utilizado para compor as regras de seleção da entidade.
+   * Caso não seja definido, trará todos os registros da entidade parametrizada
+   *
+   * @returns {E[]} lista de registros da entidade parametrizada
+   */
+  listar(): Observable<E[]> {
+
+    return this.http.get(`${environment.api}/${this.path}`, this.config()).pipe(map(this.mapper));
+
   }
 
   /**
@@ -50,59 +64,7 @@ export abstract class ConsultaServico<E extends Entidade> extends BaseService {
    */
   get(id: number): Observable<E> {
 
-    return this.http.get(this.url(`${id}`), this.config()).pipe(map(this.mapper))
-  }
-
-
-  /**
-   * Método responsável por obter um único registro da entidade pelo seu ID
-   *
-   * @param {number} identificador do registro da entidade
-   *
-   * @returns {E} um registro da entidade parametrizada
-   */
-  getDTO(id: number): Observable<any> {
-
-    return this.http.get(`${environment.api}/${this.path}/dto/${id}`, this.config()).pipe(map(this.mapper))
-  }
-
-  /*
-   * Método responsável por listar as entidades e retorna uma lista de DTO
-   *
-   */
-  listarItemDTO(): Observable<any[]> {
-
-    return this.http.get(`${environment.api}/${this.path}/listarItemDTO`, this.config()).pipe(map(this.mapper))
-
-  }
-
-  /*
-   * Método responsável por listar as entidades e retorna uma lista de DTO
-   *
-   */
-  listarItemAtivoDTO(): Observable<any[]> {
-
-    return this.http.get(`${environment.api}/${this.path}/listarItemAtivoDTO`, this.config()).pipe(map(this.mapper))
-
-  }
-
-  /*
-   * Método responsável por listar as entidades e retorna uma lista de SelectItem[] para tela de cadastro com o primeiro item como "Selecione..."
-   *
-   */
-  listarItemCadastro(): Observable<SelectItem[]> {
-
-    return this.http.get(`${environment.api}/${this.path}/listarItemCadastro`, this.config()).pipe(map(this.mapper))
-
-  }
-
-  /*
-   * Método responsável por listar as entidades e retorna uma lista de SelectItem[] para tela de cadastro com o primeiro item como "Selecione..."
-   *
-   */
-  listarItemAtivoCadastro(): Observable<SelectItem[]> {
-
-    return this.http.get(`${environment.api}/${this.path}/listarItemAtivoCadastro`, this.config()).pipe(map(this.mapper))
+    return this.http.get(this.url(`${id}`), this.config()).pipe(map(this.mapper));
 
   }
 

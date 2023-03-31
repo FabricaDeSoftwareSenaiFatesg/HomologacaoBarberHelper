@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { Pessoa } from './arquitetura/modelo/pessoa.model';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private primengConfig: PrimeNGConfig) {
 
   }
-
-  date: Date = new Date;
 
   ngOnInit() {
 

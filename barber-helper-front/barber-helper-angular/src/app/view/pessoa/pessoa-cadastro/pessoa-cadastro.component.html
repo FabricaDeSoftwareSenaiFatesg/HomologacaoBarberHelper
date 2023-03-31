@@ -1,0 +1,23 @@
+<div class="container" style="margin-top: 20px;">
+
+  <div class="form">
+
+    <span class="p-float-label" style="margin: 25px;">
+        <input pInputText id="primeiroNome" [(ngModel)]="pessoa1.primeiroNome"/>
+        <label htmlFor="primeiroNome">Primeiro Nome</label>
+    </span>
+
+    <span class="p-float-label" style="margin: 25px;">
+        <input pInputText id="segundoNome" [(ngModel)]="pessoa1.segundoNome" />
+        <label htmlFor="segundoNome">Segundo Nome</label>
+    </span>
+
+    <span class="p-float-label" style="margin: 25px;">
+      <p-inputMask mask="999.999.999-99" [(ngModel)]="pessoa1.cpf" id="cpf"></p-inputMask>
+      <label htmlFor="cpf">CPF</label>
+    </span>
+
+    <p-button label="Submit" style="margin: 25px;" (onClick)="salvar()"></p-button>
+
+  </div>
+</div>

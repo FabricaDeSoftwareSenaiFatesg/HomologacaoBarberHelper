@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import { map } from 'rxjs/operators';
 import { ConsultaServico } from './consulta.service';
 import {Observable} from "rxjs";
 import {environment} from "../../../enviroments/enviroments";
 import {Entidade} from "../modelo/entidade.model";
+import {map} from 'rxjs/operators';
 
 /**
  * Serviço inerente a manutenção de entidades no backend
@@ -39,6 +38,7 @@ export abstract class ManutencaoServico<E extends Entidade> extends ConsultaServ
   salvar(entidade: E): Observable<string> {
 
     return this.http.post(`${environment.api}/${this.path}`, entidade, this.config()).pipe(map(this.mapper));
+
   }
 
   /**
