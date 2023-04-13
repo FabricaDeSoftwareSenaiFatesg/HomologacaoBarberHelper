@@ -1,16 +1,15 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ManutencaoComponent } from 'src/app/arquitetura/component/manutencao.component';
 import { Pessoa } from 'src/app/arquitetura/modelo/pessoa.model';
 import { PessoaService } from '../pessoa.service';
-import { FormGroup } from '@angular/forms';
+import { BaseComponent } from 'src/app/arquitetura/component/base.component';
 
 @Component({
   selector: 'app-pessoa-cadastro',
   templateUrl: './pessoa-cadastro.component.html',
   styleUrls: ['./pessoa-cadastro.component.css']
 })
-export class PessoaCadastroComponent extends ManutencaoComponent<Pessoa> implements OnInit {
+export class PessoaCadastroComponent extends BaseComponent<Pessoa> implements OnInit {
 
   constructor(
     protected changeDetectorRef: ChangeDetectorRef,
@@ -33,13 +32,13 @@ export class PessoaCadastroComponent extends ManutencaoComponent<Pessoa> impleme
     return new Pessoa();
   }
 
-  override salvar() {
+  salvarEntidade() {
 
     console.log(this.pessoa1);
 
     this.entidade = this.pessoa1;
 
-    this.service.salvar(this.entidade);
+    this.service.salvar(this.entidade).subscribe();
 
   }
 

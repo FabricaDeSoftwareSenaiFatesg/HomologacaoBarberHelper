@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PessoaModule } from './pessoa/pessoa.module';
+import { ReservaModule } from './reserva/reserva.module';
 
 
 
@@ -11,7 +12,8 @@ import { PessoaModule } from './pessoa/pessoa.module';
     CommonModule
   ],
   exports: [
-    PessoaModule
+    PessoaModule,
+    ReservaModule
   ]
 })
 export class ViewModule { }
