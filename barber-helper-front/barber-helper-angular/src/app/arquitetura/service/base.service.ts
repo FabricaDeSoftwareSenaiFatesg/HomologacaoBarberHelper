@@ -1,67 +1,44 @@
-import { HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { Entidade } from "../modelo/entidade.model";
+import { first } from 'rxjs/operators';
 
-export class BaseService {
+export class BaseService<E extends Entidade> {
 
-  /**
-   * Método responsável por configurar as opções de requisição
-   *
-   * @returns {RequestOptionsArgs} configurações padrão
-   */
-  protected config(loading:boolean = true): any {
+  constructor(
+    private httpClient: HttpClient,
+    public path: string,
+    ) { }
 
-    const params: HttpParams = new HttpParams()
+  public readonly API = 'http://localhost:8080';
 
-      .set('p1', `${loading}`)
+  listar() {
 
-    return {
+    return this.httpClient.get<E[]>(`${this.API}/${this.path}`);
 
-      headers: this.buildHeaders(),
-
-      params: params
-    }
   }
 
-  protected configHttpClient(loading:boolean = true): any {
+  get(id: number) {
 
-    const params: HttpParams = new HttpParams()
+    return this.httpClient.get<E>(`${this.API}/${this.path}/${id}`);
 
-      .set('p1', `${loading}`)
-
-    return {
-
-      headers: this.buildHeaders(),
-
-      params: params
-    }
   }
 
-  /**
-   * Método responsável por construir os cabeçalhos de requisição padrão nas chamadas do serviço
-   *
-   * @returns {Headers} cabeçalhos padrão
-   */
-  protected buildHeaders(): Headers {
+  salvar(entidade: E) {
 
-    return new Headers({
+    return this.httpClient.post<E>(`${this.API}/${this.path}`, entidade);
 
-      'Content-Type': 'application/json',
-
-      'Accept': 'application/json'
-    });
   }
 
-  /**
-   * Método responsável por fazer o mapper da resposta do servidor
-   */
-  protected mapper(resp: any) {
-    try {
+  alterar(entidade: E) {
 
-      return (resp.json() || resp.text())
+    return this.httpClient.put<E>(`${this.API}/${this.path}/${entidade.id}`, entidade).pipe(first());
 
-    }catch (error){
+  }
 
-      return resp;
-    }
+  remove(id: string) {
+
+    return this.httpClient.delete(`${this.API}/${this.path}/${id}`).pipe(first());
+
   }
 
 }
