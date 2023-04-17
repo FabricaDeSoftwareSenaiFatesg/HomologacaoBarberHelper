@@ -29,7 +29,9 @@ export class PessoaCadastroComponent extends BaseComponent<Pessoa> implements On
   }
 
   protected override newEntidade(): Pessoa {
+
     return new Pessoa();
+
   }
 
   salvarEntidade() {
@@ -37,6 +39,12 @@ export class PessoaCadastroComponent extends BaseComponent<Pessoa> implements On
     console.log(this.entidade);
 
     //this.service.salvar(this.entidade).subscribe();
+
+  }
+
+  retornarCpf(cpf : string) {
+
+    this.service.testeRetornarCpf(cpf).subscribe(retorno => console.log(retorno.entity));
 
   }
 

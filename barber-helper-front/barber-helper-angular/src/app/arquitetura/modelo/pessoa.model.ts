@@ -2,9 +2,7 @@ import { Entidade } from './entidade.model';
 
 export class Pessoa extends Entidade {
 
-  primeiroNome: string = "";
-
-  segundoNome: string = "";
+  nome: string = "";
 
   cpf: string = "";
 
