@@ -3,17 +3,17 @@
   <div class="form">
 
     <span class="p-float-label">
-        <input pInputText id="primeiroNome" [(ngModel)]="pessoa1.primeiroNome"/>
+        <input pInputText id="primeiroNome" [(ngModel)]="entidade.primeiroNome"/>
         <label htmlFor="primeiroNome">Primeiro Nome</label>
     </span>
 
     <span class="p-float-label">
-        <input pInputText id="segundoNome" [(ngModel)]="pessoa1.segundoNome" />
+        <input pInputText id="segundoNome" [(ngModel)]="entidade.segundoNome" />
         <label htmlFor="segundoNome">Segundo Nome</label>
     </span>
 
     <span class="p-float-label">
-      <p-inputMask mask="999.999.999-99" [(ngModel)]="pessoa1.cpf" id="cpf"></p-inputMask>
+      <p-inputMask mask="999.999.999-99" [(ngModel)]="entidade.cpf" id="cpf"></p-inputMask>
       <label htmlFor="cpf">CPF</label>
     </span>
 

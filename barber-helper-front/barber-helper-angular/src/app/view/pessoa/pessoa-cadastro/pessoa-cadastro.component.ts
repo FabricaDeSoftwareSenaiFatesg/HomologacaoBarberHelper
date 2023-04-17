@@ -34,11 +34,9 @@ export class PessoaCadastroComponent extends BaseComponent<Pessoa> implements On
 
   salvarEntidade() {
 
-    console.log(this.pessoa1);
+    console.log(this.entidade);
 
-    this.entidade = this.pessoa1;
-
-    this.service.salvar(this.entidade).subscribe();
+    //this.service.salvar(this.entidade).subscribe();
 
   }
 
