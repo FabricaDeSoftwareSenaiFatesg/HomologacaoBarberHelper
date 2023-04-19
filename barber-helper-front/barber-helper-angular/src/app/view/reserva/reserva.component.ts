@@ -15,9 +15,18 @@ export class ReservaComponent extends BaseComponent<Reserva> {
     protected changeDetectorRef: ChangeDetectorRef,
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
-    protected override service: ReservaService
-    ) {
+    protected override service: ReservaService) {
+
     super(changeDetectorRef, router, activatedRoute, service);
+
+    this.ngOnInit();
+
+  }
+
+  override ngOnInit(): void {
+
+    this.newEntidade();
+
   }
 
   protected override newEntidade(): Reserva {
