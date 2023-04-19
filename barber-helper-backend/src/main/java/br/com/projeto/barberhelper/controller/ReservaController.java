@@ -1,7 +1,11 @@
 package br.com.projeto.barberhelper.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import br.com.projeto.barberhelper.generic.ManutencaoController;
 import br.com.projeto.barberhelper.generic.Service;
+import br.com.projeto.barberhelper.model.HorariosDisponiveis;
 import br.com.projeto.barberhelper.model.dto.FidelidadeDTO;
 import br.com.projeto.barberhelper.model.Reserva;
 import br.com.projeto.barberhelper.service.ReservaService;
@@ -10,12 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,6 +46,15 @@ public class ReservaController extends ManutencaoController<Reserva> {
 
         return ResponseEntity.ok().body(service.obterCountFidelidadeCliente(idCliente));
 
+    }
+
+    @PostMapping(value = "/consultarHorarios")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consultarHorarios(@RequestBody Date date) {
+
+        List<String> horarios = HorariosDisponiveis.getHorarios();
+        return Response.ok(horarios).build();
     }
 
 }
