@@ -23,12 +23,6 @@ export class ReservaComponent extends BaseComponent<Reserva> implements OnInit{
 
   }
 
-  override ngOnInit(): void {
-
-    this.newEntidade();
-
-  }
-
   date: Date = new Date();
   horarios: string[] = [];
 

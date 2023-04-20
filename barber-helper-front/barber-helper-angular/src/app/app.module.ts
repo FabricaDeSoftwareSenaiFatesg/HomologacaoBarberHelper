@@ -16,7 +16,6 @@ import { ButtonModule } from 'primeng/button';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
