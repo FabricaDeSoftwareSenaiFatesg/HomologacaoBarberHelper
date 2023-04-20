@@ -1,6 +1,32 @@
-<div class="mt-5 m-lg-5">
-  <h1 class="mb-3">Agende seu horário</h1>
+<div class="row">
+  <div class="col-md-6 m-lg-5 input-grupo">
+    <h2>Agende seu horário</h2>
 
-  <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true" (onSelect)="consultarHorarios()"></p-calendar>
+    <label htmlFor="nome" class="label-input">Serviços</label>
+    <p-dropdown [options]="servicos" [(ngModel)]="servicosSelecionados"></p-dropdown>
+
+    <label htmlFor="nome" class="label-input">Profissional</label>
+    <p-dropdown [options]="profissionais" [(ngModel)]="profissionalSelecionado"></p-dropdown>
+
+    <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true" (onSelect)="consultarHorarios()"></p-calendar>
+
+    <label htmlFor="nome" class="label-input">Horários disponíveis</label>
+    <p-dropdown [options]="horarios" [(ngModel)]="horarioSelecionado" (onClick)="consultarProfissionais()"></p-dropdown>
+  </div>
+
+  <div class="col-md-6 input-grupo">
+
+  </div>
 </div>
 
+
+<!--<label htmlFor="nome" class="label-input">Profissional</label>-->
+<!--<p-dropdown [options]="profissionais" [(ngModel)]="profissionalSelecionado" [disabled]="profissionais.length<1"></p-dropdown>-->
+
+<!--<label htmlFor="nome" class="label-input">Serviços</label>-->
+<!--<p-dropdown [options]="servicos" [(ngModel)]="servicosSelecionados"></p-dropdown>-->
+
+<!--<p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true" (onSelect)="consultarHorarios()"></p-calendar>-->
+
+<!--<label htmlFor="nome" class="label-input">Horários disponíveis</label>-->
+<!--<p-dropdown [options]="horarios" [(ngModel)]="horarioSelecionado" [disabled]="horarios.length<1" (onClick)="consultarProfissionais()"></p-dropdown>-->

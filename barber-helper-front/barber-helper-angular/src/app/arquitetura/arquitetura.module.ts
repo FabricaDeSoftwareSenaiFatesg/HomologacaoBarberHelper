@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    InputSwitchModule
+    InputSwitchModule,
+    DropdownModule,
   ],
   exports: [
     InputMaskModule,
@@ -34,7 +36,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    InputSwitchModule
+    InputSwitchModule,
+    DropdownModule,
   ]
 })
 export class ArquiteturaModule { }
