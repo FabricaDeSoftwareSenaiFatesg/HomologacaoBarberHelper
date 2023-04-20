@@ -1,23 +1,38 @@
-<div class="container" style="margin-top: 20px;">
+<div class="form" style="padding: 20px;">
 
-  <div class="form">
+  <p-button label="SALVAR" class="btn-salvar" (onClick)="salvar()"></p-button>
 
-    <span class="p-float-label">
-        <input pInputText id="primeiroNome" [(ngModel)]="pessoa1.primeiroNome"/>
-        <label htmlFor="primeiroNome">Primeiro Nome</label>
-    </span>
+  <div class="row">
 
-    <span class="p-float-label">
-        <input pInputText id="segundoNome" [(ngModel)]="pessoa1.segundoNome" />
-        <label htmlFor="segundoNome">Segundo Nome</label>
-    </span>
+    <div class="col input-grupo">
+      <label htmlFor="nome" class="label-input">Nome</label>
+      <input type="text" class="input-personalizado" pInputText [(ngModel)]="entidade.nome" />
+    </div>
 
-    <span class="p-float-label">
-      <p-inputMask mask="999.999.999-99" [(ngModel)]="pessoa1.cpf" id="cpf"></p-inputMask>
-      <label htmlFor="cpf">CPF</label>
-    </span>
+    <div class="col input-grupo">
+      <label htmlFor="cpf" class="label-input">CPF</label>
+      <p-inputMask class="input-personalizado" mask="999.999.999-99" [(ngModel)]="entidade.cpf"></p-inputMask>
+    </div>
 
-    <p-button label="Submit" (onClick)="salvarEntidade()"></p-button>
+    <div class="col input-grupo">
+      <label htmlFor="telefone" class="label-input">Telefone</label>
+      <p-inputMask class="input-personalizado" mask="(99) 9-9999-9999" [(ngModel)]="entidade.telefone"></p-inputMask>
+    </div>
 
   </div>
+
+  <div class="row">
+
+    <div class="col-2 input-grupo switch-input">
+      <label htmlFor="cpf" class="label-input">Funcionário</label>
+      <p-inputSwitch [(ngModel)]="entidade.flagFuncionario"><span>{{entidade.flagFuncionario? "Sim" : "Não"}}</span></p-inputSwitch>
+    </div>
+
+    <div class="col input-grupo">
+      <label htmlFor="descricaoFuncionario" class="label-input">Descrição funcionário</label>
+      <input type="text" class="input-personalizado" pInputText [disabled]="!entidade.flagFuncionario" [(ngModel)]="entidade.descricaoFuncionario" />
+    </div>
+
+  </div>
+
 </div>

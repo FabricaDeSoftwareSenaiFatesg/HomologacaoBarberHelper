@@ -13,9 +13,7 @@ import javax.persistence.*;
 @Entity(name = "tb_pessoa")
 public class Pessoa extends EntidadeGenerica {
 
-    private String primeiroNome;
-
-    private String segundoNome;
+    private String nome;
 
     private String cpf;
 

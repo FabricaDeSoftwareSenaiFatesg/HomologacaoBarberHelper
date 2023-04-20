@@ -28,7 +28,7 @@ export abstract class BaseComponent<E extends Entidade> {
 
   salvar(form?: any) {
 
-    if (form && form.valid) {
+    if (this.entidade !== null && this.entidade !== undefined) {
 
       if (!this.entidade.id) {
 

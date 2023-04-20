@@ -15,12 +15,13 @@ export class PessoaCadastroComponent extends BaseComponent<Pessoa> implements On
     protected changeDetectorRef: ChangeDetectorRef,
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
-    protected override service: PessoaService
-    ) {
-    super(changeDetectorRef, router, activatedRoute, service);
-  }
+    protected override service: PessoaService) {
 
-  pessoa1: Pessoa = new Pessoa();
+    super(changeDetectorRef, router, activatedRoute, service);
+
+    super.ngOnInit();
+
+  }
 
   override ngOnInit(): void {
 
@@ -29,16 +30,20 @@ export class PessoaCadastroComponent extends BaseComponent<Pessoa> implements On
   }
 
   protected override newEntidade(): Pessoa {
+
     return new Pessoa();
+
   }
 
-  salvarEntidade() {
+  override preSalvar() {
 
-    console.log(this.pessoa1);
+    console.log(this.entidade);
 
-    this.entidade = this.pessoa1;
+  }
 
-    this.service.salvar(this.entidade).subscribe();
+  retornarCpf(cpf : string) {
+
+    this.service.testeRetornarCpf(cpf).subscribe(retorno => console.log(retorno.entity));
 
   }
 

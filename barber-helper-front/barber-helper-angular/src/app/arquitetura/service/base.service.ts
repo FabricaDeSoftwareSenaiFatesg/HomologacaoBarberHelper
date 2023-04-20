@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 export class BaseService<E extends Entidade> {
 
   constructor(
-    private httpClient: HttpClient,
+    public httpClient: HttpClient,
     public path: string,
     ) { }
 

@@ -4,3 +4,28 @@
 @import "primeicons/primeicons.css";
 
 html, body { height: 100%; }
+
+.input-grupo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.label-input {
+  margin-bottom: 5px;
+}
+
+.switch-input {
+  max-width: 110px;
+}
+
+.btn-salvar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+input {
+  height: 34px;
+  width: 100%;
+}

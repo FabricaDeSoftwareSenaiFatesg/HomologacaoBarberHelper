@@ -1,10 +1,10 @@
 export class Entidade {
 
-  id: number = 0;
+  id: number;
 
   ativo: boolean = true;
 
-  dataCadastro: Date = new Date();
+  dataCadastro: Date;
 
   constructor() {
 

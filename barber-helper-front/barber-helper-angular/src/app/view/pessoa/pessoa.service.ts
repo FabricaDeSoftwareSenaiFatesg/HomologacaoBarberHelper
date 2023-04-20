@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Pessoa } from 'src/app/arquitetura/modelo/pessoa.model';
 import { BaseService } from 'src/app/arquitetura/service/base.service';
 
@@ -8,10 +9,14 @@ import { BaseService } from 'src/app/arquitetura/service/base.service';
 })
 export class PessoaService extends BaseService<Pessoa> {
 
-  http: HttpClient;
+  constructor(httpClient: HttpClient) {
+    super( httpClient, "pessoa");
+  }
 
-  constructor(http: HttpClient) {
-    super( http, "pessoa");
+  testeRetornarCpf(cpf: string) {
+
+    return this.httpClient.post<any>(`${this.API}/${this.path}/retornar-cpf`, cpf);
+
   }
 
 }

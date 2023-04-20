@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AppRoutingModule } from '../app-routing.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    InputSwitchModule
   ],
   exports: [
     InputMaskModule,
@@ -32,6 +34,7 @@ import { AppRoutingModule } from '../app-routing.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    InputSwitchModule
   ]
 })
 export class ArquiteturaModule { }
