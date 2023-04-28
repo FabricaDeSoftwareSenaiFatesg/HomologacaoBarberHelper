@@ -25,7 +25,14 @@ html, body { height: 100%; }
   margin-bottom: 15px;
 }
 
-input {
-  height: 34px;
+.input-personalizado {
+  width: 100%;
+}
+
+.input-personalizado .p-multiselect{
+  width: 100%;
+}
+
+.input-personalizado .p-dropdown {
   width: 100%;
 }

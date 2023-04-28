@@ -4,6 +4,7 @@ import { Reserva } from 'src/app/arquitetura/modelo/reserva.model';
 import { ReservaService } from './reserva.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import {PessoaService} from "../pessoa/pessoa.service";
+import {ServicoService} from "../servico/servico.service";
 
 @Component({
   selector: 'app-reserva',
@@ -17,15 +18,15 @@ export class ReservaComponent extends BaseComponent<Reserva> implements OnInit{
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
     protected override service: ReservaService,
-    protected pessoaService: PessoaService) {
+    protected pessoaService: PessoaService,
+    protected servicoService: ServicoService) {
 
     super(changeDetectorRef, router, activatedRoute, service);
 
     this.ngOnInit();
-
   }
 
-  date: Date = new Date();
+  data: Date = new Date();
 
   servicos: any = [];
   servicosSelecionados: any = [];
@@ -48,20 +49,25 @@ export class ReservaComponent extends BaseComponent<Reserva> implements OnInit{
   }
 
   consultarHorarios() {
-
-    this.service.consultarHorarios(this.date).subscribe(response => {
+    let pesquisaHorarios = {
+      servicos: this.servicosSelecionados,
+      profissional: this.profissionalSelecionado,
+      data: this.data
+    };
+    this.service.consultarHorarios(pesquisaHorarios).subscribe(response => {
       this.horarios = response.entity;
     });
   }
 
   consultarProfissionais() {
     this.pessoaService.listar().subscribe(response => {
-      console.log(response);
       this.profissionais = response;
     });
   }
 
   consultarServicos() {
-
+    this.servicoService.listar().subscribe(response => {
+      this.servicos = response;
+    })
   }
 }

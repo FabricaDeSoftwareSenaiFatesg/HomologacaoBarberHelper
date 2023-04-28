@@ -12,8 +12,8 @@ export class ReservaService extends BaseService<Reserva>{
     super( httpClient, 'reserva');
   }
 
-  consultarHorarios(data: Date) {
+  consultarHorarios(pesquisaHorarios: any) {
 
-    return this.httpClient.post<any>(`${this.API}/reserva/consultarHorarios`, data);
+    return this.httpClient.post<any>(`${this.API}/reserva/consultarHorarios`, pesquisaHorarios);
   }
 }

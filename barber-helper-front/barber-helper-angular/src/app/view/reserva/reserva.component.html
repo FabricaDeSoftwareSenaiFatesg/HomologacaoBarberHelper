@@ -1,32 +1,47 @@
-<div class="row">
-  <div class="col-md-6 m-lg-5 input-grupo">
+<div class="row" style="margin: 30px;">
+  <div class="col">
+
     <h2>Agende seu horário</h2>
 
-    <label htmlFor="nome" class="label-input">Serviços</label>
-    <p-dropdown [options]="servicos" [(ngModel)]="servicosSelecionados"></p-dropdown>
+    <div class="row">
+      <div class="col input-grupo">
+        <label htmlFor="servicos" class="label-input">Serviços</label>
+        <p-multiSelect class="input-personalizado" [options]="servicos" [(ngModel)]="servicosSelecionados" optionLabel="descricao"></p-multiSelect>
+      </div>
+    </div>
 
-    <label htmlFor="nome" class="label-input">Profissional</label>
-    <p-dropdown [options]="profissionais" [(ngModel)]="profissionalSelecionado"></p-dropdown>
+    <div class="row">
+      <div class="col input-grupo">
+        <label htmlFor="profissional" class="label-input">Profissional</label>
+        <p-dropdown class="input-personalizado" [options]="profissionais" [(ngModel)]="profissionalSelecionado" optionLabel="nome"></p-dropdown>
+      </div>
+    </div>
 
-    <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true" (onSelect)="consultarHorarios()"></p-calendar>
+    <div class="row">
+      <div class="col input-grupo">
+        <p-calendar [(ngModel)]="data" [inline]="true" [showWeek]="true" (onSelect)="consultarHorarios()"></p-calendar>
+      </div>
+    </div>
 
-    <label htmlFor="nome" class="label-input">Horários disponíveis</label>
-    <p-dropdown [options]="horarios" [(ngModel)]="horarioSelecionado" (onClick)="consultarProfissionais()"></p-dropdown>
+    <div class="row">
+      <div class="col input-grupo">
+        <label htmlFor="horarios" class="label-input">Horários disponíveis</label>
+        <p-dropdown class="input-personalizado" [options]="horarios" [(ngModel)]="horarioSelecionado"></p-dropdown>
+      </div>
+    </div>
   </div>
 
-  <div class="col-md-6 input-grupo">
+  <div class="col">
+    <div class="row">
+      <div class="col input-grupo">
 
+        <div *ngFor="let servico of servicosSelecionados">
+          <label>{{servico.descricao}}</label>
+        </div>
+        <label>{{profissionalSelecionado.nome}}</label>
+        <label>{{data}}</label>
+        <label>{{horarioSelecionado}}</label>
+      </div>
+    </div>
   </div>
 </div>
-
-
-<!--<label htmlFor="nome" class="label-input">Profissional</label>-->
-<!--<p-dropdown [options]="profissionais" [(ngModel)]="profissionalSelecionado" [disabled]="profissionais.length<1"></p-dropdown>-->
-
-<!--<label htmlFor="nome" class="label-input">Serviços</label>-->
-<!--<p-dropdown [options]="servicos" [(ngModel)]="servicosSelecionados"></p-dropdown>-->
-
-<!--<p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true" (onSelect)="consultarHorarios()"></p-calendar>-->
-
-<!--<label htmlFor="nome" class="label-input">Horários disponíveis</label>-->
-<!--<p-dropdown [options]="horarios" [(ngModel)]="horarioSelecionado" [disabled]="horarios.length<1" (onClick)="consultarProfissionais()"></p-dropdown>-->
