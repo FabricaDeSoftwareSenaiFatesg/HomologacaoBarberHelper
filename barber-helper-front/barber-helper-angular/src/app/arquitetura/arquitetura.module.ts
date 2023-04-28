@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import {DropdownModule} from "primeng/dropdown";
+import {MultiSelectModule} from "primeng/multiselect";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {DropdownModule} from "primeng/dropdown";
     FormsModule,
     InputSwitchModule,
     DropdownModule,
+    MultiSelectModule,
   ],
   exports: [
     InputMaskModule,
@@ -38,6 +40,7 @@ import {DropdownModule} from "primeng/dropdown";
     FormsModule,
     InputSwitchModule,
     DropdownModule,
+    MultiSelectModule,
   ]
 })
 export class ArquiteturaModule { }

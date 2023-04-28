@@ -8,6 +8,7 @@ import br.com.projeto.barberhelper.generic.Service;
 import br.com.projeto.barberhelper.model.HorariosDisponiveis;
 import br.com.projeto.barberhelper.model.dto.FidelidadeDTO;
 import br.com.projeto.barberhelper.model.Reserva;
+import br.com.projeto.barberhelper.model.dto.PesquisaHorarios;
 import br.com.projeto.barberhelper.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,9 @@ public class ReservaController extends ManutencaoController<Reserva> {
     @PostMapping(value = "/consultarHorarios")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response consultarHorarios(@RequestBody Date date) {
+    public Response consultarHorarios(@RequestBody PesquisaHorarios pesquisaHorarios) {
+
+        List<Reserva> reservas = service.obterReservasDoFuncionarioPorData(pesquisaHorarios.getProfissional().getId(), pesquisaHorarios.getData());
 
         List<String> horarios = HorariosDisponiveis.getHorarios();
         return Response.ok(horarios).build();
