@@ -120,4 +120,10 @@ export abstract class BaseComponent<E extends Entidade> {
 
   }
 
+  cadastrar() {
+
+    this.router.navigate([this.service.path + '/novo']);
+
+  }
+
 }

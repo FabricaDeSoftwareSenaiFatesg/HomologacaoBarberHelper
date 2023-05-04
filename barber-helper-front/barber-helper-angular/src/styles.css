@@ -20,12 +20,15 @@ html, body { height: 100%; }
 }
 
 input {
-  height: 34px;
+  height: 40px;
+  width: 100%;
+}
+
+.p-inputnumber {
   width: 100%;
 }
 
 .tabela-dados {
-  margin: 20px;
 }
 
 .btn-confimar {
@@ -69,4 +72,42 @@ input {
 .btn-confimar:active:before {
   background: #F9F5F2;
   transition: 0s;
+}
+
+.div-inputs {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.div-novo-cadastro {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-novo-cadastro {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.tela-listagem {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.div-voltar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-voltar {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cadastro {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.form-cadastro {
 }
