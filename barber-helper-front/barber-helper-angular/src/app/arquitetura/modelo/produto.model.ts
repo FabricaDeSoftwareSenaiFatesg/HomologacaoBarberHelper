@@ -1,4 +1,5 @@
 import { Entidade } from './entidade.model';
+import { Imagem } from './imagem.model';
 
 export class Produto extends Entidade {
 
@@ -7,6 +8,8 @@ export class Produto extends Entidade {
   valor: number = 0;
 
   tempo: number = 0;
+
+  imagem: Imagem;
 
   constructor() {
     super();

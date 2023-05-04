@@ -11,9 +11,17 @@ import { AppRoutingModule } from '../app-routing.module';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
+import { TableModule } from 'primeng/table';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { DialogModule } from 'primeng/dialog';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { SafeUrlPipe } from './pipe/safe-url.pipe';
+import { ImagemPreviewComponent } from './component/imagem-preview.component';
 
 @NgModule({
   declarations: [
+    SafeUrlPipe,
+    ImagemPreviewComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +36,10 @@ import {MultiSelectModule} from "primeng/multiselect";
     InputSwitchModule,
     DropdownModule,
     MultiSelectModule,
+    TableModule,
+    TieredMenuModule,
+    DialogModule,
+    InputNumberModule
   ],
   exports: [
     InputMaskModule,
@@ -41,6 +53,15 @@ import {MultiSelectModule} from "primeng/multiselect";
     InputSwitchModule,
     DropdownModule,
     MultiSelectModule,
+    TableModule,
+    TieredMenuModule,
+    DialogModule,
+    InputNumberModule,
+    SafeUrlPipe,
+    ImagemPreviewComponent
+  ],
+  providers: [
+    SafeUrlPipe
   ]
 })
 export class ArquiteturaModule { }

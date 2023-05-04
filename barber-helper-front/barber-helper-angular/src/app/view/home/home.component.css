@@ -1,0 +1,113 @@
+/*
+  Estilo da barra de menu:
+  1º- Define a cor de fundo da barra de menu;
+  2º- Faz com que os elementos dentro da barra sejam exibidos em linha;
+  3º- Centraliza horizontalmente os elementos dentro da barra;
+  4º- Define a altura da barra do menu.
+*/
+.menu {
+  background-color: #202020;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+}
+
+
+/*
+  Estilo da lista de links:
+  1º- Centraliza o texto dos links;
+  2º- Faz com que os elementos dentro da lista sejam exibidos em linha;
+  3º- Centraliza verticalmente os elementos dentro da lista.
+*/
+.main-nav {
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+
+/*
+  Estilo dos ícones de whatsapp, instagram e configurações:
+  1º- Define o tamanho da fonte dos ícones;
+  2º- Define a cor dos ícones.
+*/
+.main-nav .whatsapp i,
+.main-nav .instagram i,
+.main-nav .config i {
+  font-size: 20px;
+  color: white;
+}
+
+
+/* Define um margem no topo do ícone para centralizá-lo */
+.main-nav .config i {
+  margin-top: 5px;
+}
+
+
+/*
+  Estilo dos links:
+  1º- Define a fonte dos links;
+  2º- Define o tamanho da fonte dos links;
+  3º- Define a cor dos links;
+  4º- Remove a sublinhado dos links.
+*/
+.main-nav a {
+  font-family: Khand Medium, sans-serif;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+
+/*
+  Cria efeito hover para os links e ícones:
+  1º- Muda a cor e garante que isso aconteça independente das regras;
+*/
+.main-nav a:hover,
+.main-nav i:hover {
+  color: #C07C5A !important;
+}
+
+
+/*
+  Estilo da lista não ordenada que contém os links:
+  1º- Remove as margens externas da lista;
+  2º- Remove o preenchimento interno da lista;
+  3º- Remove a formatação de lista padrão;
+  4º- Faz com que os elementos dentro da lista sejam exibidos em linha;
+  5º- Centraliza verticalmente os elementos dentro da lista;
+  6º- Define a altura da lista como 100%.
+*/
+.main-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+
+h1 {
+  font-family: 'Khand', sans-serif;
+  font-weight: 600; /* negrito */
+  font-size: 2.6rem; /* tamanho personalizado */
+  text-align: center;
+}
+
+
+
+/*
+  Estilo dos itens da lista:
+  1º- Define a margem entre os itens da lista;
+  2º- Define a altura dos itens da lista como 100%;
+  3º- Faz com que os elementos dentro dos itens da lista sejam exibidos em linha;
+  4º- Centraliza verticalmente os elementos dentro dos itens da lista;
+*/
+.main-nav li {
+  margin: 0 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
