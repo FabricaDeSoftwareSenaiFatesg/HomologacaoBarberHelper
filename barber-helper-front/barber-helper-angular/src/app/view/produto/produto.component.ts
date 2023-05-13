@@ -9,7 +9,7 @@ import { ProdutoService } from './produto.service';
   templateUrl: './produto.component.html',
   styleUrls: ['./produto.component.css']
 })
-export class ProdutoComponent extends BaseComponent<Produto> implements OnInit {
+export class ProdutoComponent extends BaseComponent<Produto> {
 
   constructor(
     protected changeDetectorRef: ChangeDetectorRef,
@@ -23,35 +23,15 @@ export class ProdutoComponent extends BaseComponent<Produto> implements OnInit {
 
   }
 
-  produtos: Produto[] = [];
-
-  cadastro: boolean;
-
   override ngOnInit(): void {
 
-    this.listar();
+    super.listar();
 
   }
 
   protected override newEntidade(): Produto {
 
     return new Produto();
-
-  }
-
-  listar() {
-
-    this.service.listar().subscribe(retorno => {
-
-      this.produtos = retorno;
-
-    })
-
-  }
-
-  showDialog() {
-
-    this.cadastro = true;
 
   }
 
@@ -67,6 +47,14 @@ export class ProdutoComponent extends BaseComponent<Produto> implements OnInit {
 
     }
 
-}
+  }
+
+  override salvar() {
+
+    this.entidade = this.entidadeForm;
+
+    super.salvar();
+
+  }
 
 }

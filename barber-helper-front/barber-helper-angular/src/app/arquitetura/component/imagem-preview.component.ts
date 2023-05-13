@@ -10,7 +10,7 @@ import { Imagem } from "../modelo/imagem.model";
 
             <div *ngIf="!visualizacao" class="form-row" style="min-width: 100%; margin: 0px 0px -15px 0px; max-height: 35px;">
 
-                <div class="col-md text-right">
+                <div class="col-md" style="text-align: end">
 
                     <a (click)="removerImagem()" class="btn" pTooltip="Remover Imagem" tooltipPosition="left" style="color: #6c757d;">
 
@@ -18,9 +18,9 @@ import { Imagem } from "../modelo/imagem.model";
 
                     </a>
 
-                    <a class="btn" pTooltip="Selecionar Imagem" tooltipPosition="left" style="color: #ffc107; padding-left: 0px;">
+                    <a class="btn" pTooltip="Selecionar Imagem" tooltipPosition="left" style="color: #ffc107">
 
-                        <input type="file" (change)="readAndPreviewImagem($event)" class="custom-file-input" style="position: absolute; max-width: 20px; max-height: 20px; cursor: pointer; font-size: 0;" />
+                        <input type="file" (change)="readAndPreviewImagem($event)" class="custom-file-input" style="position: absolute; font-size: 0; margin-left: -11px; margin-top: -7px; max-width: 40px; cursor: pointer; opacity: 0;"/>
 
                         <i class="pi pi-upload"></i>
 

@@ -1,25 +1,36 @@
 <div class="tela-listagem">
 
   <div class="div-novo-cadastro">
-    <button class="btn-novo-cadastro" (click)="showDialog()">NOVO</button>
+    <button class="btn-novo-cadastro" (click)="cadastrar()">NOVO</button>
   </div>
 
   <div class="tabela-dados">
 
-    <p-table [value]="produtos" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="listaEntidades" [responsive]="true" emptyMessage="Nenhum registro encontrado." [tableStyle]="{ 'min-width': '50rem' }" [lazy]="true" (onLazyLoad)="listar()">
       <ng-template pTemplate="header">
           <tr>
               <th>Descrição</th>
-              <th>Valor</th>
-              <th>Tempo</th>
-              <th></th>
+              <th class="text-center">Valor</th>
+              <th class="text-center">Quantidade</th>
+              <th class="text-center">Status</th>
+              <th class="text-center">Ações</th>
           </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-produto>
+      <ng-template pTemplate="body" let-obj>
           <tr>
-              <td>{{ produto.descricao }}</td>
-              <td>{{ produto.valor }}</td>
-              <td>{{ produto.tempo }}</td>
+              <td>{{ obj.descricao }}</td>
+              <td class="text-center">{{ obj.valor }}</td>
+              <td class="text-center">{{ obj.quantidade }}</td>
+              <td class="text-center">
+                <label-status [ativo]="obj.ativo"></label-status>
+              </td>
+              <td class="text-center">
+                <coluna-opcoes [ativo]="obj.ativo"
+                                (onEditar)="cadastrar(obj)"
+                                (onVisualizar)="visualizar(obj)"
+                                (onExcluir)="excluir(obj)"
+                                (onStatus)="status(obj.id)"></coluna-opcoes>
+            </td>
           </tr>
       </ng-template>
     </p-table>
@@ -28,7 +39,7 @@
 
 </div>
 
-<p-dialog header="Novo Produto" [maximizable]="true" [draggable]="false" [(visible)]="cadastro" [modal]="true" [style]="{width: '80vw'}">
+<p-dialog header="Novo Produto" [maximizable]="true" [draggable]="false" [(visible)]="modalCadastro" [modal]="true" [style]="{width: '80vw'}" (onHide)="isVisualizacao = false">
   <div class="cadastro">
 
     <div class="form form-cadastro">
@@ -38,7 +49,7 @@
         <div class="col">
 
           <label htmlFor="imagem" class="label-input">Imagem</label>
-          <imagem-preview [maxLength]="2000000" [entidade]="entidade"></imagem-preview>
+          <imagem-preview [maxLength]="2000000" [entidade]="entidadeForm" [visualizacao]="isVisualizacao"></imagem-preview>
         </div>
 
         <div class="col">
@@ -47,7 +58,7 @@
 
             <div class="col input-grupo">
               <label htmlFor="descricao" class="label-input">Descrição</label>
-              <input type="text" class="input-personalizado" pInputText [(ngModel)]="entidade.descricao" />
+              <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText [(ngModel)]="entidadeForm.descricao" />
             </div>
 
           </div>
@@ -56,7 +67,7 @@
 
             <div class="col input-grupo">
               <label htmlFor="valor" class="label-input">Valor</label>
-              <p-inputNumber class="input-personalizado" [(ngModel)]="entidade.valor" inputId="currency-br" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
+              <p-inputNumber [disabled]="isVisualizacao" class="input-personalizado" [(ngModel)]="entidadeForm.valor" inputId="currency-br" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
             </div>
 
           </div>
@@ -64,8 +75,8 @@
           <div class="row">
 
             <div class="col input-grupo">
-              <label htmlFor="tempo" class="label-input">Tempo de realização (min)</label>
-              <p-inputNumber class="input-personalizado" inputId="integeronly" [(ngModel)]="entidade.tempo"></p-inputNumber>
+              <label htmlFor="quantidade" class="label-input">Quantidade</label>
+              <p-inputNumber [disabled]="isVisualizacao" class="input-personalizado" inputId="integeronly" [(ngModel)]="entidadeForm.quantidade"></p-inputNumber>
             </div>
 
           </div>
@@ -74,8 +85,8 @@
 
       </div>
 
-      <div class="col" style="display: flex; justify-content: flex-end;">
-        <button class="btn-confimar" type="submit">CONFIRMAR</button>
+      <div *ngIf="!isVisualizacao" class="col" style="display: flex; justify-content: flex-end;">
+        <button class="btn-confimar" type="submit" (click)="salvar()">CONFIRMAR</button>
       </div>
 
     </div>

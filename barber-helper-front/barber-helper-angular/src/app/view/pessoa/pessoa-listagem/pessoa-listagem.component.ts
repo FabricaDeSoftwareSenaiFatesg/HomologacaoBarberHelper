@@ -37,7 +37,7 @@ export class PessoaListagemComponent extends BaseComponent<Pessoa> implements On
 
   }
 
-  listar() {
+  override listar() {
 
     this.service.listar().subscribe(retorno => {
 

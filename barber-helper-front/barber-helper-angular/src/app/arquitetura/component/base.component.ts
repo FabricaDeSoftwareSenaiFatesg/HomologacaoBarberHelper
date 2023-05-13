@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Entidade } from '../modelo/entidade.model';
 import { BaseService } from '../service/base.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,9 +6,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   template: ''
 })
-export abstract class BaseComponent<E extends Entidade> {
+export abstract class BaseComponent<E extends Entidade> implements OnInit {
 
   entidade: E;
+
+  entidadeForm: E;
+
+  listaEntidades: E[] = [];
+
+  modalCadastro: boolean = false;
+
+  isVisualizacao: boolean = false;
 
   constructor(
     protected changeDectetor: ChangeDetectorRef,
@@ -36,9 +44,9 @@ export abstract class BaseComponent<E extends Entidade> {
 
         this.service.salvar(this.entidade).subscribe(() => {
 
-          this.executarDepoisDeSalvar();
+          this.modalCadastro = false;
 
-          this.router.navigate(this.getVoltarCommand());
+          this.executarDepoisDeSalvar();
 
         });
 
@@ -48,37 +56,21 @@ export abstract class BaseComponent<E extends Entidade> {
 
         this.service.alterar(this.entidade).subscribe(() => {
 
+          this.modalCadastro = false;
+
           this.executarDepoisDeSalvar();
 
-          this.router.navigate(this.getVoltarCommand());
         });
-      }
 
-    } else {
+      }
 
     }
 
   }
 
-  voltar() {
-
-    this.router.navigate(this.getVoltarCommand());
-
-  }
-
-  getVoltarCommand(): any[] {
-
-    return [this.getPath()];
-
-  }
-
-  getPath() {
-
-    return this.service.path;
-
-  }
-
   public executarDepoisDeSalvar():void {
+
+    this.listar();
 
   }
 
@@ -90,7 +82,19 @@ export abstract class BaseComponent<E extends Entidade> {
 
   ngOnInit() {
 
-    this.inicializarManutencao();
+    this.listar();
+
+    this.entidadeForm = this.newEntidade();
+
+  }
+
+  ngAfterViewChecked(): void {
+
+    if (this.changeDectetor) {
+
+      this.changeDectetor.detectChanges();
+
+    }
 
   }
 
@@ -100,13 +104,13 @@ export abstract class BaseComponent<E extends Entidade> {
 
   protected inicializarManutencao() {
 
-    let id: number = this.activatedRoute.snapshot.params['id'];
+    let id: number = this.entidadeForm.id;
 
     if (id) {
 
       this.service.get(id).subscribe((entidade) => {
 
-        this.entidade = entidade;
+        this.entidadeForm = entidade;
 
         this['acaoAposCarregarEntidade'] && this['acaoAposCarregarEntidade']();
 
@@ -114,15 +118,63 @@ export abstract class BaseComponent<E extends Entidade> {
 
     } else {
 
-      this.entidade = this.newEntidade();
+      this.entidadeForm = this.newEntidade();
 
     }
 
   }
 
-  cadastrar() {
+  cadastrar(entidadeConsulta?: E) {
 
-    this.router.navigate([this.service.path + '/novo']);
+    if (entidadeConsulta) {
+
+      this.entidadeForm = entidadeConsulta;
+
+    } else {
+
+      this.entidadeForm = this.newEntidade();
+
+    }
+
+    this.inicializarManutencao();
+
+    this.modalCadastro = true;
+
+  }
+
+  visualizar(entidadeConsulta: E) {
+
+    this.isVisualizacao = true;
+
+    this.cadastrar(entidadeConsulta);
+
+  }
+
+  excluir(entidadeConsulta: E) {
+
+    this.service.remove(entidadeConsulta.id+"").subscribe(retorno => {
+
+      this.listar();
+
+    });
+
+  }
+
+  listar() {
+
+    this.service.listar().subscribe(retorno => {
+
+      this.listaEntidades = retorno;
+
+      this.changeDectetor.detectChanges();
+
+    });
+
+  }
+
+  status(id: any) {
+
+    this.service.status(id).subscribe(() => {});
 
   }
 

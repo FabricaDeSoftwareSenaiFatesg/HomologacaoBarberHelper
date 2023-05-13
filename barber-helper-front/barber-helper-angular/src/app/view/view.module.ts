@@ -6,6 +6,7 @@ import { ServicoModule } from './servico/servico.module';
 import { HomeModule } from './home/home.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { ProdutoModule } from './produto/produto.module';
+import { LojaModule } from './loja/loja.module';
 
 
 
@@ -21,7 +22,8 @@ import { ProdutoModule } from './produto/produto.module';
     ServicoModule,
     HomeModule,
     UsuarioModule,
-    ProdutoModule
+    ProdutoModule,
+    LojaModule
   ]
 })
 export class ViewModule { }
