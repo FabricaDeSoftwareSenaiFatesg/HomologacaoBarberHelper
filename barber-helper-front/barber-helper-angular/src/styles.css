@@ -111,3 +111,9 @@ input {
 
 .form-cadastro {
 }
+
+.pi:not(.pi-th-large, .pi-bars) {
+  cursor: pointer;
+  margin: 3px;
+  color: #C07C5A;
+}

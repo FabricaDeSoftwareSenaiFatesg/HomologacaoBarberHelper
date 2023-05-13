@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { Pessoa } from './arquitetura/modelo/pessoa.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,10 @@ import { Pessoa } from './arquitetura/modelo/pessoa.model';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private primengConfig: PrimeNGConfig) {
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private _router: Router,
+    private primengConfig: PrimeNGConfig) {
 
   }
 
@@ -23,6 +26,16 @@ export class AppComponent implements OnInit {
       menu: 1000,     // overlay menus
       tooltip: 1100   // tooltip
     };
+
+  }
+
+  public ngAfterViewChecked(): void {
+
+    if (this.changeDetectorRef) {
+
+      this.changeDetectorRef.detectChanges();
+
+    }
 
   }
 

@@ -7,7 +7,7 @@ export class Produto extends Entidade {
 
   valor: number = 0;
 
-  tempo: number = 0;
+  quantidade: number = 0;
 
   imagem: Imagem;
 

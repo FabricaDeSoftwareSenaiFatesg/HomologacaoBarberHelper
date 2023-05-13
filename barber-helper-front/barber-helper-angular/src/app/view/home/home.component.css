@@ -111,3 +111,7 @@ h1 {
   display: flex;
   align-items: center;
 }
+
+.pi-cog {
+  color: white;
+}

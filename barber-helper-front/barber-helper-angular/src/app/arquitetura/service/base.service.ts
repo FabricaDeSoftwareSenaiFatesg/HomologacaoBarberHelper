@@ -31,7 +31,13 @@ export class BaseService<E extends Entidade> {
 
   alterar(entidade: E) {
 
-    return this.httpClient.put<E>(`${this.API}/${this.path}/${entidade.id}`, entidade).pipe(first());
+    return this.httpClient.put<E>(`${this.API}/${this.path}`, entidade).pipe(first());
+
+  }
+
+  status(id: string) {
+
+    return this.httpClient.put<E>(`${this.API}/${this.path}/${id}`, null);
 
   }
 

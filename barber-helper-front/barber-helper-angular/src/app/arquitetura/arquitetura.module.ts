@@ -15,11 +15,18 @@ import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
 import { ImagemPreviewComponent } from './component/imagem-preview.component';
+import { ColunaOpcoesComponent } from './component/coluna-opcoes.component';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
+import { LabelStatusComponent } from './component/label-status.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
     SafeUrlPipe,
-    ImagemPreviewComponent
+    ImagemPreviewComponent,
+    ColunaOpcoesComponent,
+    LabelStatusComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +42,10 @@ import { ImagemPreviewComponent } from './component/imagem-preview.component';
     TableModule,
     TieredMenuModule,
     DialogModule,
-    InputNumberModule
+    InputNumberModule,
+    ConfirmPopupModule,
+    DataViewModule,
+    CardModule
   ],
   exports: [
     InputMaskModule,
@@ -52,7 +62,13 @@ import { ImagemPreviewComponent } from './component/imagem-preview.component';
     DialogModule,
     InputNumberModule,
     SafeUrlPipe,
-    ImagemPreviewComponent
+    ImagemPreviewComponent,
+    ColunaOpcoesComponent,
+    ConfirmPopupModule,
+    DataViewModule,
+    DataViewLayoutOptions,
+    LabelStatusComponent,
+    CardModule
   ],
   providers: [
     SafeUrlPipe

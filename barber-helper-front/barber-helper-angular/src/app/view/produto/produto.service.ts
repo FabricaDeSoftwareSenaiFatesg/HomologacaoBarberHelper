@@ -12,4 +12,10 @@ export class ProdutoService extends BaseService<Produto>{
     super( httpClient, 'produto');
   }
 
+  listarProdutosDTO() {
+
+    return this.httpClient.get<any>(`${this.API}/${this.path}/listar-dtos`);
+
+  }
+
 }

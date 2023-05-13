@@ -9,10 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class ServiceGenerico<ID extends Serializable, E extends EntidadeGenerica> implements Service<ID, E> {

@@ -6,6 +6,7 @@ import { ReservaComponent } from './view/reserva/reserva.component';
 import { PessoaRoutes } from './view/pessoa/pessoa-routes';
 import { UsuarioRoutes } from './view/usuario/usuario-routes';
 import { ProdutoComponent } from './view/produto/produto.component';
+import { LojaComponent } from './view/loja/loja.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'reserva', component: ReservaComponent },
   { path: 'usuario', children: UsuarioRoutes },
   { path: 'produto', component: ProdutoComponent },
+  { path: 'loja', component: LojaComponent },
 ];
 
 @NgModule({
