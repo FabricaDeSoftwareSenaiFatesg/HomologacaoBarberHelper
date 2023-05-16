@@ -1,33 +1,33 @@
 <div align="center" style="background-color: #e6eaf4;">
     <img src="docs/Imagens/logo-faculdade-300.png" 
          alt="Texto alternativo" 
-         title="Sistema de Controle de Acesso a Ambientes"/>
+         title="Barber Helper"/>
 </div>
 <br>
 <br>
 <br>
 <div align="center">
-    <img src="docs/logo/LogoEliasBarber_Prancheta 1.jpg" alt="Texto alternativo" />
+    <img src="docs/Logo/LogoEliasBarber_Prancheta.png" alt="Texto alternativo" />
 </div>
 <br>
-<h2> Sistema de Controle de Acesso a Ambientes </h2>
+<h2> Projeto Barber Helper </h2>
 <h3> 1 - Visão Geral do Software </h3>
 
 <p>
-Controlar o acesso a ambientes de sala de aula, surge da necessidade de garantir a segurança do ambiente, dos equipamentos, dos alunos, docentes e funcionários da instituição. Dentro deste contexto, uma necessidade primordial é assegurar o acesso restrito a ambientes de pessoas autorizadas, de modo a garantir a privacidade e proteção aos recursos de valor dentro desses ambientes. Há também a necessidade de monitorar o histórioco de acesso aos ambientes, registrando-se a data, horário e usuário que acessou um determinado ambiente.
+Toda barbearia se inicia sem um gerenciamento dos agendamentos dos serviços, muitos seguem realizando esse serviço por meio de anotações em cadernos, porém é algo que toma o tempo de serviço para deixar bem organizado. Com o uso do Barber Helper tudo fica automatizado deixando de lado a necessidade de anotações e outros controles, podendo ter até ter a possibilidade de gerenciar o caixa e de vender produtos na plataforma.
 </p>
 
 <h4> 1.1 - Objetivo do Software </h4>
 
 <p>
-   O objetivo do Sistema de Controle de Acesso a Ambientes é gerenciar o acesso a sala de aula, utilizando reconhecimento facial. Sua função principal consiste em reconher a face do usário, autorizar o  acesso, comandar a liberação da tranca eletromagnética do ambiente e manter o histórico com data, horário e usuário que acessou aquele espaço.
+   O objetivo do Barber Helper é automatizar todo o agendamento de serviços de uma barbearia, aumentando a produtividade lucratividade do estabelecimento, tendo a possibilidade de ter um gerenciamento de gastos, serviços mais atendidos, promoções, produtos e avaliações de profissionais.
 </p>
 <div align="center">
     <img src="imagens/sgambiente.png" alt="Texto alternativo" />
 </div>
 
 <h4> 1.2 - Escopo do Projeto e Requisitos de Software </h4>
-<p>Os requisitos funcionais descrevem as funções, que o sistema deve executar e as tarefas que ele deve realizar. Neste documento, apresentaremos os requisitos funcionais do Sistema de Controle de Acesso a Ambientes, definidos a partir das necessidades do cliente vinculado a este projeto. Além das principais necessidades e requisitos funcionais,  apresentaremos uma descrição detalhada de como o modelo Entidade-Relacionamento (ER) foi desenvolvido para atender a esses requisitos, incluindo as entidades, relacionamentos e atributos necessários para armazenar e gerenciar as informações do sistema.</p>
+<p>.</p>
 <br>
 <p>
 Após diversas reuniões com o cliente, restringiu-se o escopo deste projeto a implementação de um aplicação web que contemple as necessidades detalhadas abaixo:
