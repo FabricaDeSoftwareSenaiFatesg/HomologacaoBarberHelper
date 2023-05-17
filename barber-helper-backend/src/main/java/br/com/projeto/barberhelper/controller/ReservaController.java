@@ -2,6 +2,7 @@ package br.com.projeto.barberhelper.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.projeto.barberhelper.generic.ManutencaoController;
 import br.com.projeto.barberhelper.generic.Service;
@@ -55,9 +56,18 @@ public class ReservaController extends ManutencaoController<Reserva> {
     public Response consultarHorarios(@RequestBody PesquisaHorarios pesquisaHorarios) {
 
         List<Reserva> reservas = service.obterReservasDoFuncionarioPorData(pesquisaHorarios.getProfissional().getId(), pesquisaHorarios.getData());
-
-        List<String> horarios = HorariosDisponiveis.getHorarios();
-        return Response.ok(horarios).build();
+        List<String> horariosReservados = service.getHorariosReservadosDasReservas(reservas);
+        return Response.ok(service.getHorariosFiltardos(horariosReservados, pesquisaHorarios.getServicos())).build();
     }
 
+    @PostMapping(value = "/salvarReserva")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response salvarReserva(@RequestBody Reserva reserva) {
+        if (reserva.getId() != null) {
+            reserva.setId(null);
+        }
+        service.salvar(reserva);
+        return Response.ok().build();
+    }
 }

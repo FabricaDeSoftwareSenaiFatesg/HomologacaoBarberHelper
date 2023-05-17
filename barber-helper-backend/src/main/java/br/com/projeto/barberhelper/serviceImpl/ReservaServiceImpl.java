@@ -1,8 +1,10 @@
 package br.com.projeto.barberhelper.serviceImpl;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,8 +17,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.projeto.barberhelper.generic.DAO;
 import br.com.projeto.barberhelper.generic.ServiceGenerico;
+import br.com.projeto.barberhelper.model.HorariosDisponiveis;
 import br.com.projeto.barberhelper.model.Pessoa;
 import br.com.projeto.barberhelper.model.Reserva;
+import br.com.projeto.barberhelper.model.Servico;
 import br.com.projeto.barberhelper.model.dto.FidelidadeDTO;
 import br.com.projeto.barberhelper.model.enuns.StatusReservaEnum;
 import br.com.projeto.barberhelper.repository.ReservaDAO;
@@ -76,16 +80,58 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
                 root.get("dataFim").alias("dataFim")
         ));
 
-        LocalDateTime dataInicial = DateUtil.getLocalDateTime(DateUtil.converterDateInicioDia(dataReserva));
-        LocalDateTime dataFinal = DateUtil.getLocalDateTime(DateUtil.converterDateFimDia(dataReserva));
+        Date dataInicial = DateUtil.converterDateInicioDia(dataReserva);
+        Date dataFinal = DateUtil.converterDateFimDia(dataReserva);
 
         query.where(
                 builder.equal(rootFuncionario.get("id"), funcionarioId),
                 builder.between(root.get("dataInicial"), dataInicial, dataFinal)
         );
 
-        List<Reserva> reservas = this.executeQueryAndTransforResult(query, Reserva.class);
-        return reservas;
+        return this.executeQueryAndTransforResult(query, Reserva.class);
     }
 
+    @Override
+    public List<String> getHorariosReservadosDasReservas(List<Reserva> reservas) {
+        List<String> horariosReservados = new ArrayList<>();
+        for (Reserva reserva: reservas) {
+            Calendar inicio = DateUtil.getCalendarDate(reserva.getDataInicial());
+            Calendar fim = DateUtil.getCalendarDate(reserva.getDataFim());
+            Calendar temp = (Calendar) inicio.clone();
+            temp.add(Calendar.MINUTE, 30);
+
+            horariosReservados.add(DateUtil.getStringHorario(inicio));
+            while (temp.before(fim)) {
+                horariosReservados.add(DateUtil.getStringHorario(temp));
+                temp.add(Calendar.MINUTE, 30);
+            }
+        }
+        return horariosReservados;
+    }
+
+    @Override
+    public List<String> getHorariosFiltardos(List<String> horariosReservados, List<Servico> servicos) {
+        List<String> horariosDisponiveis = HorariosDisponiveis.getHorarios().stream().filter(horario -> !horariosReservados.contains(horario)).collect(Collectors.toList());
+
+        int qntHorariosNecessarios = getQntHorariosNecessarios(servicos);
+        if (qntHorariosNecessarios > 0) {
+            List<String> horariosRemocao = horariosDisponiveis.stream()
+                    .filter(horario -> {
+                        for (int i = 1; i <= qntHorariosNecessarios; i++) {
+                            String horarioTemp = HorariosDisponiveis.getNext(horario, i);
+                            if (horarioTemp == null || !horariosDisponiveis.contains(horarioTemp)) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    })
+                    .collect(Collectors.toList());
+            horariosDisponiveis.removeIf(horariosRemocao::contains);
+        }
+        return horariosDisponiveis;
+    }
+
+    private int getQntHorariosNecessarios(List<Servico> servicos) {
+        return (int) Math.ceil((double) servicos.stream().mapToLong(Servico::getTempo).sum()/30)-1;
+    }
 }

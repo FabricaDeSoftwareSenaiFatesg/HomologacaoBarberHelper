@@ -36,4 +36,9 @@ public class HorariosDisponiveis {
     public static List<String> getHorarios() {
         return horarios;
     }
+
+    public static String getNext(String horario, int indexAFrente) {
+        int index = horarios.indexOf(horario) + indexAFrente;
+        return index < horarios.size() ? horarios.get(index) : null;
+    }
 }
