@@ -1,10 +1,11 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { BaseComponent } from 'src/app/arquitetura/component/base.component';
-import { Reserva } from 'src/app/arquitetura/modelo/reserva.model';
-import { ReservaService } from './reserva.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {BaseComponent} from 'src/app/arquitetura/component/base.component';
+import {Reserva} from 'src/app/arquitetura/modelo/reserva.model';
+import {ReservaService} from './reserva.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PessoaService} from "../pessoa/pessoa.service";
 import {ServicoService} from "../servico/servico.service";
+import {StatusReservaEnum} from "../../arquitetura/modelo/status-reserva.enum";
 
 @Component({
   selector: 'app-reserva',
@@ -69,5 +70,42 @@ export class ReservaComponent extends BaseComponent<Reserva> implements OnInit{
     this.servicoService.listar().subscribe(response => {
       this.servicos = response;
     })
+  }
+
+  salvarReserva() {
+    let reserva = {
+      funcionario: this.profissionalSelecionado,
+      servicos: this.servicosSelecionados,
+      dataInicial: this.getDataInicial(),
+      dataFim: this.getDataFim(this.getDataInicial()),
+      statusReserva: StatusReservaEnum.RESERVADO,
+    }
+    this.service.salvarReserva(reserva).subscribe();
+  }
+
+  getDataInicial() {
+    let dataInicial = new Date();
+    let horaInicial = Number(this.horarioSelecionado.substring(0, 2));
+    let minutoInicial = Number(this.horarioSelecionado.substring(3, 5));
+    dataInicial.setHours(horaInicial, minutoInicial, 0, 0);
+    return dataInicial;
+  }
+
+  getDataFim(dataInicial: Date) {
+    let tempoTotalServicos = this.getTempoTotalServicos();
+    let qntHorariosNecessarios = Math.ceil(tempoTotalServicos/30);
+    let horasFinais = Math.floor(qntHorariosNecessarios * 30 / 60);
+    let minutosFinais = qntHorariosNecessarios * 30 % 60;
+    let dataFinal = new Date();
+    dataFinal.setHours(dataInicial.getHours() + horasFinais, dataInicial.getMinutes() + minutosFinais, 0, 0);
+    return dataFinal;
+  }
+
+  getTempoTotalServicos() {
+    let tempoTotalServicos = 0;
+    this.servicosSelecionados.forEach((servico: { tempo: number; }) => {
+      tempoTotalServicos += servico.tempo;
+    });
+    return tempoTotalServicos;
   }
 }

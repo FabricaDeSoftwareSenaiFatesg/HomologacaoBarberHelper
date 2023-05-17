@@ -34,13 +34,7 @@
   <div class="col">
     <div class="row">
       <div class="col input-grupo">
-
-        <div *ngFor="let servico of servicosSelecionados">
-          <label>{{servico.descricao}}</label>
-        </div>
-        <label>{{profissionalSelecionado.nome}}</label>
-        <label>{{data}}</label>
-        <label>{{horarioSelecionado}}</label>
+        <p-button label="SALVAR" class="btn-salvar" (onClick)="salvarReserva()"></p-button>
       </div>
     </div>
   </div>
