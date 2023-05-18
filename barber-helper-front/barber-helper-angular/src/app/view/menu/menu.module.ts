@@ -1,22 +1,20 @@
-import { HomeComponent } from './home.component';
+import { MenuComponent } from './menu.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArquiteturaModule } from 'src/app/arquitetura/arquitetura.module';
-import { MenuModule } from '../menu/menu.module';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    MenuComponent
   ],
   imports: [
     CommonModule,
-    ArquiteturaModule,
-    MenuModule
+    ArquiteturaModule
   ],
   exports: [
-    HomeComponent
+    MenuComponent
   ]
 })
-export class HomeModule { }
+export class MenuModule { }

@@ -3,7 +3,10 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 .input-grupo {
   display: flex;
@@ -29,11 +32,10 @@ html, body { height: 100%; }
   width: 100%;
 }
 
-.input-personalizado .p-multiselect{
+.input-personalizado .p-multiselect {
   width: 100%;
 }
 
-.input-personalizado .p-dropdown {
 input {
   height: 40px;
   width: 100%;
@@ -49,13 +51,13 @@ input {
 .btn-confimar {
   display: inline-block;
   position: relative;
-  color: #F9F5F2;
-  background: #C07C5A;
+  color: #f9f5f2;
+  background: #c07c5a;
   font-family: Khand Medium, sans-serif;
   font-size: 23px;
   font-weight: 500;
   text-align-all: center;
-  border: 2px solid #C07C5A;
+  border: 2px solid #c07c5a;
   border-radius: 8px;
   z-index: 1;
   overflow: hidden;
@@ -66,14 +68,14 @@ input {
 .btn-confimar:before {
   content: "";
   position: absolute;
-  background: #F9F5F2;
+  background: #f9f5f2;
   height: 150px;
   width: 200px;
   border-radius: 50%;
   z-index: -1;
 }
 .btn-confimar:hover {
-  color: #C07C5A;
+  color: #c07c5a;
 }
 .btn-confimar:before {
   top: 100%;
@@ -85,7 +87,7 @@ input {
   left: -30px;
 }
 .btn-confimar:active:before {
-  background: #F9F5F2;
+  background: #f9f5f2;
   transition: 0s;
 }
 
@@ -130,5 +132,5 @@ input {
 .pi:not(.pi-th-large, .pi-bars) {
   cursor: pointer;
   margin: 3px;
-  color: #C07C5A;
+  color: #c07c5a;
 }
