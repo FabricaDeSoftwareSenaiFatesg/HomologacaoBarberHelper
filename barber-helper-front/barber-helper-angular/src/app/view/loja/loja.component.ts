@@ -26,6 +26,10 @@ export class LojaComponent implements OnInit {
 
   descricaoBusca: string;
 
+  carrinhoCompras: boolean = false;
+
+  produtosSelecionados: Produto[] = [];
+
   ngOnInit(): void {
 
     this.listar();
@@ -61,6 +65,12 @@ export class LojaComponent implements OnInit {
   pesquisar() {
 
     console.log(this.descricaoBusca);
+
+  }
+
+  adicionarProdutoCarrinho(produto: Produto) {
+
+    this.produtosSelecionados.push(produto);
 
   }
 

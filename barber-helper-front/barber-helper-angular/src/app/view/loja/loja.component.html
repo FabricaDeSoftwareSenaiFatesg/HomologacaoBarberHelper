@@ -5,16 +5,39 @@
       <i class="pi pi-search" style="top: 8px;"></i>
       <input type="text" pInputText placeholder="Faça sua busca aqui..." style="width: 500px;" [(ngModel)]="descricaoBusca" (keyup.enter)="pesquisar()"/>
     </span>
-    <a title="Carrinho"><i class="pi pi-shopping-cart" style="font-size: 2rem"></i></a>
+    <a (click)="carrinhoCompras = true" title="Carrinho"><i class="pi pi-shopping-cart" style="font-size: 2rem"></i></a>
+    <div class="numero-produtos">
+      <span style="cursor: default; font-size: 12px;">{{produtosSelecionados.length}}</span>
+    </div>
   </div>
   <div class="row m-1" style="justify-content: center;">
     <div class="col-md-auto card-produto" *ngFor="let produto of produtos">
-      <img [src]="obterConteudoFormatado(produto)" *ngIf="produto && produto.imagem" style="margin: 10px;" height="150" width="150"/>
+      <img [src]="obterConteudoFormatado(produto)" *ngIf="produto && produto.imagem" style="margin: 15px;" height="190" width="190"/>
       <div class="descricao-produto">
         <span style="font-weight: 700; font-size: 20px;">{{ produto.descricao }}</span>
         <span style="font-weight: 700; font-size: 23px;">{{ 'R$' + produto.valor }}</span>
       </div>
-      <button class="btn-confimar" style="font-size: 18px; margin: 15px;" type="submit">COMPRAR</button>
+      <button class="btn-confimar" style="font-size: 18px; margin: 15px;" type="submit" (click)="adicionarProdutoCarrinho(produto)">COMPRAR</button>
     </div>
+    <label *ngIf="produtos.length == 0" for="semProduto" style="text-align-last: center;">Sem produtos cadastrados no momento!</label>
   </div>
 </div>
+
+<p-sidebar [(visible)]="carrinhoCompras" position="right" styleClass="w-30rem">
+
+  <ng-template pTemplate="header">
+    <label style="font-family: 'Khand', sans-serif; font-weight: 700; font-size: 25px;" for="titulo">CARRINHO DE COMPRAS</label>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <div class="lista-produtos">
+
+    </div>
+    <label *ngIf="produtosSelecionados.length == 0" for="semProduto" style="text-align-last: center;">Adicione produtos!</label>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button class="btn-confimar" style="font-size: 18px; margin: 15px;" type="submit">CONFIRMAR</button>
+  </ng-template>
+
+</p-sidebar>
