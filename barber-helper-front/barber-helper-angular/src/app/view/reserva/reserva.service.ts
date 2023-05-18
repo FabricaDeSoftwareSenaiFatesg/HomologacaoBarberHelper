@@ -13,7 +13,10 @@ export class ReservaService extends BaseService<Reserva>{
   }
 
   consultarHorarios(pesquisaHorarios: any) {
+    return this.httpClient.post<any>(`${this.API}/${this.path}/consultarHorarios`, pesquisaHorarios);
+  }
 
-    return this.httpClient.post<any>(`${this.API}/reserva/consultarHorarios`, pesquisaHorarios);
+  salvarReserva(reserva: any) {
+    return this.httpClient.post<any>(`${this.API}/${this.path}/salvarReserva`, reserva);
   }
 }

@@ -1,18 +1,18 @@
 <div class="row" style="margin: 30px;">
   <div class="col">
 
-    <h2>Agende seu horário</h2>
+    <h2 class="khand-font-700">AGENDE SEU HORÁRIO</h2>
 
     <div class="row">
       <div class="col input-grupo">
-        <label htmlFor="servicos" class="label-input">Serviços</label>
+        <label htmlFor="servicos" class="label-input popins-font">Serviços</label>
         <p-multiSelect class="input-personalizado" [options]="servicos" [(ngModel)]="servicosSelecionados" optionLabel="descricao"></p-multiSelect>
       </div>
     </div>
 
     <div class="row">
       <div class="col input-grupo">
-        <label htmlFor="profissional" class="label-input">Profissional</label>
+        <label htmlFor="profissional" class="label-input popins-font">Profissional</label>
         <p-dropdown class="input-personalizado" [options]="profissionais" [(ngModel)]="profissionalSelecionado" optionLabel="nome"></p-dropdown>
       </div>
     </div>
@@ -25,7 +25,7 @@
 
     <div class="row">
       <div class="col input-grupo">
-        <label htmlFor="horarios" class="label-input">Horários disponíveis</label>
+        <label htmlFor="horarios" class="label-input popins-font">Horários disponíveis</label>
         <p-dropdown class="input-personalizado" [options]="horarios" [(ngModel)]="horarioSelecionado"></p-dropdown>
       </div>
     </div>
@@ -34,13 +34,7 @@
   <div class="col">
     <div class="row">
       <div class="col input-grupo">
-
-        <div *ngFor="let servico of servicosSelecionados">
-          <label>{{servico.descricao}}</label>
-        </div>
-        <label>{{profissionalSelecionado.nome}}</label>
-        <label>{{data}}</label>
-        <label>{{horarioSelecionado}}</label>
+        <p-button label="SALVAR" class="btn-salvar" (onClick)="salvarReserva()"></p-button>
       </div>
     </div>
   </div>

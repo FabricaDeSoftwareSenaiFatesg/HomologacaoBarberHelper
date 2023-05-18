@@ -179,4 +179,14 @@ public class DateUtil {
 		return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 
+	public static Calendar getCalendarDate(Date data) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(data);
+		return calendar;
+	}
+	public static String getStringHorario(Calendar calendar) {
+		return (calendar.get(Calendar.HOUR_OF_DAY) < 10 ? "0" + calendar.get(Calendar.HOUR_OF_DAY) : calendar.get(Calendar.HOUR_OF_DAY))
+				+ ":"
+				+ (calendar.get(Calendar.MINUTE) == 0 ? "00" : calendar.get(Calendar.MINUTE));
+	}
 }
