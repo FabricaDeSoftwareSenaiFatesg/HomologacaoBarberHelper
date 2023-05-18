@@ -22,7 +22,9 @@ export class LojaComponent implements OnInit {
 
   produtos: Produto[] = [];
 
-  layout: string = 'list';
+  layout: string = 'grid';
+
+  descricaoBusca: string;
 
   ngOnInit(): void {
 
@@ -39,6 +41,26 @@ export class LojaComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
 
     });
+
+  }
+
+  obterConteudoFormatado(produto: Produto) {
+
+    if (produto.imagem.conteudo.indexOf('base64,') > -1) {
+
+      return produto.imagem.conteudo;
+
+    } else {
+
+      return 'data:' + produto.imagem.tipo + ';base64,' + produto.imagem.conteudo;
+
+    }
+
+  }
+
+  pesquisar() {
+
+    console.log(this.descricaoBusca);
 
   }
 
