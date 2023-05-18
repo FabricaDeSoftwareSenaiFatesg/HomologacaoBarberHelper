@@ -10,10 +10,11 @@
   <div class="row m-1" style="justify-content: center;">
     <div class="col-md-auto card-produto" *ngFor="let produto of produtos">
       <img [src]="obterConteudoFormatado(produto)" *ngIf="produto && produto.imagem" style="margin: 10px;" height="150" width="150"/>
-          <div class="descricao-produto">
-            <span>{{ produto.descricao }}</span>
-            <span>{{ 'R$' + produto.valor }}</span>
-          </div>
+      <div class="descricao-produto">
+        <span style="font-weight: 700; font-size: 20px;">{{ produto.descricao }}</span>
+        <span style="font-weight: 700; font-size: 23px;">{{ 'R$' + produto.valor }}</span>
+      </div>
+      <button class="btn-confimar" style="font-size: 18px; margin: 15px;" type="submit">COMPRAR</button>
     </div>
   </div>
 </div>
