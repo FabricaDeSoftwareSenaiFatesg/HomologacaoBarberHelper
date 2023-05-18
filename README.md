@@ -23,30 +23,47 @@ Toda barbearia se inicia sem um gerenciamento dos agendamentos dos serviços, mu
    O objetivo do Barber Helper é automatizar todo o agendamento de serviços de uma barbearia, aumentando a produtividade lucratividade do estabelecimento, tendo a possibilidade de ter um gerenciamento de gastos, serviços mais atendidos, promoções, produtos e avaliações de profissionais.
 </p>
 <div align="center">
-    <img src="imagens/sgambiente.png" alt="Texto alternativo" />
+    <img src="docs/Imagens/Home page.png" alt="home" height="290" width="450"/>
+    <img src="docs/Imagens/Agendamento.png" alt="home" height="290" width="450"/>
+</div>
+<div align="center">
+    <img src="docs/Imagens/Loja.png" alt="home" height="290" width="450"/>
+    <img src="docs/Imagens/Dashboard Financeiro.png" alt="home" height="290" width="450"/>
 </div>
 
 <h4> 1.2 - Escopo do Projeto e Requisitos de Software </h4>
-<p>.</p>
+<p>Os requisitos funcionais descrevem as funções, que o sistema deve executar e as tarefas que ele deve realizar. Neste documento, apresentaremos os requisitos funcionais do Projeto Barber Helper, definidos a partir das necessidades do cliente vinculado a este projeto. Além das principais necessidades e requisitos funcionais, apresentaremos uma descrição detalhada de como o modelo Entidade-Relacionamento (ER) foi desenvolvido para atender a esses requisitos, incluindo as entidades, relacionamentos e atributos necessários para armazenar e gerenciar as informações do sistema.</p>
 <br>
 <p>
 Após diversas reuniões com o cliente, restringiu-se o escopo deste projeto a implementação de um aplicação web que contemple as necessidades detalhadas abaixo:
 </p>
 <br>
 <ul>
-<li> permitir o cadastro de diferentes tipos de ambientes, como sala de aula, laboratórios e  auditórios;
+<li> Autenticação e controle de acesso;
 </li>
 <li>
-permitir o cadastro de usuários com diferentes perfis de acesso, tal como professor, aluno e funcionários;
+Cadastro Funcionário e Cliente;
 </li>
 <li>
-liberar o acesso aos ambientes utilizando  reconhecimento facial;
+Agendamento de horários;
 </li>
 <li>
-manter o histórico de acesso a cada ambiente, registrando-se data, horário e usuário que a acessou;
+Cadastramento dos serviços de barbearia;
 </li>
 <li>
-permitir o cadastro do embarcado e o seu vinculo a um ambiente. O embarcado deve  comandar a liberação da tranca eletromagnética para o acesso a sala de aula.
+Controle financeiro: despesas e receitas;
+</li>
+<li>
+Relatórios de serviços;
+</li>
+<li>
+Possibilidade de implementação;
+</li>
+<li>
+Loja virtual de cosméticos;
+</li>
+<li>
+Pagamento;
 </li>
 
 </ul>
@@ -67,23 +84,38 @@ permitir o cadastro do embarcado e o seu vinculo a um ambiente. O embarcado deve
     <tbody>
         <tr>
             <td><b>RF01</b></td>
-            <td><b>Manter usuários</b></td>
-            <td>O sistema deve permitir incluir, excluir, atualizar e buscar informações do usuário, como nome, cpf, celular e e-mail. A busca será realizada pelo e-mail e os dados persistidos em um banco de dados</td>
+            <td><b>Manter pessoas</b></td>
+            <td>O sistema deve permitir incluir, excluir, atualizar e buscar informações de pessoas, como nome, cpf, celular e e-mail. A busca será realizada pelo e-mail e os dados persistidos em um banco de dados</td>
         </tr>
         <tr>
             <td><b>RF02</b></td>
-            <td><b>Autenticar usuários</b></td>
-            <td>A autenticação do usuário deve verificada ;</td>
+            <td><b>Manter promoções</b></td>
+            <td>o sistema deve permitir incluir, excluir, atualizar e buscar informações de promoções</td>
         </tr>
         <tr>
             <td><b>RF03</b></td>
-            <td><b>Manter perfil de usuários</b></td>
-            <td>o sistema deve permitir incluir, excluir, atualizar e buscar informações do usuário: nome, cpf, celular e e-mail;</td>
+            <td><b>Manter produtos</b></td>
+            <td>o sistema deve permitir incluir, excluir, atualizar e buscar informações de produtos</td>
         </tr>
         <tr>
             <td><b>RF04</b></td>
-            <td><b>Manter contato</b></td>
-            <td>o sistema deve permitir incluir, excluir, atualizar e buscar informações do usuário: nome, cpf, celular e e-mail;</td>
+            <td><b>Manter serviços</b></td>
+            <td>o sistema deve permitir incluir, excluir, atualizar e buscar informações de serviços</td>
+        </tr>
+        <tr>
+            <td><b>RF05</b></td>
+            <td><b>Controle de acesso</b></td>
+            <td>Manter todos os perfils de acesso e controles para não permitir acesso por pessoas não permitidas</td>
+        </tr>
+        <tr>
+            <td><b>RF06</b></td>
+            <td><b>Controle financeiro</b></td>
+            <td>Armazenar e mostrar com gráficos todo o controle de caixa, entrada e saida de todos os serviços e produtos</td>
+        </tr>
+        <tr>
+            <td><b>RF07</b></td>
+            <td><b>Agendar horario</b></td>
+            <td>Realizar agendamento selecionando serviços, profissionais, data e horario</td>
         </tr>
     </tbody>
 </table>
@@ -92,7 +124,8 @@ permitir o cadastro do embarcado e o seu vinculo a um ambiente. O embarcado deve
 <h4> 1.4 - Modelo de Domínio </h2>
 <p>A documentação do modelo Entidade-Relacionamento (ER) é uma etapa crucial no processo de desenvolvimento de um sistema de informação. O modelo ER é usado para representar a estrutura do banco de dados, incluindo as entidades, relacionamentos e atributos. A partir desse modelo, é possível criar um esquema de banco de dados que possa ser implementado em um sistema de gerenciamento de banco de dados (SGBD). Neste documento, apresentaremos o modelo ER para Sistema de Controle de Acesso a Ambientes que contém a descrição detalhada dessa estrutura, incluindo as entidades, relacionamentos, chaves primárias e estrangeiras.</p>
 <div align="center">
-    <img src="docs/Imagens/DiagramaDeClasse.png" alt="Diagrama de Classes" />
+    <img src="docs/Imagens/DiagramaDeClasse.png" alt="Diagrama de Classes" height="470" width="450"/>
+    <img src="docs/Imagens/DiagramaBancoDeDados.png" alt="Diagrama de Classes" height="700" width="450"/>
 </div>
 <br>
 <h3> 2 - Arquitetura do Software </h2>
