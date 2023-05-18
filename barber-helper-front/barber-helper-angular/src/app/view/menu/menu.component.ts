@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MenuItem } from 'primeng/api';
-import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
   selector: 'app-menu',

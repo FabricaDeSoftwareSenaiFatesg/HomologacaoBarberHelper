@@ -38,7 +38,7 @@
   4º- Remove a sublinhado dos links.
 */
 .main-nav a {
-  font-family: Khand Medium, sans-serif;
+  font-family: 'Khand', sans-serif;
   font-size: 20px;
   color: white;
   text-decoration: none;
