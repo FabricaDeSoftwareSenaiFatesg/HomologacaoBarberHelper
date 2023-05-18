@@ -19,6 +19,21 @@ html, body { height: 100%; }
   max-width: 110px;
 }
 
+.btn-salvar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.input-personalizado {
+  width: 100%;
+}
+
+.input-personalizado .p-multiselect{
+  width: 100%;
+}
+
+.input-personalizado .p-dropdown {
 input {
   height: 40px;
   width: 100%;

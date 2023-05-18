@@ -9,6 +9,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import {DropdownModule} from "primeng/dropdown";
+import {MultiSelectModule} from "primeng/multiselect";
 import { TableModule } from 'primeng/table';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { DialogModule } from 'primeng/dialog';
@@ -39,6 +41,8 @@ import { CardModule } from 'primeng/card';
     AppRoutingModule,
     FormsModule,
     InputSwitchModule,
+    DropdownModule,
+    MultiSelectModule,
     TableModule,
     TieredMenuModule,
     DialogModule,
@@ -57,6 +61,8 @@ import { CardModule } from 'primeng/card';
     AppRoutingModule,
     FormsModule,
     InputSwitchModule,
+    DropdownModule,
+    MultiSelectModule,
     TableModule,
     TieredMenuModule,
     DialogModule,

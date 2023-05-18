@@ -3,7 +3,9 @@ package br.com.projeto.barberhelper.utils;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -170,6 +172,11 @@ public class DateUtil {
 		}
 
 		return date1.compareTo(date2);
+	}
+
+	public static LocalDateTime getLocalDateTime(Date date) {
+		Instant instant = date.toInstant();
+		return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 
 }
