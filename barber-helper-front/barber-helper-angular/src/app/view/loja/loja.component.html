@@ -30,10 +30,28 @@
   </ng-template>
 
   <ng-template pTemplate="content">
-    <div class="lista-produtos">
+    <div *ngIf="produtosSelecionados.length > 0" class="lista-produtos">
+      <p-scrollPanel [style]="{ height: '200px' }">
 
+        <div class="cards-selecionado" *ngFor="let produto of produtosSelecionados">
+          <p-divider></p-divider>
+          <div class="produto-selecionado">
+            <div class="label-descricao">
+              <label for="produtoSelecionado">{{ produto.descricao }}</label>
+              <label for="produtoSelecionado">{{ 'R$' + produto.valor }}</label>
+              <div class="input-quantidade">
+                <i class="pi pi-plus btn-edit-qtd" style="margin: 5px;" (click)="produto.quantidade = produto.quantidade + 1"></i>
+                <label for="produtoSelecionado">{{ produto.quantidade }}</label>
+                <i class="pi pi-minus btn-edit-qtd" style="margin: 5px;" (click)="produto.quantidade = produto.quantidade - 1"></i>
+              </div>
+            </div>
+          </div>
+          <p-divider></p-divider>
+        </div>
+
+      </p-scrollPanel>
     </div>
-    <label *ngIf="produtosSelecionados.length == 0" for="semProduto" style="text-align-last: center;">Adicione produtos!</label>
+    <label *ngIf="produtosSelecionados.length == 0" for="semProduto" style="text-align-last: center;">Carrinho vazio!</label>
   </ng-template>
 
   <ng-template pTemplate="footer">

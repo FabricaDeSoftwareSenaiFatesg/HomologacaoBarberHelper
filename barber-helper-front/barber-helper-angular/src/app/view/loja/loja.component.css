@@ -49,3 +49,20 @@
   align-items: center;
   justify-content: center;
 }
+
+.label-descricao {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-quantidade {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+}
+
+.produto-selecionado {
+  margin-left: 0px;
+}

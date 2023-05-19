@@ -2,19 +2,25 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProdutoService } from '../produto/produto.service';
 import { Produto } from 'src/app/arquitetura/modelo/produto.model';
+import { Pedido } from 'src/app/arquitetura/modelo/pedido.model';
+import { BaseComponent } from 'src/app/arquitetura/component/base.component';
+import { PedidoService } from './pedido.service';
 
 @Component({
   selector: 'app-loja',
   templateUrl: './loja.component.html',
   styleUrls: ['./loja.component.css']
 })
-export class LojaComponent implements OnInit {
+export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    protected router: Router,
-    protected activatedRoute: ActivatedRoute,
-    protected service: ProdutoService) {
+    protected override router: Router,
+    protected override activatedRoute: ActivatedRoute,
+    protected override service: PedidoService,
+    protected produtoService: ProdutoService) {
+
+    super(changeDetectorRef, router, activatedRoute, service);
 
     this.ngOnInit();
 
@@ -30,15 +36,21 @@ export class LojaComponent implements OnInit {
 
   produtosSelecionados: Produto[] = [];
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
 
     this.listar();
 
   }
 
-  listar() {
+  protected override newEntidade(): Pedido {
 
-    this.service.listarProdutosDTO().subscribe(retorno => {
+    return new Pedido();
+
+  }
+
+  override listar() {
+
+    this.produtoService.listarProdutosDTO().subscribe(retorno => {
 
       this.produtos = retorno;
 
@@ -69,6 +81,8 @@ export class LojaComponent implements OnInit {
   }
 
   adicionarProdutoCarrinho(produto: Produto) {
+
+    produto.quantidade = 1;
 
     this.produtosSelecionados.push(produto);
 
