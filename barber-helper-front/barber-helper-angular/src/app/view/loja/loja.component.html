@@ -14,7 +14,7 @@
     <div class="col-md-auto card-produto" *ngFor="let produto of produtos">
       <img [src]="obterConteudoFormatado(produto)" *ngIf="produto && produto.imagem" style="margin: 15px;" height="190" width="190"/>
       <div class="descricao-produto">
-        <span style="font-weight: 700; font-size: 20px;">{{ produto.descricao }}</span>
+        <span style="font-weight: 500; font-size: 20px; text-align: center;">{{ produto.descricao }}</span>
         <span style="font-weight: 700; font-size: 23px;">{{ 'R$' + produto.valor }}</span>
       </div>
       <button class="btn-confimar" style="font-size: 18px; margin: 15px;" type="submit" (click)="adicionarProdutoCarrinho(produto)">COMPRAR</button>
@@ -54,9 +54,9 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <div class="rodape-carrinho">
+    <div class="rodape-carrinho" *ngIf="produtosSelecionados.length > 0">
       <button class="btn-confimar" style="font-size: 18px; margin: 15px;" (click)="confirmarPedido()">CONFIRMAR</button>
-      <label for="total" style="font-weight: 700; font-size: 30px;" *ngIf="produtosSelecionados.length > 0">{{ somarTotal() }}</label>
+      <label for="total" style="font-weight: 700; font-size: 30px;">{{ somarTotal() }}</label>
     </div>
   </ng-template>
 
