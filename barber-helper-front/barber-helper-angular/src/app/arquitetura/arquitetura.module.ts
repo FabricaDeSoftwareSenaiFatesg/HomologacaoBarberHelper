@@ -22,6 +22,9 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { LabelStatusComponent } from './component/label-status.component';
 import { CardModule } from 'primeng/card';
+import { SidebarModule } from 'primeng/sidebar';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { CardModule } from 'primeng/card';
     InputNumberModule,
     ConfirmPopupModule,
     DataViewModule,
-    CardModule
+    CardModule,
+    SidebarModule,
+    ScrollPanelModule,
+    DividerModule
   ],
   exports: [
     InputMaskModule,
@@ -74,7 +80,10 @@ import { CardModule } from 'primeng/card';
     DataViewModule,
     DataViewLayoutOptions,
     LabelStatusComponent,
-    CardModule
+    CardModule,
+    SidebarModule,
+    ScrollPanelModule,
+    DividerModule
   ],
   providers: [
     SafeUrlPipe
