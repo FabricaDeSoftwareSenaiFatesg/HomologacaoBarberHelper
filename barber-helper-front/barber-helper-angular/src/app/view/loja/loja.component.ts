@@ -82,9 +82,65 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
   adicionarProdutoCarrinho(produto: Produto) {
 
-    produto.quantidade = 1;
+    let produtoEncontrado = this.produtosSelecionados.find(p => p.descricao == produto.descricao);
 
-    this.produtosSelecionados.push(produto);
+    if (produtoEncontrado == undefined) {
+
+      let produtoSelecionado = new Produto();
+
+      produtoSelecionado.descricao = produto.descricao;
+
+      produtoSelecionado.valor = produto.valor;
+
+      produtoSelecionado.quantidade = 1;
+
+      this.produtosSelecionados.push(produtoSelecionado);
+
+    }
+
+  }
+
+  diminuirQtd(produto: Produto) {
+
+    if (produto.quantidade > 1) {
+
+      produto.quantidade = produto.quantidade - 1;
+
+    } else {
+
+      this.produtosSelecionados.splice(this.produtosSelecionados.indexOf(produto), 1);
+
+    }
+
+  }
+
+  aumentarQtd(produto: Produto) {
+
+    let produtoEncontrado = this.produtos.find(p => p.descricao == produto.descricao);
+
+    if (produtoEncontrado !== undefined) {
+
+      if (produtoEncontrado?.quantidade >= produto.quantidade + 1) {
+
+        produto.quantidade = produto.quantidade + 1
+
+      }
+
+    }
+
+  }
+
+  somarTotal() {
+
+    let total = 0;
+
+    this.produtosSelecionados.forEach(produto => total = total + (produto.valor * produto.quantidade));
+
+    return "R$" + total;
+
+  }
+
+  confirmarPedido() {
 
   }
 

@@ -57,12 +57,21 @@
 }
 
 .input-quantidade {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 20px;
+  border-color: #C07C5A;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  align-self: center;
 }
 
 .produto-selecionado {
   margin-left: 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rodape-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
