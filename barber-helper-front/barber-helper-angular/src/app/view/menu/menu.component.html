@@ -7,7 +7,8 @@
       </li>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
-        <i class="menu-sanduiche pi pi-bars"></i>
+        <i class="menu-sanduiche pi pi-bars" (click)="menuSanduiche.toggle($event)"></i>
+        <p-tieredMenu #menuSanduiche [model]="itemsMenuSanduiche" [popup]="true"></p-tieredMenu>
       </button>
 
         <div class="collapse navbar-collapse justify-content-center">

@@ -16,6 +16,7 @@ export class MenuComponent implements OnInit {
   ) {}
 
   items: MenuItem[];
+  itemsMenuSanduiche: MenuItem[];
 
   ngOnInit() {
     this.items = [
@@ -67,6 +68,34 @@ export class MenuComponent implements OnInit {
           label: 'Sair',
           icon: 'pi pi-fw pi-power-off'
       }
+    ];
+
+    this.itemsMenuSanduiche = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        command:(click)=>{this.router.navigate(['']);}
+      },
+      {
+        label: 'Sobre',
+        icon: 'pi pi-info-circle',
+        command:(click)=>{this.router.navigate(['']);}
+      },
+      {
+        label: 'Serviços',
+        icon: 'pi pi-briefcase',
+        command:(click)=>{this.router.navigate(['']);}
+      },
+      {
+        label: 'Loja',
+        icon: 'pi pi-shopping-cart',
+        command:(click)=>{this.router.navigate(['loja']);}
+      },
+      {
+        label: 'Agendar',
+        icon: 'pi pi-calendar-times',
+        command:(click)=>{this.router.navigate(['reserva']);}
+      },
     ];
   }
 
