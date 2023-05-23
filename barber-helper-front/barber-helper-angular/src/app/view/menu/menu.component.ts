@@ -97,7 +97,6 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
-
   }
 
 }
