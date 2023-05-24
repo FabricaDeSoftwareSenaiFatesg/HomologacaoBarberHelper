@@ -1,4 +1,4 @@
-
+<p-messages [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'500ms'"></p-messages>
 <div class="fundo-loja">
   <div class="busca-carrinho">
     <span class="p-input-icon-right">
@@ -17,7 +17,8 @@
         <span style="font-weight: 500; font-size: 20px; text-align: center;">{{ produto.descricao }}</span>
         <span style="font-weight: 700; font-size: 23px;">{{ 'R$' + produto.valor }}</span>
       </div>
-      <button class="btn-confimar" style="font-size: 18px; margin: 15px;" type="submit" (click)="adicionarProdutoCarrinho(produto)">COMPRAR</button>
+      <label for="estoque" *ngIf="produto.quantidade < 1">Sem estoque</label>
+      <button class="btn-confimar" *ngIf="produto.quantidade > 0" style="font-size: 18px; margin: 15px;" type="submit" (click)="adicionarProdutoCarrinho(produto)">COMPRAR</button>
     </div>
     <label *ngIf="produtos.length == 0" for="semProduto" style="text-align-last: center;">Sem produtos cadastrados no momento!</label>
   </div>

@@ -174,3 +174,14 @@ input {
   font-family: 'Khand', sans-serif;
   font-weight: 700;
 }
+
+.p-messages {
+  margin-left: 10px;
+  position: absolute;
+  z-index: 1;
+}
+
+.p-messages .pi-times {
+  color: black;
+  margin: 10px;
+}

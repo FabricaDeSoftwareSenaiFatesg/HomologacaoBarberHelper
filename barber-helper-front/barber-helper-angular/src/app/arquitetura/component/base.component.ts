@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Entidade } from '../modelo/entidade.model';
 import { BaseService } from '../service/base.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   template: ''
@@ -22,7 +23,8 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
     protected changeDectetor: ChangeDetectorRef,
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
-    protected service: BaseService<E>,) {
+    protected service: BaseService<E>,
+    protected messageService: MessageService) {
 
   }
 
@@ -175,6 +177,30 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   status(id: any) {
 
     this.service.status(id).subscribe(() => {});
+
+  }
+
+  adicionarMensagemAlerta(mensagem: string) {
+
+    this.messageService.add({severity:'warn', summary:'Alerta', detail: mensagem});
+
+  }
+
+  adicionarMensagemInfo(mensagem: string) {
+
+    this.messageService.add({severity:'info', summary:'Informação', detail: mensagem});
+
+  }
+
+  adicionarMensagemErro(mensagem: string) {
+
+    this.messageService.add({severity:'error', summary:'Erro', detail: mensagem});
+
+  }
+
+  adicionarMensagemSucesso(mensagem: string) {
+
+    this.messageService.add({severity:'success', summary:'Sucesso', detail: mensagem});
 
   }
 

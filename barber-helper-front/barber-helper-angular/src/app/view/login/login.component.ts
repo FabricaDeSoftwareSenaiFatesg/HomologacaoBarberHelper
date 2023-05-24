@@ -3,6 +3,7 @@ import {BaseComponent} from "../../arquitetura/component/base.component";
 import {Usuario} from "../../arquitetura/modelo/usuario.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "./login.service";
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,17 @@ import {LoginService} from "./login.service";
 })
 export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
-  constructor(protected changeDetectorRef: ChangeDetectorRef, protected override router: Router, protected override activatedRoute: ActivatedRoute, protected override service: LoginService) {
-    super(changeDetectorRef, router, activatedRoute, service);
+  constructor(
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected override router: Router,
+    protected override activatedRoute: ActivatedRoute,
+    protected override service: LoginService,
+    protected override messageService: MessageService) {
+
+    super(changeDetectorRef, router, activatedRoute, service, messageService);
+
     super.ngOnInit();
+
   }
 
   override ngOnInit() : void {

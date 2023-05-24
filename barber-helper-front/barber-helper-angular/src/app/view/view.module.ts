@@ -8,6 +8,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { ProdutoModule } from './produto/produto.module';
 import { LojaModule } from './loja/loja.module';
 import { MenuModule } from './menu/menu.module';
+import { PedidoModule } from './pedido/pedido.module';
 
 
 
@@ -25,7 +26,8 @@ import { MenuModule } from './menu/menu.module';
     UsuarioModule,
     ProdutoModule,
     LojaModule,
-    MenuModule
+    MenuModule,
+    PedidoModule
   ]
 })
 export class ViewModule { }

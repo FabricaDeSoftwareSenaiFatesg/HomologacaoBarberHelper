@@ -5,11 +5,14 @@ import { Produto } from 'src/app/arquitetura/modelo/produto.model';
 import { Pedido } from 'src/app/arquitetura/modelo/pedido.model';
 import { BaseComponent } from 'src/app/arquitetura/component/base.component';
 import { PedidoService } from './pedido.service';
+import { MessageService } from 'primeng/api';
+import { StatusPedidoEnum } from 'src/app/arquitetura/modelo/status-pedido.enum';
 
 @Component({
   selector: 'app-loja',
   templateUrl: './loja.component.html',
-  styleUrls: ['./loja.component.css']
+  styleUrls: ['./loja.component.css'],
+  providers: [MessageService]
 })
 export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
@@ -18,17 +21,16 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
     protected override service: PedidoService,
-    protected produtoService: ProdutoService) {
+    protected produtoService: ProdutoService,
+    protected override messageService: MessageService) {
 
-    super(changeDetectorRef, router, activatedRoute, service);
+    super(changeDetectorRef, router, activatedRoute, service, messageService);
 
     this.ngOnInit();
 
   }
 
   produtos: Produto[] = [];
-
-  layout: string = 'grid';
 
   descricaoBusca: string;
 
@@ -76,7 +78,7 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
   pesquisar() {
 
-    console.log(this.descricaoBusca);
+    this.adicionarMensagemSucesso(this.descricaoBusca);
 
   }
 
@@ -88,6 +90,8 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
       let produtoSelecionado = new Produto();
 
+      produtoSelecionado.id = produto.id;
+
       produtoSelecionado.descricao = produto.descricao;
 
       produtoSelecionado.valor = produto.valor;
@@ -95,6 +99,10 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
       produtoSelecionado.quantidade = 1;
 
       this.produtosSelecionados.push(produtoSelecionado);
+
+    } else {
+
+      this.adicionarMensagemAlerta("Produto já adicionado ao carrinho");
 
     }
 
@@ -141,6 +149,32 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
   }
 
   confirmarPedido() {
+
+    if (this.produtosSelecionados.length > 0) {
+
+      this.entidade = this.newEntidade();
+
+      this.entidade.dataPedido = new Date();
+
+      let total = 0;
+
+      this.produtosSelecionados.forEach(produto => total = total + (produto.valor * produto.quantidade));
+
+      this.entidade.total = total;
+
+      this.entidade.produtos = this.produtosSelecionados;
+
+      this.entidade.statusPedido = StatusPedidoEnum.EM_ESPERA;
+
+      super.salvar(this.entidade);
+
+      this.produtosSelecionados = [];
+
+      this.carrinhoCompras = false;
+
+      this.adicionarMensagemSucesso("Pedido realizado com sucesso!");
+
+    }
 
   }
 
