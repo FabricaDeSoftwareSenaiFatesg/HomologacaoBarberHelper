@@ -8,7 +8,8 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-usuario-listagem',
   templateUrl: './usuario-listagem.component.html',
-  styleUrls: ['./usuario-listagem.component.css']
+  styleUrls: ['./usuario-listagem.component.css'],
+  providers: [MessageService]
 })
 export class UsuarioListagemComponent extends BaseComponent<Usuario> implements OnInit {
 

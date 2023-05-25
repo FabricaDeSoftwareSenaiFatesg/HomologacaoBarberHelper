@@ -26,6 +26,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { DividerModule } from 'primeng/divider';
 import { MessagesModule } from 'primeng/messages';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { MessagesModule } from 'primeng/messages';
     SidebarModule,
     ScrollPanelModule,
     DividerModule,
-    MessagesModule
+    MessagesModule,
+    TooltipModule
   ],
   exports: [
     InputMaskModule,
@@ -86,7 +88,8 @@ import { MessagesModule } from 'primeng/messages';
     SidebarModule,
     ScrollPanelModule,
     DividerModule,
-    MessagesModule
+    MessagesModule,
+    TooltipModule
   ],
   providers: [
     SafeUrlPipe

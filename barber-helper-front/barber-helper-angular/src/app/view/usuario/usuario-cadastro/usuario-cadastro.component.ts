@@ -8,7 +8,8 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-usuario-cadastro',
   templateUrl: './usuario-cadastro.component.html',
-  styleUrls: ['./usuario-cadastro.component.css']
+  styleUrls: ['./usuario-cadastro.component.css'],
+  providers: [MessageService]
 })
 export class UsuarioCadastroComponent extends BaseComponent<Usuario> implements OnInit {
 
@@ -24,6 +25,8 @@ export class UsuarioCadastroComponent extends BaseComponent<Usuario> implements 
     super.ngOnInit();
 
   }
+
+  value: string;
 
   override ngOnInit(): void {
 

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Entidade } from "../modelo/entidade.model";
 import { first } from 'rxjs/operators';
+import { Usuario } from "../modelo/usuario.model";
 
 export class BaseService<E extends Entidade> {
 
@@ -44,6 +45,12 @@ export class BaseService<E extends Entidade> {
   remove(id: string) {
 
     return this.httpClient.delete(`${this.API}/${this.path}/${id}`).pipe(first());
+
+  }
+
+  getUsuarioLogado() {
+
+    return this.httpClient.get<Usuario>(`${this.API}/${this.path}/usuario-logado`);
 
   }
 

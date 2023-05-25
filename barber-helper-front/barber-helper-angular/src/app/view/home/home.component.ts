@@ -14,8 +14,6 @@ export class HomeComponent implements OnInit {
     protected activatedRoute: ActivatedRoute
   ) {}
 
-  value: string;
-
   ngOnInit() {
 
   }

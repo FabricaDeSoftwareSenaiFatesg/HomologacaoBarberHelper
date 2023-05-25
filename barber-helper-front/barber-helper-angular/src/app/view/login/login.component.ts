@@ -8,7 +8,8 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MessageService]
 })
 export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
@@ -25,6 +26,14 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
   }
 
+  flagNovoUsuario: boolean = false;
+
+  flagRecuperarSenha: boolean = false;
+
+  novoUsuario: Usuario = new Usuario();
+
+  usuarioRecuperarSenha: Usuario = new Usuario();
+
   override ngOnInit() : void {
     this.newEntidade()
   }
@@ -35,6 +44,34 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
   override preSalvar() {
     console.log(this.entidade);
+  }
+
+  login() {
+
+  }
+
+  recuperarSenha() {
+
+    this.flagRecuperarSenha = true;
+
+  }
+
+  cadastrarUsuario() {
+
+    this.flagNovoUsuario = true;
+
+  }
+
+  voltarLogin() {
+
+    this.flagNovoUsuario = false;
+
+    this.flagRecuperarSenha = false;
+
+  }
+
+  enviarEmailComSenhaNova() {
+
   }
 
 }

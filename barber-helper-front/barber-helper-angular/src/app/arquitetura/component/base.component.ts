@@ -3,6 +3,7 @@ import { Entidade } from '../modelo/entidade.model';
 import { BaseService } from '../service/base.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Usuario } from '../modelo/usuario.model';
 
 @Component({
   template: ''
@@ -18,6 +19,8 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   modalCadastro: boolean = false;
 
   isVisualizacao: boolean = false;
+
+  usuarioLogado: Usuario;
 
   constructor(
     protected changeDectetor: ChangeDetectorRef,
@@ -83,6 +86,8 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   }
 
   ngOnInit() {
+
+    this.getUsuarioLogado();
 
     this.listar();
 
@@ -202,6 +207,17 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
 
     this.messageService.add({severity:'success', summary:'Sucesso', detail: mensagem});
 
+  }
+
+  getUsuarioLogado() {
+
+    this.service.getUsuarioLogado().subscribe(retorno => {
+
+      this.usuarioLogado = retorno;
+
+      this.changeDectetor.detectChanges();
+
+    });
   }
 
 }
