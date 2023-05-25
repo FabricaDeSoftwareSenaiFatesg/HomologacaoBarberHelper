@@ -8,15 +8,20 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { ProdutoModule } from './produto/produto.module';
 import { LojaModule } from './loja/loja.module';
 import { MenuModule } from './menu/menu.module';
+import { SobreComponent } from './sobre/sobre.component';
+import {ButtonModule} from "primeng/button";
 
 
 
 @NgModule({
   declarations: [
+
+    SobreComponent
   ],
-  imports: [
-    CommonModule
-  ],
+    imports: [
+        CommonModule,
+        ButtonModule
+    ],
   exports: [
     PessoaModule,
     ReservaModule,

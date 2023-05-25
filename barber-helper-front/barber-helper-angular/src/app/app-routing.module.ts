@@ -7,6 +7,7 @@ import { PessoaRoutes } from './view/pessoa/pessoa-routes';
 import { UsuarioRoutes } from './view/usuario/usuario-routes';
 import { ProdutoComponent } from './view/produto/produto.component';
 import { LojaComponent } from './view/loja/loja.component';
+import {SobreComponent} from "./view/sobre/sobre.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'usuario', children: UsuarioRoutes },
   { path: 'produto', component: ProdutoComponent },
   { path: 'loja', component: LojaComponent },
+  { path: 'sobre', component: SobreComponent },
 ];
 
 @NgModule({
