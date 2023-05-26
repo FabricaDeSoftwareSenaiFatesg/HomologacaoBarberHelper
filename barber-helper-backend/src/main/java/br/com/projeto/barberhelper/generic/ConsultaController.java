@@ -34,13 +34,4 @@ public abstract class ConsultaController<E extends Serializable> {
 
     }
 
-    @GetMapping(value = "/usuario-logado")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Usuario> getUsuarioLogado() {
-
-        return ResponseEntity.ok().body(this.getServico().get( id ));
-
-    }
-
 }

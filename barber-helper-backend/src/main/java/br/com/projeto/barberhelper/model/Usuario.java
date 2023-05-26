@@ -24,7 +24,7 @@ public class Usuario extends EntidadeGenerica {
     @Column(name = "tipo")
     private TipoUsuarioEnum tipo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Pessoa pessoa;
 

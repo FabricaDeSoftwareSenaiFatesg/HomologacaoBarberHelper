@@ -21,6 +21,7 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   isVisualizacao: boolean = false;
 
   usuarioLogado: Usuario;
+  usuarioService: any;
 
   constructor(
     protected changeDectetor: ChangeDetectorRef,
@@ -218,6 +219,7 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
       this.changeDectetor.detectChanges();
 
     });
+
   }
 
 }

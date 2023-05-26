@@ -1,7 +1,10 @@
 <div class="panel">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <li class="main-nav config" style="margin-right: 22px;">
+      <li class="main-nav config"  *ngIf="!usuarioLogado">
+        <a href="login" class="login"><i class="pi pi-sign-in"></i></a>
+      </li>
+      <li class="main-nav config" style="margin-right: 22px;" *ngIf="usuarioLogado">
         <a title="Configurações"><i class="pi pi-cog" (click)="menu.toggle($event)"></i></a>
         <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
       </li>
@@ -30,9 +33,6 @@
           </ul>
         </div>
         <ul class="nav ms-auto justify-content-center">
-          <li class="nav-item">
-            <a href="login" class="login"><i class="pi pi-sign-in"></i></a>
-          </li>
           <li class="nav-item">
             <a href="" class="whatsapp"><i class="pi pi-whatsapp"></i></a>
           </li>

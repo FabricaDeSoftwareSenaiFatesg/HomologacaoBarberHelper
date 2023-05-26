@@ -1,6 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
+import { BaseService } from 'src/app/arquitetura/service/base.service';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,12 +15,18 @@ export class MenuComponent implements OnInit {
   constructor(
     protected changeDetectorRef: ChangeDetectorRef,
     protected router: Router,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected service: UsuarioService
   ) {}
 
   items: MenuItem[];
 
+  usuarioLogado: Usuario;
+
   ngOnInit() {
+
+    this.pegarUsuarioLogado();
+
     this.items = [
       {
         label: 'Dashboard',
@@ -68,6 +77,16 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-power-off'
       }
     ];
+  }
+
+  pegarUsuarioLogado() {
+
+    this.service.getUsuarioLogado().subscribe(retorno => {
+
+      this.usuarioLogado = retorno;
+
+    });
+
   }
 
 }

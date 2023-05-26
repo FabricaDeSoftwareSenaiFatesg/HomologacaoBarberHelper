@@ -48,10 +48,12 @@ export class BaseService<E extends Entidade> {
 
   }
 
+  logout() {
+    return this.httpClient.get<any>(`${this.API}/usuario/logout`);
+  }
+
   getUsuarioLogado() {
-
-    return this.httpClient.get<Usuario>(`${this.API}/${this.path}/usuario-logado`);
-
+    return this.httpClient.get<any>(`${this.API}/usuario/get-usuario-logado`);
   }
 
 }
