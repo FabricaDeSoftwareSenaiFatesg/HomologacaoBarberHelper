@@ -3,11 +3,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'src/app/arquitetura/component/base.component';
 import { Produto } from 'src/app/arquitetura/modelo/produto.model';
 import { ProdutoService } from './produto.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-produto',
   templateUrl: './produto.component.html',
-  styleUrls: ['./produto.component.css']
+  styleUrls: ['./produto.component.css'],
+  providers: [MessageService]
 })
 export class ProdutoComponent extends BaseComponent<Produto> {
 
@@ -15,9 +17,10 @@ export class ProdutoComponent extends BaseComponent<Produto> {
     protected changeDetectorRef: ChangeDetectorRef,
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
-    protected override service: ProdutoService) {
+    protected override service: ProdutoService,
+    protected override messageService: MessageService) {
 
-    super(changeDetectorRef, router, activatedRoute, service);
+    super(changeDetectorRef, router, activatedRoute, service, messageService);
 
     super.ngOnInit();
 

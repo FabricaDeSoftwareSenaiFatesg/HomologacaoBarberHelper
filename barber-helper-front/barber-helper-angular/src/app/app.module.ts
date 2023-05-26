@@ -9,13 +9,14 @@ import { ArquiteturaModule } from './arquitetura/arquitetura.module';
 import { ViewModule } from './view/view.module';
 import { HttpClientModule } from '@angular/common/http';
 import {HomeComponent} from "./view/home/home.component";
+import {MenuComponent} from "./view/menu/menu.component";
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

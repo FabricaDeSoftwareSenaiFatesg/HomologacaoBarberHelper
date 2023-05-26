@@ -1,31 +1,39 @@
-<div class="menu navbar navbar-expand-lg bg-body-tertiary">
-  <ul class="container-fluid main-nav nav justify-content-center" style="width: 100%;">
-    <li class="nav-item" style="margin-inline-end: auto;">
-      <a title="Configurações"><i class="pi pi-cog"  (click)="menu.toggle($event)"></i></a>
-    </li>
-    <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
-    <li class="nav-item">
-      <a class="nav-link active" href="\">HOME</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="\">SOBRE</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="\">SERVIÇOS</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="loja">LOJA</a>
-    </li>
-    <li class="nav-item" style="margin-inline-end: auto;">
-      <a class="nav-link" style="margin-inline-end: auto" href="reserva/novo">AGENDAR</a>
-    </li>
-    <li>
-      <a href="\" class="whatsapp justify-content-between"><i class="pi pi-whatsapp"></i></a>
-    </li>
-    <li>
-      <a href="\" class="instagram"><i class="pi pi-instagram"></i></a>
-    </li>
-  </ul>
+
+<div class="container-fluid style-background">
+  <div>
+    <img class="d-flex imagem margin-bottom" src="assets/logo_barbearia_sem_fundo.svg" alt="imagemLateral">
+  </div>
+
+  <div class="rodape-retangulo d-flex justify-content-around">
+      <div class="col-3 div-centralizada ml-3">
+        <div>
+          <h1 class="khand-font-500 font-color-titulo div-centralizada mt-4">ENDEREÇO</h1>
+          <a href="https://goo.gl/maps/btUDQF8KycyaWE4P6" target="_blank" class="texto-centralizado popins-font-700">R. dos Junquilhos - Parque Oeste Industrial, Goiânia - GO, 74375-640</a>
+        </div>
+      </div>
+
+    <div class="retangulo d-flex mt-4"></div>
+
+      <div class="col-3 div-centralizada">
+        <div>
+          <h1 class="khand-font-500 font-color-titulo div-centralizada mt-4">FALE CONOSCO</h1>
+<!--          <p class="texto-centralizado popins-font-700">(62) 99395-5124</p>-->
+          <a href="tel:+5562993955124" target="_blank" class="texto-centralizado popins-font-700">(62) 99395-5124</a>
+
+        </div>
+      </div>
+
+    <div class="retangulo d-flex mt-4"></div>
+
+      <div class="col-3 mr-5 div-centralizada">
+        <div>
+          <h1 class="khand-font-500 font-color-titulo div-centralizada mt-3">HORÁRIO</h1>
+          <p class="texto-centralizado popins-font-700">09:00 às 19:00</p>
+        </div>
+      </div>
+
+  </div>
+
 </div>
 
 
