@@ -16,6 +16,10 @@ export class ReservaService extends BaseService<Reserva>{
     return this.httpClient.post<any>(`${this.API}/${this.path}/consultarHorarios`, pesquisaHorarios);
   }
 
+  listarFiltrado(pesquisaHorarios: any) {
+    return this.httpClient.post<any>(`${this.API}/${this.path}/listarFiltrado`, pesquisaHorarios);
+  }
+
   salvarReserva(reserva: any) {
     return this.httpClient.post<any>(`${this.API}/${this.path}/salvarReserva`, reserva);
   }
