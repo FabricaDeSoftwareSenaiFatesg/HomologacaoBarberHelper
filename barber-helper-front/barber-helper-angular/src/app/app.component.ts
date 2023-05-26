@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
       tooltip: 1100   // tooltip
     };
 
+    this.changeDetectorRef.detectChanges();
+
   }
 
   public ngAfterViewChecked(): void {

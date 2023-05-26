@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Entidade } from '../modelo/entidade.model';
 import { BaseService } from '../service/base.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { Usuario } from '../modelo/usuario.model';
 
 @Component({
   template: ''
@@ -18,11 +20,15 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
 
   isVisualizacao: boolean = false;
 
+  usuarioLogado: Usuario;
+  usuarioService: any;
+
   constructor(
     protected changeDectetor: ChangeDetectorRef,
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
-    protected service: BaseService<E>,) {
+    protected service: BaseService<E>,
+    protected messageService: MessageService) {
 
   }
 
@@ -81,6 +87,8 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   }
 
   ngOnInit() {
+
+    this.getUsuarioLogado();
 
     this.listar();
 
@@ -175,6 +183,42 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   status(id: any) {
 
     this.service.status(id).subscribe(() => {});
+
+  }
+
+  adicionarMensagemAlerta(mensagem: string) {
+
+    this.messageService.add({severity:'warn', summary:'Alerta', detail: mensagem});
+
+  }
+
+  adicionarMensagemInfo(mensagem: string) {
+
+    this.messageService.add({severity:'info', summary:'Informação', detail: mensagem});
+
+  }
+
+  adicionarMensagemErro(mensagem: string) {
+
+    this.messageService.add({severity:'error', summary:'Erro', detail: mensagem});
+
+  }
+
+  adicionarMensagemSucesso(mensagem: string) {
+
+    this.messageService.add({severity:'success', summary:'Sucesso', detail: mensagem});
+
+  }
+
+  getUsuarioLogado() {
+
+    this.service.getUsuarioLogado().subscribe(retorno => {
+
+      this.usuarioLogado = retorno;
+
+      this.changeDectetor.detectChanges();
+
+    });
 
   }
 

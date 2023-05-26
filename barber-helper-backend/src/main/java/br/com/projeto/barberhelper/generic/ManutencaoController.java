@@ -1,5 +1,6 @@
 package br.com.projeto.barberhelper.generic;
 
+import br.com.projeto.barberhelper.model.Usuario;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.*;

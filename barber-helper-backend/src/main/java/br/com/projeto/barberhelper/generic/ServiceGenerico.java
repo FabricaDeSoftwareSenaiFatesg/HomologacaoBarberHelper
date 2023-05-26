@@ -1,6 +1,7 @@
 package br.com.projeto.barberhelper.generic;
 
 import br.com.projeto.barberhelper.model.EntidadeGenerica;
+import br.com.projeto.barberhelper.model.Usuario;
 import br.com.projeto.barberhelper.utils.DateUtil;
 import br.com.projeto.barberhelper.utils.TransformerTuple;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public abstract class ServiceGenerico<ID extends Serializable, E extends Entidad
 
     @Autowired
     protected EntityManager em;
+
+    protected Usuario usuarioLogado;
 
     @Override
     public E get(ID id) {
