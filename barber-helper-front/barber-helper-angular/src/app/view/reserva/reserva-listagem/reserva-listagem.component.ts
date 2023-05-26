@@ -4,13 +4,11 @@ import {Reserva} from "../../../arquitetura/modelo/reserva.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReservaService} from "../reserva.service";
 import {PessoaService} from "../../pessoa/pessoa.service";
-import { MessageService } from "primeng/api";
 
 @Component({
   selector: 'app-reserva-listagem',
   templateUrl: './reserva-listagem.component.html',
-  styleUrls: ['./reserva-listagem.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./reserva-listagem.component.css']
 })
 export class ReservaListagemComponent extends BaseComponent<Reserva> implements OnInit {
 
@@ -19,10 +17,9 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
     protected override service: ReservaService,
-    protected pessoaService: PessoaService,
-    protected override messageService: MessageService) {
+    protected pessoaService: PessoaService,) {
 
-    super(changeDetectorRef, router, activatedRoute, service, messageService);
+    super(changeDetectorRef, router, activatedRoute, service);
 
     super.ngOnInit();
 
@@ -65,6 +62,10 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
     this.service.listarFiltrado(pesquisaHorarios).subscribe(response => {
       this.listaEntidades = response.entity;
     });
+  }
+
+  getUsuarioLogado() {
+    return {id: 1};
   }
 
 }
