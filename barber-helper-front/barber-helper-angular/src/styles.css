@@ -45,6 +45,14 @@ body {
   width: 100%;
 }
 
+.input-personalizado .p-calendar{
+  width: 100%;
+}
+
+.input-personalizado .p-dropdown{
+  width: 100%;
+}
+
 input {
   height: 40px;
   width: 100%;

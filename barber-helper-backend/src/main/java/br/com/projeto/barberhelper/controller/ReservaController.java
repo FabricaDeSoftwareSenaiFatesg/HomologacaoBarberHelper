@@ -10,6 +10,8 @@ import br.com.projeto.barberhelper.model.HorariosDisponiveis;
 import br.com.projeto.barberhelper.model.dto.FidelidadeDTO;
 import br.com.projeto.barberhelper.model.Reserva;
 import br.com.projeto.barberhelper.model.dto.PesquisaHorarios;
+import br.com.projeto.barberhelper.model.dto.listagem.ReservaListagemDTO;
+import br.com.projeto.barberhelper.model.mapper.ReservaMapper;
 import br.com.projeto.barberhelper.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,15 @@ public class ReservaController extends ManutencaoController<Reserva> {
         List<Reserva> reservas = service.obterReservasDoFuncionarioPorData(pesquisaHorarios.getProfissional().getId(), pesquisaHorarios.getData());
         List<String> horariosReservados = service.getHorariosReservadosDasReservas(reservas);
         return Response.ok(service.getHorariosFiltardos(horariosReservados, pesquisaHorarios.getServicos())).build();
+    }
+
+    @PostMapping(value = "/listarFiltrado")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarFiltrado(@RequestBody PesquisaHorarios pesquisaHorarios) {
+
+        List<Reserva> reservas = service.listarFiltrado(pesquisaHorarios.getProfissional().getId(), pesquisaHorarios.getData());
+        return Response.ok(ReservaMapper.toListReservaListagemDTO(reservas)).build();
     }
 
     @PostMapping(value = "/salvarReserva")

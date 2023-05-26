@@ -189,4 +189,13 @@ public class DateUtil {
 				+ ":"
 				+ (calendar.get(Calendar.MINUTE) == 0 ? "00" : calendar.get(Calendar.MINUTE));
 	}
+
+	public static String getStringData(Date data) {
+		Calendar calendar = getCalendarDate(data);
+		return (calendar.get(Calendar.DATE) < 10 ? "0" + calendar.get(Calendar.DATE) : calendar.get(Calendar.DATE))
+				+ "/"
+				+ (calendar.get(Calendar.MONTH) < 10 ? "0" + calendar.get(Calendar.MONTH) : calendar.get(Calendar.MONTH))
+				+ "/"
+				+ calendar.get(Calendar.YEAR);
+	}
 }

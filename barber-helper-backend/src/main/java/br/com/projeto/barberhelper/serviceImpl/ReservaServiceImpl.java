@@ -13,6 +13,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.Selection;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.barberhelper.generic.DAO;
@@ -85,7 +86,8 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
 
         query.where(
                 builder.equal(rootFuncionario.get("id"), funcionarioId),
-                builder.between(root.get("dataInicial"), dataInicial, dataFinal)
+                builder.between(root.get("dataInicial"), dataInicial, dataFinal),
+                builder.equal(root.get("statusReserva"), StatusReservaEnum.RESERVADO)
         );
 
         return this.executeQueryAndTransforResult(query, Reserva.class);
@@ -133,5 +135,39 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
 
     private int getQntHorariosNecessarios(List<Servico> servicos) {
         return (int) Math.ceil((double) servicos.stream().mapToLong(Servico::getTempo).sum()/30)-1;
+    }
+
+    @Override
+    public List<Reserva> listarFiltrado(Long funcionarioId, Date dataReserva) {
+        final CriteriaBuilder builder = em.getCriteriaBuilder();
+        final CriteriaQuery<Tuple> query = builder.createTupleQuery();
+        final Root<Reserva> root = query.from(Reserva.class);
+//        final Join<Reserva, Pessoa> rootCliente = root.join("cliente");
+        final Join<Reserva, Pessoa> rootFuncionario = root.join("funcionario");
+
+        query.select(builder.tuple(
+                root.get("id").alias("id"),
+
+//                rootCliente.get("id").alias("cliente.id"),
+//                rootCliente.get("nome").alias("cliente.nome"),
+
+                rootFuncionario.get("id").alias("funcionario.id"),
+                rootFuncionario.get("nome").alias("funcionario.nome"),
+
+                root.get("dataInicial").alias("dataInicial"),
+                root.get("dataFim").alias("dataFim"),
+                root.get("statusReserva").alias("statusReserva")
+        ));
+
+        Date dataInicial = DateUtil.converterDateInicioDia(dataReserva);
+        Date dataFinal = DateUtil.converterDateFimDia(dataReserva);
+
+        query.where(
+                builder.equal(rootFuncionario.get("id"), funcionarioId),
+                builder.between(root.get("dataInicial"), dataInicial, dataFinal),
+                builder.equal(root.get("statusReserva"), StatusReservaEnum.RESERVADO)
+        );
+
+        return this.executeQueryAndTransforResult(query, Reserva.class);
     }
 }
