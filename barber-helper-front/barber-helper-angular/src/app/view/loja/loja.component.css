@@ -70,3 +70,8 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.fundo-loja {
+  height: 100%;
+  background-color: #F9F5F2;
+}

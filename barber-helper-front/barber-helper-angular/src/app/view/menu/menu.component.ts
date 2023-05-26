@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
-import { BaseService } from 'src/app/arquitetura/service/base.service';
 import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
@@ -74,7 +73,9 @@ export class MenuComponent implements OnInit {
       },
       {
           label: 'Sair',
-          icon: 'pi pi-fw pi-power-off'
+          icon: 'pi pi-fw pi-power-off',
+          command:(click)=>{this.logout();}
+
       }
     ];
   }
@@ -84,6 +85,16 @@ export class MenuComponent implements OnInit {
     this.service.getUsuarioLogado().subscribe(retorno => {
 
       this.usuarioLogado = retorno;
+
+    });
+
+  }
+
+  logout() {
+
+    this.service.logout().subscribe(() => {
+
+      this.ngOnInit()
 
     });
 
