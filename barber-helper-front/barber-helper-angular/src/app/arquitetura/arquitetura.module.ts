@@ -28,6 +28,7 @@ import { DividerModule } from 'primeng/divider';
 import { MessagesModule } from 'primeng/messages';
 import { TooltipModule } from 'primeng/tooltip';
 import { PasswordModule } from 'primeng/password';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PasswordModule } from 'primeng/password';
     DividerModule,
     MessagesModule,
     TooltipModule,
-    PasswordModule
+    PasswordModule,
+    BadgeModule
   ],
   exports: [
     InputMaskModule,
@@ -92,7 +94,8 @@ import { PasswordModule } from 'primeng/password';
     DividerModule,
     MessagesModule,
     TooltipModule,
-    PasswordModule
+    PasswordModule,
+    BadgeModule
   ],
   providers: [
     SafeUrlPipe
