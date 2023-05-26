@@ -42,6 +42,8 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
     this.listar();
 
+    console.log(this.getUsuarioLogado());
+
   }
 
   protected override newEntidade(): Pedido {

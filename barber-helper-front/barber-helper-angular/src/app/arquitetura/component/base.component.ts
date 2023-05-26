@@ -94,6 +94,8 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
 
     this.entidadeForm = this.newEntidade();
 
+    this.entidade = this.newEntidade();
+
   }
 
   ngAfterViewChecked(): void {
@@ -214,9 +216,7 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
 
     this.service.getUsuarioLogado().subscribe(retorno => {
 
-      this.usuarioLogado = retorno;
-
-      this.changeDectetor.detectChanges();
+      return retorno;
 
     });
 
