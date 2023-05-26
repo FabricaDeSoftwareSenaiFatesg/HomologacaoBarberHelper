@@ -17,4 +17,6 @@ public interface ReservaService extends Service<Long, Reserva> {
     List<String> getHorariosReservadosDasReservas(List<Reserva> reservas);
 
     public List<String> getHorariosFiltardos(List<String> horariosReservados, List<Servico> servicos);
+
+    public List<Reserva> listarFiltrado(Long funcionarioId, Date dataReserva);
 }
