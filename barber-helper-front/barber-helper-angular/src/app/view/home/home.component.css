@@ -1,7 +1,6 @@
 
 .container-fluid {
-  
-  height: 92vh;
+  height: 92.5vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,8 +84,8 @@
 
 .imagem {
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 1));
-  height: 70vh;
-  width: 70vh;
+  width: 100%;
+  heigth: auto;
 }
 
 .rodape-retangulo{
