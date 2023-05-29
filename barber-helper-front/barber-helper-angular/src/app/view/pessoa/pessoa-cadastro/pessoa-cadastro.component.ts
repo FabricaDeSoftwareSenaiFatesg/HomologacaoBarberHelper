@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Pessoa } from 'src/app/arquitetura/modelo/pessoa.model';
 import { PessoaService } from '../pessoa.service';
 import { BaseComponent } from 'src/app/arquitetura/component/base.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -15,9 +16,10 @@ export class PessoaCadastroComponent extends BaseComponent<Pessoa> implements On
     protected changeDetectorRef: ChangeDetectorRef,
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
-    protected override service: PessoaService) {
+    protected override service: PessoaService,
+    protected override messageService: MessageService) {
 
-    super(changeDetectorRef, router, activatedRoute, service);
+    super(changeDetectorRef, router, activatedRoute, service, messageService);
 
     super.ngOnInit();
 

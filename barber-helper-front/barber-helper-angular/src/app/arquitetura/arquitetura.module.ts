@@ -25,6 +25,9 @@ import { CardModule } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { DividerModule } from 'primeng/divider';
+import { MessagesModule } from 'primeng/messages';
+import { TooltipModule } from 'primeng/tooltip';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { DividerModule } from 'primeng/divider';
     CardModule,
     SidebarModule,
     ScrollPanelModule,
-    DividerModule
+    DividerModule,
+    MessagesModule,
+    TooltipModule,
+    PasswordModule
   ],
   exports: [
     InputMaskModule,
@@ -83,7 +89,10 @@ import { DividerModule } from 'primeng/divider';
     CardModule,
     SidebarModule,
     ScrollPanelModule,
-    DividerModule
+    DividerModule,
+    MessagesModule,
+    TooltipModule,
+    PasswordModule
   ],
   providers: [
     SafeUrlPipe

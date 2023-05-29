@@ -12,4 +12,8 @@ export class UsuarioService extends BaseService<Usuario> {
     super( httpClient, "usuario");
   }
 
+  autenticarUsuario(usuario: Usuario) {
+    return this.httpClient.post<boolean>(`${this.API}/${this.path}/autenticar-usuario`, usuario);
+  }
+
 }

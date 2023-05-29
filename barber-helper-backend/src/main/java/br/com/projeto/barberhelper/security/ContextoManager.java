@@ -57,7 +57,7 @@ public class ContextoManager {
 
                 .stream()
 
-                .filter(u -> ((Usuario) u.getValue()).getLogin().equals(usuario.getLogin()) )
+                .filter(u -> ((Usuario) u.getValue()).getEmail().equals(usuario.getEmail()) )
 
                 .map(Map.Entry::getKey)
 

@@ -5,6 +5,10 @@ import br.com.projeto.barberhelper.model.Usuario;
 
 public interface UsuarioService extends Service<Long, Usuario> {
 
-    Usuario autenticarUsuario(final String login, final String senha);
+    boolean autenticarUsuario(final String email, final String senha);
+
+    Usuario getUsuarioLogado();
+
+    void logout();
 
 }

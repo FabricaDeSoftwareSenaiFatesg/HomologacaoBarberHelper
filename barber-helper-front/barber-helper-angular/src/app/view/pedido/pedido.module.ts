@@ -1,20 +1,18 @@
-import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArquiteturaModule } from 'src/app/arquitetura/arquitetura.module';
-
-
+import { PedidoComponent } from './pedido.component';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    PedidoComponent
   ],
   imports: [
     CommonModule,
-    ArquiteturaModule
+    ArquiteturaModule,
   ],
   exports: [
-    HomeComponent
+    PedidoComponent
   ]
 })
-export class HomeModule { }
+export class PedidoModule { }

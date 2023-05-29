@@ -1,5 +1,6 @@
 package br.com.projeto.barberhelper.generic;
 
+import br.com.projeto.barberhelper.model.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

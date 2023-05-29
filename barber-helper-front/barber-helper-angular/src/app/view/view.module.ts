@@ -8,20 +8,14 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { ProdutoModule } from './produto/produto.module';
 import { LojaModule } from './loja/loja.module';
 import { MenuModule } from './menu/menu.module';
-import { SobreComponent } from './sobre/sobre.component';
-import {ButtonModule} from "primeng/button";
-
-
+import { PedidoModule } from './pedido/pedido.module';
 
 @NgModule({
   declarations: [
-
-    SobreComponent
   ],
-    imports: [
-        CommonModule,
-        ButtonModule
-    ],
+  imports: [
+    CommonModule
+  ],
   exports: [
     PessoaModule,
     ReservaModule,
@@ -30,7 +24,8 @@ import {ButtonModule} from "primeng/button";
     UsuarioModule,
     ProdutoModule,
     LojaModule,
-    MenuModule
+    MenuModule,
+    PedidoModule
   ]
 })
 export class ViewModule { }

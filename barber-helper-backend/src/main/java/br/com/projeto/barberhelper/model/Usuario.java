@@ -20,13 +20,11 @@ public class Usuario extends EntidadeGenerica {
 
     private String senha;
 
-    private String login;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
     private TipoUsuarioEnum tipo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Pessoa pessoa;
 

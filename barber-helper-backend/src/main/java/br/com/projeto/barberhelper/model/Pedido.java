@@ -31,6 +31,7 @@ public class Pedido extends EntidadeGenerica {
 
     private Date dataPedido;
 
+    @Enumerated(EnumType.STRING)
     private StatusPedidoEnum statusPedido;
 
     @Transient

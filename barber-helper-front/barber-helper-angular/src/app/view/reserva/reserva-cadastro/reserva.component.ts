@@ -1,18 +1,20 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BaseComponent} from 'src/app/arquitetura/component/base.component';
 import {Reserva} from 'src/app/arquitetura/modelo/reserva.model';
-import {ReservaService} from './reserva.service';
+import {ReservaService} from '../reserva.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PessoaService} from "../pessoa/pessoa.service";
-import {ServicoService} from "../servico/servico.service";
-import {StatusReservaEnum} from "../../arquitetura/modelo/status-reserva.enum";
+import { MessageService } from 'primeng/api';
+import {PessoaService} from "../../pessoa/pessoa.service";
+import {ServicoService} from "../../servico/servico.service";
+import {StatusReservaEnum} from "../../../arquitetura/modelo/status-reserva.enum";
 
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
-  styleUrls: ['./reserva.component.css']
+  styleUrls: ['./reserva.component.css'],
+  providers: [MessageService]
 })
-export class ReservaComponent extends BaseComponent<Reserva> implements OnInit{
+export class ReservaCadastroComponent extends BaseComponent<Reserva> implements OnInit{
 
   constructor(
     protected changeDetectorRef: ChangeDetectorRef,
@@ -20,9 +22,10 @@ export class ReservaComponent extends BaseComponent<Reserva> implements OnInit{
     protected override activatedRoute: ActivatedRoute,
     protected override service: ReservaService,
     protected pessoaService: PessoaService,
-    protected servicoService: ServicoService) {
+    protected servicoService: ServicoService,
+    protected override messageService: MessageService) {
 
-    super(changeDetectorRef, router, activatedRoute, service);
+    super(changeDetectorRef, router, activatedRoute, service, messageService);
 
     this.ngOnInit();
   }
