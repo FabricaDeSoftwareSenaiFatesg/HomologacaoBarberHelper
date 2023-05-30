@@ -89,7 +89,7 @@ export class MenuComponent implements OnInit {
       {
         label: 'Sobre',
         icon: 'pi pi-info-circle',
-        command:(click)=>{this.router.navigate(['']);}
+        command:(click)=>{this.router.navigate(['sobre']);}
       },
       {
         label: 'Serviços',
