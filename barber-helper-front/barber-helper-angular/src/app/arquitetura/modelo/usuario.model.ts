@@ -8,7 +8,7 @@ export class Usuario extends Entidade {
 
   senha: string = "";
 
-  pessoa: Pessoa = new Pessoa;
+  pessoa: Pessoa = new Pessoa();
 
   tipo: TipoUsuarioEnum = TipoUsuarioEnum.CLIENTE;
 

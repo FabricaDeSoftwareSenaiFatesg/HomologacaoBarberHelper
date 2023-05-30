@@ -21,6 +21,7 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   isVisualizacao: boolean = false;
 
   usuarioLogado: Usuario;
+
   usuarioService: any;
 
   constructor(
@@ -87,8 +88,6 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
   }
 
   ngOnInit() {
-
-    this.getUsuarioLogado();
 
     this.listar();
 
@@ -212,13 +211,11 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
 
   }
 
-  getUsuarioLogado() {
+  setarUsuarioLogado(usuario: Usuario) {
 
-    this.service.getUsuarioLogado().subscribe(retorno => {
+    this.usuarioLogado = usuario;
 
-      return retorno;
-
-    });
+    console.log(this.usuarioLogado);
 
   }
 

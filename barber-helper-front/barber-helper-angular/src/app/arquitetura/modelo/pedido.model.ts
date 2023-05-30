@@ -5,7 +5,7 @@ import { StatusPedidoEnum } from './status-pedido.enum';
 
 export class Pedido extends Entidade {
 
-  cliente: Pessoa;
+  cliente: Pessoa = new Pessoa();
 
   produtos: Produto[] = [];
 

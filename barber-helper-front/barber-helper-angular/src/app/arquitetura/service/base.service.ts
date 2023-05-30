@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Entidade } from "../modelo/entidade.model";
 import { first } from 'rxjs/operators';
 import { Usuario } from "../modelo/usuario.model";
+import { Observable } from "rxjs";
 
 export class BaseService<E extends Entidade> {
 
@@ -52,8 +53,8 @@ export class BaseService<E extends Entidade> {
     return this.httpClient.get<any>(`${this.API}/usuario/logout`);
   }
 
-  getUsuarioLogado() {
-    return this.httpClient.get<any>(`${this.API}/usuario/get-usuario-logado`);
+  getUsuarioLogado(): Observable<Usuario> {
+    return this.httpClient.get<Usuario>(`${this.API}/usuario/get-usuario-logado`);
   }
 
 }

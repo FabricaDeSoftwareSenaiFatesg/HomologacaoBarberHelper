@@ -9,7 +9,7 @@ export class Produto extends Entidade {
 
   quantidade: number = 0;
 
-  imagem: Imagem;
+  imagem: Imagem = new Imagem();
 
   constructor() {
     super();

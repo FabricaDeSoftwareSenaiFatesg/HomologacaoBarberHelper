@@ -9,8 +9,7 @@ import { MessageService } from "primeng/api";
 @Component({
   selector: 'app-reserva-listagem',
   templateUrl: './reserva-listagem.component.html',
-  styleUrls: ['./reserva-listagem.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./reserva-listagem.component.css']
 })
 export class ReservaListagemComponent extends BaseComponent<Reserva> implements OnInit {
 
@@ -58,7 +57,7 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
 
   listarFiltrado() {
     let pesquisaHorarios = {
-      profissional: Array.isArray(this.profissionalSelecionado) ? this.getUsuarioLogado() : this.profissionalSelecionado,
+      profissional: Array.isArray(this.profissionalSelecionado) ? this.service.getUsuarioLogado() : this.profissionalSelecionado,
       data: Array.isArray(this.data) ? new Date(): this.data
     };
 
