@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
   items: MenuItem[];
   itemsMenuSanduiche: MenuItem[];
 
-  usuarioLogado: Usuario;
+  usuarioLogado: Usuario | undefined;
 
   ngOnInit() {
 
@@ -75,7 +75,7 @@ export class MenuComponent implements OnInit {
       {
           label: 'Sair',
           icon: 'pi pi-fw pi-power-off',
-          command:(click)=>{this.logout();}
+          command:(click)=>{this.deslogar()}
 
       }
     ];
@@ -119,13 +119,11 @@ export class MenuComponent implements OnInit {
 
   }
 
-  logout() {
+  deslogar() {
 
-    this.service.logout().subscribe(() => {
+    this.usuarioLogado = undefined;
 
-      this.ngOnInit()
-
-    });
+    this.service.sair().subscribe();
 
   }
 

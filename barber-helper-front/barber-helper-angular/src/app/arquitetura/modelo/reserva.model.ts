@@ -5,9 +5,9 @@ import { Pessoa } from './pessoa.model';
 
 export class Reserva extends Entidade {
 
-  cliente: Pessoa = new Pessoa;
+  cliente: Pessoa = new Pessoa();
 
-  funcionario: Pessoa = new Pessoa;
+  funcionario: Pessoa = new Pessoa();
 
   servicos: Servico[] = [];
 

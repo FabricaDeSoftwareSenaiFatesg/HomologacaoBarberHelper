@@ -69,7 +69,11 @@ public class UsuarioServiceImpl extends ServiceGenerico<Long, Usuario> implement
     }
 
     public void setUsuarioLogado(Usuario usuario) {
+
         super.usuarioLogado = usuario;
+
+        super.usuarioLogado.setSenha(null);
+
     }
 
     public String converterSenhaEmMD5(String senha) {
