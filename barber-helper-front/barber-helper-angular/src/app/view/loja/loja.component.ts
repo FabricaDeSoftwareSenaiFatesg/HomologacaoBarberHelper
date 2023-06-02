@@ -42,7 +42,11 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
     this.listar();
 
-    console.log(this.getUsuarioLogado());
+    this.service.getUsuarioLogado().subscribe(usuario => {
+
+      this.setarUsuarioLogado(usuario);
+
+    });
 
   }
 
@@ -167,6 +171,8 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
       this.entidade.produtos = this.produtosSelecionados;
 
       this.entidade.statusPedido = StatusPedidoEnum.EM_ESPERA;
+
+      this.entidade.cliente = this.usuarioLogado.pessoa;
 
       super.salvar(this.entidade);
 

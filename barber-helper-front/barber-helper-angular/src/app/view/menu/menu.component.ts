@@ -18,8 +18,9 @@ export class MenuComponent implements OnInit {
     protected service: UsuarioService
   ) {}
 
-  items: MenuItem[];
+  itemsFuncionario: MenuItem[];
   itemsMenuSanduiche: MenuItem[];
+  itemsCliente: MenuItem[];
 
   usuarioLogado: Usuario | undefined;
 
@@ -27,7 +28,7 @@ export class MenuComponent implements OnInit {
 
     this.pegarUsuarioLogado();
 
-    this.items = [
+    this.itemsFuncionario = [
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-chart-line',
@@ -107,6 +108,16 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
+
+    this.itemsCliente = [
+      {
+          label: 'Sair',
+          icon: 'pi pi-fw pi-power-off',
+          command:(click)=>{this.deslogar()}
+
+      }
+    ];
+
   }
 
   pegarUsuarioLogado() {
@@ -124,6 +135,12 @@ export class MenuComponent implements OnInit {
     this.usuarioLogado = undefined;
 
     this.service.sair().subscribe();
+
+  }
+
+  usuarioFuncionario(): MenuItem[] {
+
+    return this.usuarioLogado?.tipo.toString() == 'CLIENTE' ? this.itemsCliente : this.itemsFuncionario;
 
   }
 

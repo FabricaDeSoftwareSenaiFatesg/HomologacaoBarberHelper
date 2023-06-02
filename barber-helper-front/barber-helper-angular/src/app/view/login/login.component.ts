@@ -3,7 +3,7 @@ import {BaseComponent} from "../../arquitetura/component/base.component";
 import {Usuario} from "../../arquitetura/modelo/usuario.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import { MessageService } from 'primeng/api';
-import { UsuarioService, setToken, setUsuarioLogado } from '../usuario/usuario.service';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -60,9 +60,9 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
             this.setarUsuarioLogado(usuario);
 
-            this.router.navigate(['']);
-
           });
+
+          this.router.navigateByUrl('');
 
         }
 

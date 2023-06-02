@@ -215,8 +215,6 @@ export abstract class BaseComponent<E extends Entidade> implements OnInit {
 
     this.usuarioLogado = usuario;
 
-    console.log(this.usuarioLogado);
-
   }
 
 }
