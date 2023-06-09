@@ -1,9 +1,11 @@
+import { AuthService } from './../../arquitetura/service/auth.service';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BaseComponent} from "../../arquitetura/component/base.component";
 import {Usuario} from "../../arquitetura/modelo/usuario.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from '../usuario/usuario.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +20,11 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
     protected override service: UsuarioService,
-    protected override messageService: MessageService) {
+    protected override messageService: MessageService,
+    private authService: AuthService, private location: Location) {
 
     super(changeDetectorRef, router, activatedRoute, service, messageService);
 
-    this.ngOnInit();
 
   }
 
@@ -56,13 +58,12 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
         } else {
 
-          this.service.getUsuarioLogado().subscribe(usuario => {
 
-            this.setarUsuarioLogado(usuario);
+          this.authService.entrar();
 
-          });
-
-          this.router.navigateByUrl('');
+          //this.router.navigate(['', 'home']);
+          this.location.replaceState("/");
+          window.location.reload();
 
         }
 

@@ -8,9 +8,11 @@ import { ProdutoComponent } from './view/produto/produto.component';
 import { LojaComponent } from './view/loja/loja.component';
 import {ReservaRoutes} from "./view/reserva/reserva-routes";
 import {SobreComponent} from "./view/sobre/sobre.component";
+import { AuthGuard } from './arquitetura/service/auth-guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'pessoa', children: PessoaRoutes },
   { path: 'reserva', children: ReservaRoutes },
@@ -22,6 +24,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

@@ -14,7 +14,7 @@ import { PedidoModule } from './pedido/pedido.module';
   declarations: [
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     PessoaModule,

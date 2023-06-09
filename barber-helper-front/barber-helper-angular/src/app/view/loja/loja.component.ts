@@ -90,25 +90,33 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
   adicionarProdutoCarrinho(produto: Produto) {
 
-    let produtoEncontrado = this.produtosSelecionados.find(p => p.descricao == produto.descricao);
+    if (this.usuarioLogado) {
 
-    if (produtoEncontrado == undefined) {
+      let produtoEncontrado = this.produtosSelecionados.find(p => p.descricao == produto.descricao);
 
-      let produtoSelecionado = new Produto();
+      if (produtoEncontrado == undefined) {
 
-      produtoSelecionado.id = produto.id;
+        let produtoSelecionado = new Produto();
 
-      produtoSelecionado.descricao = produto.descricao;
+        produtoSelecionado.id = produto.id;
 
-      produtoSelecionado.valor = produto.valor;
+        produtoSelecionado.descricao = produto.descricao;
 
-      produtoSelecionado.quantidade = 1;
+        produtoSelecionado.valor = produto.valor;
 
-      this.produtosSelecionados.push(produtoSelecionado);
+        produtoSelecionado.quantidade = 1;
+
+        this.produtosSelecionados.push(produtoSelecionado);
+
+      } else {
+
+        this.adicionarMensagemAlerta("Produto já adicionado ao carrinho");
+
+      }
 
     } else {
 
-      this.adicionarMensagemAlerta("Produto já adicionado ao carrinho");
+      this.adicionarMensagemAlerta("Realize o login para fazer um pedido");
 
     }
 
