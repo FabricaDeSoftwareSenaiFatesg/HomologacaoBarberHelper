@@ -4,6 +4,7 @@ import {Reserva} from "../../../arquitetura/modelo/reserva.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReservaService} from "../reserva.service";
 import {PessoaService} from "../../pessoa/pessoa.service";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: 'app-reserva-listagem',
@@ -17,9 +18,10 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
     protected override router: Router,
     protected override activatedRoute: ActivatedRoute,
     protected override service: ReservaService,
-    protected pessoaService: PessoaService,) {
+    protected pessoaService: PessoaService,
+    protected override messageService: MessageService) {
 
-    super(changeDetectorRef, router, activatedRoute, service);
+    super(changeDetectorRef, router, activatedRoute, service, messageService);
 
     super.ngOnInit();
 
@@ -64,7 +66,8 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
     });
   }
 
-  getUsuarioLogado() {
+  
+ override getUsuarioLogado() {
     return {id: 1};
   }
 
