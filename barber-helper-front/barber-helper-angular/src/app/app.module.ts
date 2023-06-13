@@ -1,17 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { LoginComponent } from './view/login/login.component';
-import { ArquiteturaModule } from './arquitetura/arquitetura.module';
-import { ViewModule } from './view/view.module';
-import { HttpClientModule } from '@angular/common/http';
-import {HomeComponent} from "./view/home/home.component";
-import {MenuComponent} from "./view/menu/menu.component";
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {FormsModule} from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {LoginComponent} from './view/login/login.component';
+import {ArquiteturaModule} from './arquitetura/arquitetura.module';
+import {ViewModule} from './view/view.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {HttpInterceptorAuth} from "./http-interceptor";
 
 @NgModule({
   declarations: [
@@ -29,7 +28,13 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     ButtonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorAuth,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
