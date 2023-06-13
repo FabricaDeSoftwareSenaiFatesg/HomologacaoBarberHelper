@@ -4,12 +4,13 @@ import {Reserva} from "../../../arquitetura/modelo/reserva.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReservaService} from "../reserva.service";
 import {PessoaService} from "../../pessoa/pessoa.service";
-import { MessageService } from "primeng/api";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-reserva-listagem',
   templateUrl: './reserva-listagem.component.html',
-  styleUrls: ['./reserva-listagem.component.css']
+  styleUrls: ['./reserva-listagem.component.css'],
+  providers: [MessageService]
 })
 export class ReservaListagemComponent extends BaseComponent<Reserva> implements OnInit {
 
@@ -36,6 +37,8 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
   profissionais: any = [];
   profissionalSelecionado: any = [];
 
+  reservaVizualizacao: any = null;
+
   override ngOnInit(): void {
     this.consultarProfissionais();
     this.listarFiltrado();
@@ -57,7 +60,7 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
 
   listarFiltrado() {
     let pesquisaHorarios = {
-      profissional: Array.isArray(this.profissionalSelecionado) ? this.getUsuarioLogado() : this.profissionalSelecionado,
+      profissional: Array.isArray(this.profissionalSelecionado) ? {id:1} : this.profissionalSelecionado,
       data: Array.isArray(this.data) ? new Date(): this.data
     };
 
@@ -66,9 +69,14 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
     });
   }
 
-  
- override getUsuarioLogado() {
+  override getUsuarioLogado() {
     return {id: 1};
   }
 
+  override visualizar(entidadeConsulta: Reserva) {
+    this.isVisualizacao = true;
+    this.service.consultarServicosDaReserva(entidadeConsulta.id).subscribe(response => {
+      this.reservaVizualizacao = {...entidadeConsulta, ...response.entity};
+    });
+  }
 }
