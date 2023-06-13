@@ -4,45 +4,45 @@
       <div class="input-reserva">
         <h3 class="khand-font-700 titulos">Agende seu horário</h3>
         <label htmlFor="servicos" class="label-input popins-font">Serviços</label>
-        <p-multiSelect class="input-personalizado" [options]="servicos" [(ngModel)]="servicosSelecionados" optionLabel="descricao"></p-multiSelect>
+        <p-multiSelect class="input-personalizado" [options]="servicos" [(ngModel)]="servicosSelecionados" optionLabel="descricao" (onChange)="onChangeServicos()"></p-multiSelect>
       </div>
       <div class="input-reserva">
         <label htmlFor="profissional" class="label-input popins-font">Profissional</label>
-        <p-dropdown class="input-personalizado" [options]="profissionais" [(ngModel)]="profissionalSelecionado" optionLabel="nome"></p-dropdown>
+        <p-dropdown class="input-personalizado" [options]="profissionais" [(ngModel)]="profissionalSelecionado" optionLabel="nome" (onChange)="onChangeProfissional()" placeholder="-"></p-dropdown>
       </div>
       <div class="input-reserva">
         <p-calendar [(ngModel)]="data" [inline]="true" [showWeek]="true" (onSelect)="consultarHorarios()"></p-calendar>
       </div>
       <div class="input-reserva">
         <label htmlFor="horarios" class="label-input popins-font">Horários disponíveis</label>
-        <p-dropdown class="input-personalizado" [options]="horarios" [(ngModel)]="horarioSelecionado"></p-dropdown>
+        <p-dropdown class="input-personalizado" [options]="horarios" [(ngModel)]="horarioSelecionado" (onChange)="onChangeDataHora()" placeholder="-"></p-dropdown>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="input-reserva">
         <h3 class="khand-font-700 titulos text-right">Informações do agendamento</h3>
-        <label htmlFor="profissional" class="label-input popins-font">Serviços teste</label>
+        <label htmlFor="profissional" class="label-input popins-font">Serviços</label>
         <div class="inputComIcone fundoIcone">
-          <input type="text" placeholder="Teste">
+          <input type="text" [(ngModel)]="informacoes.servicos">
           <i class="fa fa-phone fa-lg fa-fw" aria-hidden="true"></i>
         </div>
       </div>
       <div class="input-reserva">
-        <label htmlFor="profissional" class="label-input popins-font">Profissional teste</label>
+        <label htmlFor="profissional" class="label-input popins-font">Profissional</label>
         <div class="inputComIcone fundoIcone">
-          <input type="text" placeholder="Teste">
+          <input type="text" [(ngModel)]="informacoes.profissional">
           <i class="fa fa-phone fa-lg fa-fw" aria-hidden="true"></i>
         </div>
       </div>
       <div class="input-reserva">
-        <label htmlFor="profissional" class="label-input popins-font">Data e Hora teste</label>
+        <label htmlFor="profissional" class="label-input popins-font">Data e Hora</label>
         <div class="inputComIcone fundoIcone">
-          <input type="text" placeholder="Teste">
+          <input type="text" [(ngModel)]="informacoes.dataHora">
           <i class="" aria-hidden="true"></i>
         </div>
         <h2 class="khand-font-700 titulos text-right" style="margin-bottom: 20px;">Valor Total</h2>
-        <h1 class="khand-font-700 titulo-valor text-right" style="color: #c07c5a; margin-top: 0;">R$ 50,00</h1>
+        <h1 class="khand-font-700 titulo-valor text-right" style="color: #c07c5a; margin-top: 0;">R$ {{informacoes.total}},00</h1>
 
         <div class="grupo-botoes">
           <button class="btn-editar" style="margin-right: 20px;">EDITAR</button>
@@ -50,4 +50,5 @@
         </div>
       </div>
   </div>
+</div>
 </div>

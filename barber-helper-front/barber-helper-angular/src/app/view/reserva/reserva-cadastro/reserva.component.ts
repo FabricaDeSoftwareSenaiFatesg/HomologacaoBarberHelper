@@ -41,6 +41,13 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
   horarios: string[] = [];
   horarioSelecionado: string = '';
 
+  informacoes: any = {
+    servicos: '-',
+    profissional: '-',
+    dataHora: '-',
+    total: '0'
+  };
+
   override ngOnInit(): void {
 
     this.newEntidade();
@@ -110,5 +117,39 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
       tempoTotalServicos += servico.tempo;
     });
     return tempoTotalServicos;
+  }
+
+  onChangeServicos() {
+    this.setServicosNasInformacoes();
+  }
+
+  setServicosNasInformacoes() {
+    let servicosSelecionadosString = '-';
+    let total = 0;
+    this.servicosSelecionados.forEach((servico: { descricao: string; valor: number; }) => {
+      servicosSelecionadosString += servico.descricao + ', ';
+      total += servico.valor;
+    })
+    servicosSelecionadosString = servicosSelecionadosString.substring(1, servicosSelecionadosString.length-2);
+    this.informacoes.servicos = servicosSelecionadosString;
+    this.informacoes.total = total;
+  }
+
+  onChangeProfissional() {
+    this.informacoes.profissional = this.profissionalSelecionado.nome;
+  }
+
+  onChangeDataHora() {
+    let dataInicial =  this.getDataInicial();
+    let dataFim = this.getDataFim(dataInicial);
+
+    const formatador = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const partesData = formatador.formatToParts(dataInicial);
+    const data = partesData.map(part => part.value).join('');
+
+    const horaInicial = dataInicial.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    const horaFinal = dataFim.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    this.informacoes.dataHora = data + " - " + horaInicial + " às " + horaFinal;
   }
 }
