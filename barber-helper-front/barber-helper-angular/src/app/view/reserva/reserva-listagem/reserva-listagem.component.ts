@@ -9,7 +9,8 @@ import {MessageService} from "primeng/api";
 @Component({
   selector: 'app-reserva-listagem',
   templateUrl: './reserva-listagem.component.html',
-  styleUrls: ['./reserva-listagem.component.css']
+  styleUrls: ['./reserva-listagem.component.css'],
+  providers: [MessageService]
 })
 export class ReservaListagemComponent extends BaseComponent<Reserva> implements OnInit {
 
