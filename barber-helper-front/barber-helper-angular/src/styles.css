@@ -79,7 +79,7 @@ input {
   z-index: 1;
   overflow: hidden;
   transition: 0.5s;
-  width: 9rem;
+  width: 9.5rem;
   height: 2.5rem;
 }
 .btn-confimar:before {
@@ -191,4 +191,47 @@ input {
 .p-messages .pi-times {
   color: black;
   margin: 10px;
+}
+
+.btn-editar {
+  display: inline-block;
+  position: relative;
+  color: #f9f5f2;
+  background: #202020;
+  font-family: 'Khand', sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+  text-align-all: center;
+  border: 2px solid #202020;
+  border-radius: 8px;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.5s;
+  width: 9.5rem;
+  height: 2.5rem;
+}
+.btn-editar:before {
+  content: "";
+  position: absolute;
+  background: white;
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+  z-index: -1;
+}
+.btn-editar:hover {
+  color: #202020;
+}
+.btn-editar:before {
+  top: 100%;
+  left: 100%;
+  transition: 0.7s;
+}
+.btn-editar:hover:before {
+  top: -30px;
+  left: -30px;
+}
+.btn-editar:active:before {
+  background: #f9f5f2;
+  transition: 0s;
 }
