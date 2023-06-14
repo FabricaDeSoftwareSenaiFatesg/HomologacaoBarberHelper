@@ -12,6 +12,7 @@ import br.com.projeto.barberhelper.model.Reserva;
 import br.com.projeto.barberhelper.model.dto.PesquisaHorarios;
 import br.com.projeto.barberhelper.model.dto.listagem.ReservaListagemDTO;
 import br.com.projeto.barberhelper.model.mapper.ReservaMapper;
+import br.com.projeto.barberhelper.model.mapper.ServicoMapper;
 import br.com.projeto.barberhelper.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +47,9 @@ public class ReservaController extends ManutencaoController<Reserva> {
     @GetMapping(value = "/fidelidade/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<FidelidadeDTO> obterFidelidadeCliente(@PathVariable Long idCliente) {
+    public ResponseEntity<FidelidadeDTO> obterFidelidadeCliente(@PathVariable Long id) {
 
-        return ResponseEntity.ok().body(service.obterCountFidelidadeCliente(idCliente));
+        return ResponseEntity.ok().body(service.obterCountFidelidadeCliente(id));
 
     }
 
@@ -69,6 +70,14 @@ public class ReservaController extends ManutencaoController<Reserva> {
 
         List<Reserva> reservas = service.listarFiltrado(pesquisaHorarios.getProfissional().getId(), pesquisaHorarios.getData());
         return Response.ok(ReservaMapper.toListReservaListagemDTO(reservas)).build();
+    }
+
+    @GetMapping(value = "/consultarServicos/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consultarServicosDaReserva(@PathVariable Long id) {
+
+        return Response.ok(ServicoMapper.toServicosVisuaizacaoDTO(service.consultarServicosDaReserva(id))).build();
     }
 
     @PostMapping(value = "/salvarReserva")

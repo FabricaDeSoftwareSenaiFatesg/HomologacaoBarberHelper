@@ -9,7 +9,8 @@ import { MessageService } from "primeng/api";
 @Component({
   selector: 'app-reserva-listagem',
   templateUrl: './reserva-listagem.component.html',
-  styleUrls: ['./reserva-listagem.component.css']
+  styleUrls: ['./reserva-listagem.component.css'],
+  providers: [MessageService]
 })
 export class ReservaListagemComponent extends BaseComponent<Reserva> implements OnInit {
 
@@ -35,6 +36,8 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
 
   profissionais: any = [];
   profissionalSelecionado: any = [];
+
+  reservaVizualizacao: any = null;
 
   override ngOnInit(): void {
     this.consultarProfissionais();
@@ -66,4 +69,10 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
     });
   }
 
+  override visualizar(entidadeConsulta: Reserva) {
+    this.isVisualizacao = true;
+    this.service.consultarServicosDaReserva(entidadeConsulta.id).subscribe(response => {
+      this.reservaVizualizacao = {...entidadeConsulta, ...response.entity};
+    });
+  }
 }

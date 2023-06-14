@@ -13,7 +13,6 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.Selection;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.barberhelper.generic.DAO;
@@ -169,5 +168,24 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
         );
 
         return this.executeQueryAndTransforResult(query, Reserva.class);
+    }
+
+    public List<Servico> consultarServicosDaReserva(Long idReserva) {
+        final CriteriaBuilder builder = em.getCriteriaBuilder();
+        final CriteriaQuery<Tuple> query = builder.createTupleQuery();
+        final Root<Reserva> root = query.from(Reserva.class);
+        final Join<Reserva, Servico> rootServico = root.join("servicos");
+
+        query.select(builder.tuple(
+                rootServico.get("valor").alias("valor"),
+                rootServico.get("descricao").alias("descricao"),
+                rootServico.get("tempo").alias("tempo")
+        ));
+
+        query.where(
+                builder.equal(root.get("id"), idReserva)
+        );
+
+        return this.executeQueryAndTransforResult(query, Servico.class);
     }
 }

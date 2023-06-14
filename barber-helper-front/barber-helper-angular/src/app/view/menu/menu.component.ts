@@ -113,6 +113,24 @@ export class MenuComponent implements OnInit {
 
     this.itemsCliente = [
       {
+        label: 'Perfil',
+        icon: 'pi pi-fw pi-calendar',
+        command:(click)=>{this.router.navigate(['']);}
+      },
+      {
+        label: 'Reservas',
+        icon: 'pi pi-fw pi-calendar',
+        command:(click)=>{this.router.navigate(['reserva']);}
+      },
+      {
+        label: 'Pedidos',
+        icon: 'pi pi-fw pi-calendar',
+        command:(click)=>{this.router.navigate(['']);}
+      },
+      {
+        separator: true
+      },
+      {
           label: 'Sair',
           icon: 'pi pi-fw pi-power-off',
           command:(click)=>{this.deslogar()}
