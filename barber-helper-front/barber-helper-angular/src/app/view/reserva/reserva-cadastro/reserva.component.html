@@ -23,29 +23,29 @@
       <div class="input-reserva">
         <h3 class="khand-font-700 titulos text-right">Informações do agendamento</h3>
         <label htmlFor="profissional" class="label-input popins-font">Serviços</label>
-        <div class="inputComIcone fundoIcone">
+        <div class="inputComIcone">
           <input type="text" [(ngModel)]="informacoes.servicos">
-          <i class="fa fa-phone fa-lg fa-fw" aria-hidden="true"></i>
+          <img class="d-flex imagem margin-bottom" src="assets/IconeTesoura.svg" alt="imagemLateral">
         </div>
       </div>
       <div class="input-reserva">
         <label htmlFor="profissional" class="label-input popins-font">Profissional</label>
-        <div class="inputComIcone fundoIcone">
+        <div class="inputComIcone">
           <input type="text" [(ngModel)]="informacoes.profissional">
-          <i class="fa fa-phone fa-lg fa-fw" aria-hidden="true"></i>
+          <img class="d-flex imagem margin-bottom" src="assets/IconeBarbeiro.svg" alt="imagemLateral">
         </div>
       </div>
       <div class="input-reserva">
         <label htmlFor="profissional" class="label-input popins-font">Data e Hora</label>
-        <div class="inputComIcone fundoIcone">
+        <div class="inputComIcone">
           <input type="text" [(ngModel)]="informacoes.dataHora">
-          <i class="" aria-hidden="true"></i>
+          <img class="d-flex imagem margin-bottom" src="assets/IconeData.svg" alt="imagemLateral">
         </div>
         <h2 class="khand-font-700 titulos text-right" style="margin-bottom: 20px;">Valor Total</h2>
         <h1 class="khand-font-700 titulo-valor text-right" style="color: #c07c5a; margin-top: 0;">R$ {{informacoes.total}},00</h1>
 
         <div class="grupo-botoes">
-          <button class="btn-editar" style="margin-right: 20px;">EDITAR</button>
+          <button class="btn-editar">EDITAR</button>
           <button class="btn-confimar">CONFIRMAR</button>
         </div>
       </div>
