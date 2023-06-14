@@ -11,4 +11,6 @@ public interface UsuarioService extends Service<Long, Usuario> {
 
     void logout();
 
+    Usuario getUsuarioPeloLogin(String login);
+
 }

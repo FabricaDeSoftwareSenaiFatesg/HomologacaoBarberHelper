@@ -6,7 +6,8 @@ import br.com.projeto.barberhelper.model.Usuario;
 import br.com.projeto.barberhelper.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Consumes;
@@ -32,9 +33,9 @@ public class UsuarioController extends ManutencaoController<Usuario> {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario getUsuarioLogado() {
-
-        return this.service.getUsuarioLogado();
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = (String) authentication.getPrincipal();
+        return this.service.getUsuarioPeloLogin(login);
     }
 
     @GetMapping(value = "/logout")

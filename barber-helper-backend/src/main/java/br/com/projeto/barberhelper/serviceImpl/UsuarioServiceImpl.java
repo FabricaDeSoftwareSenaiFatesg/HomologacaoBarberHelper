@@ -8,6 +8,10 @@ import br.com.projeto.barberhelper.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -81,6 +85,17 @@ public class UsuarioServiceImpl extends ServiceGenerico<Long, Usuario> implement
         }
         BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));
         return hash.toString(16);
+    }
+
+    public Usuario getUsuarioPeloLogin(String login) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
+        Root<Usuario> root = criteriaQuery.from(Usuario.class);
+
+        Predicate predicate = criteriaBuilder.equal(root.get("email"), login);
+        criteriaQuery.where(predicate);
+
+        return em.createQuery(criteriaQuery).getSingleResult();
     }
 
 }
