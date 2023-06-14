@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
 import { BaseService } from 'src/app/arquitetura/service/base.service';
-import {Observable} from "rxjs";
 
 export const LOCAL_STORAGE_ITEM_USER: string = 'barber.manager.current.user'
 

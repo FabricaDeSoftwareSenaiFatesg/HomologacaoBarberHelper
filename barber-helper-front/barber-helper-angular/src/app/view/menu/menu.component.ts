@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
 import { UsuarioService } from '../usuario/usuario.service';
-import { AuthService } from 'src/app/arquitetura/service/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,8 +15,7 @@ export class MenuComponent implements OnInit {
     protected changeDetectorRef: ChangeDetectorRef,
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
-    protected service: UsuarioService,
-    private authService: AuthService
+    protected service: UsuarioService
   ) {}
 
   itemsFuncionario: MenuItem[];
@@ -154,7 +152,7 @@ export class MenuComponent implements OnInit {
 
     this.usuarioLogado = undefined;
 
-    this.authService.sair();
+    //this.authService.sair();
 
     this.service.sair().subscribe();
 

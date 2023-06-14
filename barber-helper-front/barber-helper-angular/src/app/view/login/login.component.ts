@@ -1,4 +1,3 @@
-import { AuthService } from './../../arquitetura/service/auth.service';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BaseComponent} from "../../arquitetura/component/base.component";
 import {Usuario} from "../../arquitetura/modelo/usuario.model";
@@ -21,7 +20,7 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
     protected override activatedRoute: ActivatedRoute,
     protected override service: UsuarioService,
     protected override messageService: MessageService,
-    private authService: AuthService, private location: Location) {
+    private location: Location) {
 
     super(changeDetectorRef, router, activatedRoute, service, messageService);
 
