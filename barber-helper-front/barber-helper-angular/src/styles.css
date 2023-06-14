@@ -74,7 +74,7 @@ input {
   font-family: 'Khand', sans-serif;
   font-size: 23px;
   font-weight: 500;
-  text-align-all: center;
+  text-align: center;
   border: 2px solid #c07c5a;
   border-radius: 8px;
   z-index: 1;
@@ -196,13 +196,14 @@ input {
 
 .btn-editar {
   display: inline-block;
+  margin-right: 20px;
   position: relative;
   color: #f9f5f2;
   background: #202020;
   font-family: 'Khand', sans-serif;
   font-size: 23px;
   font-weight: 500;
-  text-align-all: center;
+  text-align: center;
   border: 2px solid #202020;
   border-radius: 8px;
   z-index: 1;

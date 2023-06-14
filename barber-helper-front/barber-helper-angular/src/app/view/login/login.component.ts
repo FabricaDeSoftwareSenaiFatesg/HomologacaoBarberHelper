@@ -25,21 +25,20 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
     super(changeDetectorRef, router, activatedRoute, service, messageService);
 
-
+    this.ngOnInit();
   }
 
   flagNovoUsuario: boolean = false;
-
   flagRecuperarSenha: boolean = false;
-
   usuarioLogin: Usuario = new Usuario();
-
   novoUsuario: Usuario = new Usuario();
-
   usuarioRecuperarSenha: Usuario = new Usuario();
 
   override ngOnInit() : void {
-    this.newEntidade()
+    if(localStorage.getItem("ads_access_token") !== null){
+      localStorage.removeItem("ads_access_token");
+    }
+    this.newEntidade();
   }
 
   protected override newEntidade(): Usuario {
@@ -48,33 +47,34 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
   login() {
 
+    this.validarTipoMensagem(this.usuarioLogin.email, this.usuarioLogin.senha);
+
     if (this.usuarioLogin.email && this.usuarioLogin.senha) {
 
-      this.service.autenticarUsuario(this.usuarioLogin).subscribe(retorno => {
-
-        if (!retorno) {
-
-          this.adicionarMensagemAlerta("Email e/ou senha incorretos");
-
-        } else {
-
-
-          this.authService.entrar();
-
-          //this.router.navigate(['', 'home']);
-          this.location.replaceState("/");
-          window.location.reload();
-
+      this.service.logar(this.usuarioLogin.email, this.usuarioLogin.senha).subscribe(
+        r => {
+          if (r.access_token !== null){
+            localStorage.setItem("ads_access_token", r.access_token);
+            this.router.navigate(['/']);
+          }
         }
-
-      });
-
-    } else {
-
-      this.adicionarMensagemAlerta("Preencha todos os campos!");
-
+      );
     }
 
+  }
+
+  validarTipoMensagem(login: string, senha: string) {
+    if (!login && senha){
+      this.adicionarMensagemAlerta("Preencha o campo login!");
+    }
+
+    if (login && !senha){
+      this.adicionarMensagemAlerta("Preencha o campo senha!");
+    }
+
+    if (!login && !senha){
+      this.adicionarMensagemAlerta("Preencha todos os campos!");
+    }
   }
 
   recuperarSenha() {
@@ -98,50 +98,55 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
   }
 
   enviarEmailComSenhaNova() {
-
     console.log(this.usuarioRecuperarSenha);
-
   }
 
   cadastrarNovoUsuario() {
 
-    if (this.novoUsuario.email && this.novoUsuario.senha && this.novoUsuario.pessoa.nome && this.novoUsuario.pessoa.cpf && this.novoUsuario.pessoa.telefone) {
-
-      if (this.validarEmail(this.novoUsuario.email)) {
-
-        if (this.validarSenha(this.novoUsuario.senha)) {
-
-          if (this.validarCpf(this.novoUsuario.pessoa.cpf)) {
-
-            this.service.salvar(this.novoUsuario).subscribe(() => {
-
-              this.router.navigate(['']);
-
-            });
-
-          } else {
-
-            this.adicionarMensagemAlerta("CPF inválido");
-
-          }
-
-        } else {
-
-          this.adicionarMensagemAlerta("Senha deve ter no mínimo 5 caracteres");
-
-        }
-
-      } else {
-
-        this.adicionarMensagemAlerta("Email inválido");
-
-      }
-
-    } else {
-
-      this.adicionarMensagemAlerta("Preencha todos os campos!");
+    if (this.validarCampos(this.novoUsuario.email, this.novoUsuario.senha, this.novoUsuario.pessoa.cpf, this.novoUsuario.pessoa.nome, this.novoUsuario.pessoa.telefone)){
+      this.service.inserirUsuarioNoServidorDeAutenticacao(this.novoUsuario.email, this.novoUsuario.senha).subscribe(() => {
+        this.service.salvar(this.novoUsuario).subscribe(() => {
+          this.router.navigate(['']);
+        });
+      });
 
     }
+
+  }
+
+  validarCampos(email: string, senha: string, cpf: string, nome: string, telefone: string) : boolean{
+
+    if(!email && !senha && !cpf && !nome && !telefone){
+      this.adicionarMensagemAlerta("Preencha todos os campos!");
+      return false;
+    }
+
+    if(!nome){
+      this.adicionarMensagemAlerta("O campo nome deve ser preenchido");
+      return false;
+    }
+
+    if(!telefone){
+      this.adicionarMensagemAlerta("O campo telefone deve ser preenchido");
+      return false;
+    }
+
+    if(!this.validarEmail(email)){
+      this.adicionarMensagemAlerta("Email inválido");
+      return false;
+    }
+
+    if(!this.validarSenha(senha)){
+      this.adicionarMensagemAlerta("Senha deve ter no mínimo 5 caracteres");
+      return false;
+    }
+
+    if(!this.validarCpf(cpf)){
+      this.adicionarMensagemAlerta("CPF inválido");
+      return false;
+    }
+
+    return true;
 
   }
 

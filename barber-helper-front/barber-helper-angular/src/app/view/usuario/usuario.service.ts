@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
 import { BaseService } from 'src/app/arquitetura/service/base.service';
+import {Observable} from "rxjs";
 
 export const LOCAL_STORAGE_ITEM_USER: string = 'barber.manager.current.user'
 
@@ -64,6 +65,14 @@ export class UsuarioService extends BaseService<Usuario> {
 
     return this.logout();
 
+  }
+
+  public logar(usuario:string, senha:string): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/login', {'usuario': usuario, 'senha': senha})
+  }
+
+  public inserirUsuarioNoServidorDeAutenticacao(login: string, senha:string){
+    return this.httpClient.post('http://localhost:8080/login/criar', {'login': login, 'pass': senha})
   }
 
 }

@@ -43,32 +43,33 @@ input[type="text"] {
   input[type="text"]:hover {
     border-color: #c07c5a;
     box-shadow: 0 0 9px 0 #c07c5a;
+    cursor: default;
   }
   
   .inputComIcone input[type="text"] {
-    padding-left: 60px;
+    padding-left: 80px;
   }
   
   .inputComIcone {
     position: relative;
   }
   
-  .inputComIcone i {
+  .inputComIcone img {
     position: absolute;
-    left: 0;
     top: 0px;
-    padding: 9px 8px;
     transition: 0.3s;
+    width: 60px;
+    height: 45px;
   }
   
-  .inputComIcone.fundoIcone i {
+  .inputComIcone img {
     background-color: #202020;
     color: white;
-    padding: 22px 24px;
+    padding: 12px 12px;
     border-radius: 8px 0 0 4px;
   }
   
-  .inputComIcone.fundoIcone input[type="text"]:hover + i {
+  .inputComIcone input[type="text"]:hover + img {
     background-color: #c07c5a;
   }
 
