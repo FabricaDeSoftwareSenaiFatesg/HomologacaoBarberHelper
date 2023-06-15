@@ -95,12 +95,18 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
   cadastrarNovoUsuario() {
 
-    if (this.validarCampos(this.novoUsuario.email, this.novoUsuario.senha, this.novoUsuario.pessoa.cpf, this.novoUsuario.pessoa.nome, this.novoUsuario.pessoa.telefone)){
+    if (this.validarCampos(this.novoUsuario.email, this.novoUsuario.senha, this.novoUsuario.pessoa.cpf, this.novoUsuario.pessoa.nome, this.novoUsuario.pessoa.telefone)) {
+
       this.service.inserirUsuarioNoServidorDeAutenticacao(this.novoUsuario.email, this.novoUsuario.senha).subscribe(() => {
-        this.service.salvar(this.novoUsuario).subscribe(() => {
-          this.router.navigate(['']);
-        });
-      });
+
+          this.service.salvar(this.novoUsuario).subscribe(() => {
+            this.router.navigate(['']);
+          }, (error) => {
+            this.adicionarMensagemAlerta("Já existe um usuário com esse email ou essa senha");
+          });
+
+        }
+      );
 
     }
 
