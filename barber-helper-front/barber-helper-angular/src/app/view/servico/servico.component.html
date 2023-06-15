@@ -36,36 +36,43 @@
   </div>
 </div>
 
-<p-dialog header="Novo Produto" [maximizable]="true" [draggable]="false" [(visible)]="modalCadastro" [modal]="true" [style]="{width: '80vw'}" (onHide)="isVisualizacao = false">
+<p-dialog header="Serviço" [maximizable]="true" [draggable]="false" [(visible)]="modalCadastro" [modal]="true" [style]="{width: '80vw'}" (onHide)="isVisualizacao = false">
   <div class="cadastro">
     <div class="form form-cadastro">
-
-      <div class="col">
-        <div class="row">
-          <div class="col input-grupo">
-            <label htmlFor="descricao" class="label-input">Descrição</label>
-            <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText
-                   [(ngModel)]="entidadeForm.descricao"/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col input-grupo">
-            <label htmlFor="valor" class="label-input">Valor</label>
-            <p-inputNumber [disabled]="isVisualizacao" class="input-personalizado" [(ngModel)]="entidadeForm.valor"
-                           inputId="currency-br" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
-          </div>
-        </div>
-      </div>
-
       <div class="row">
-        <div class="col input-grupo">
-          <label htmlFor="tempo" class="label-input">Tempo</label>
-          <input [disabled]="isVisualizacao" type="number" class="input-personalizado" pInputText
-                 [(ngModel)]="entidadeForm.tempo"/>
+
+        <div class="col">
+          <label htmlFor="imagem" class="label-input">Imagem</label>
+          <imagem-preview [maxLength]="2000000" [entidade]="entidadeForm" [visualizacao]="isVisualizacao"></imagem-preview>
+        </div>
+
+        <div class="col">
+          <div class="row">
+            <div class="col input-grupo">
+              <label htmlFor="descricao" class="label-input">Descrição</label>
+              <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText
+                     [(ngModel)]="entidadeForm.descricao"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col input-grupo">
+              <label htmlFor="valor" class="label-input">Valor</label>
+              <p-inputNumber [disabled]="isVisualizacao" class="input-personalizado" [(ngModel)]="entidadeForm.valor"
+                             inputId="currency-br" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col input-grupo">
+              <label htmlFor="tempo" class="label-input">Tempo</label>
+              <input [disabled]="isVisualizacao" type="number" class="input-personalizado" pInputText
+                     [(ngModel)]="entidadeForm.tempo"/>
+            </div>
+          </div>
+
         </div>
       </div>
-
     </div>
 
     <div *ngIf="!isVisualizacao" class="col" style="display: flex; justify-content: flex-end;">
