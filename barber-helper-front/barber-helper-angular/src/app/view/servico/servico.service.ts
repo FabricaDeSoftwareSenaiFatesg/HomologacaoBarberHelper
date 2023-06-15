@@ -12,4 +12,7 @@ export class ServicoService extends BaseService<Servico>{
     super( httpClient, 'servico');
   }
 
+  listarServicosDTO() {
+    return this.httpClient.get<any>(`${this.API}/${this.path}/listar-dtos`);
+  }
 }
