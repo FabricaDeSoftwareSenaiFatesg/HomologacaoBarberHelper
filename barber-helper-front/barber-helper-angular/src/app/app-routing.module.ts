@@ -9,6 +9,7 @@ import { LojaComponent } from './view/loja/loja.component';
 import {ReservaRoutes} from "./view/reserva/reserva-routes";
 import {SobreComponent} from "./view/sobre/sobre.component";
 import {AuthGuardService} from "./auth-guard.service";
+import {ServicoComponent} from "./view/servico/servico.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'reserva', children: ReservaRoutes, canActivate: [AuthGuardService]},
   { path: 'usuario', children: UsuarioRoutes },
   { path: 'produto', component: ProdutoComponent, canActivate: [AuthGuardService]},
+  { path: 'servico', component: ServicoComponent, canActivate: [AuthGuardService]},
   { path: 'loja', component: LojaComponent, canActivate: [AuthGuardService]},
   { path: 'sobre', component: SobreComponent},
 ];

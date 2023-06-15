@@ -1,12 +1,20 @@
 package br.com.projeto.barberhelper.serviceImpl;
 
+import java.util.List;
+
+import javax.persistence.Tuple;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.projeto.barberhelper.generic.DAO;
 import br.com.projeto.barberhelper.generic.ServiceGenerico;
 import br.com.projeto.barberhelper.model.Servico;
 import br.com.projeto.barberhelper.repository.ServicoDAO;
 import br.com.projeto.barberhelper.service.ServicoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ServicoServiceImpl extends ServiceGenerico<Long, Servico> implements ServicoService {
@@ -23,4 +31,19 @@ public class ServicoServiceImpl extends ServiceGenerico<Long, Servico> implement
     public void preSalvar(final Servico entidade) {
     }
 
+    @Override
+    public List<Servico> listarServicosDTO() {
+
+        final CriteriaBuilder builder = em.getCriteriaBuilder();
+        final CriteriaQuery<Tuple> query = builder.createTupleQuery();
+        final Root<Servico> root = query.from(Servico.class);
+
+        query.select(builder.tuple(
+                root.get("id").alias("id"),
+                root.get("valor").alias("valor"),
+                root.get("descricao").alias("descricao"),
+                root.get("tempo").alias("tempo")));
+
+        return this.executeQueryAndTransforResult(query, Servico.class);
+    }
 }
