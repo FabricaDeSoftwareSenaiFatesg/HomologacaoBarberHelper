@@ -98,7 +98,8 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
     if (this.validarCampos(this.novoUsuario.email, this.novoUsuario.senha, this.novoUsuario.pessoa.cpf, this.novoUsuario.pessoa.nome, this.novoUsuario.pessoa.telefone)){
       this.service.inserirUsuarioNoServidorDeAutenticacao(this.novoUsuario.email, this.novoUsuario.senha).subscribe(() => {
         this.service.salvar(this.novoUsuario).subscribe(() => {
-          this.router.navigate(['']);
+          this.voltarLogin();
+          this.adicionarMensagemSucesso("Usuario cadastrado com sucesso");
         });
       });
 
@@ -148,7 +149,7 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
   }
 
   validarSenha(senha: string) {
-    if(senha.length > 5) return true;
+    if(senha.length > 4) return true;
     else return false;
   }
 

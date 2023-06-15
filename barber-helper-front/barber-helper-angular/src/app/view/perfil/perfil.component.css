@@ -1,0 +1,27 @@
+.cards {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  height: 50%;
+}
+
+.card-perfil {
+  background-color: white;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.card-reserva {
+  background-color: white;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+.card-pedido {
+  background-color: white;
+  margin-top: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+}

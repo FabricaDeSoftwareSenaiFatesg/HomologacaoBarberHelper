@@ -9,6 +9,7 @@ import { ProdutoModule } from './produto/produto.module';
 import { LojaModule } from './loja/loja.module';
 import { MenuModule } from './menu/menu.module';
 import { PedidoModule } from './pedido/pedido.module';
+import { PerfilModule } from './perfil/perfil.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PedidoModule } from './pedido/pedido.module';
     ProdutoModule,
     LojaModule,
     MenuModule,
-    PedidoModule
+    PedidoModule,
+    PerfilModule
   ]
 })
 export class ViewModule { }

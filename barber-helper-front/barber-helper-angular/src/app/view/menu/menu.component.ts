@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
 import { UsuarioService } from '../usuario/usuario.service';
+import { TipoUsuarioEnum } from 'src/app/arquitetura/modelo/tipo-usuario.enum';
 
 @Component({
   selector: 'app-menu',
@@ -18,8 +19,9 @@ export class MenuComponent implements OnInit {
     protected service: UsuarioService
   ) {}
 
-  items: MenuItem[];
-  itemsMenuSanduiche: MenuItem[];
+  itensFuncionario: MenuItem[];
+  itensMenuSanduiche: MenuItem[];
+  itensCliente: MenuItem[];
 
   usuarioLogado: Usuario;
 
@@ -27,7 +29,7 @@ export class MenuComponent implements OnInit {
 
     this.pegarUsuarioLogado();
 
-    this.items = [
+    this.itensFuncionario = [
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-chart-line',
@@ -80,7 +82,7 @@ export class MenuComponent implements OnInit {
       }
     ];
 
-    this.itemsMenuSanduiche = [
+    this.itensMenuSanduiche = [
       {
         label: 'Home',
         icon: 'pi pi-home',
@@ -107,6 +109,23 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
+
+    this.itensCliente = [
+      {
+        label: 'Perfil',
+        icon: 'pi pi-fw pi-user',
+        command:(click)=>{this.router.navigate(['perfil']);}
+      },
+      {
+          separator: true
+      },
+      {
+          label: 'Sair',
+          icon: 'pi pi-fw pi-power-off',
+          command:(click)=>{this.logout();}
+
+      }
+    ];
   }
 
   pegarUsuarioLogado() {
@@ -123,10 +142,14 @@ export class MenuComponent implements OnInit {
 
     this.service.logout().subscribe(() => {
 
-      this.ngOnInit()
+      this.ngOnInit();
 
     });
 
+  }
+
+  definirTipoUsuario() {
+    return this.usuarioLogado.tipo == TipoUsuarioEnum.CLIENTE? this.itensFuncionario : this.itensCliente;
   }
 
 }

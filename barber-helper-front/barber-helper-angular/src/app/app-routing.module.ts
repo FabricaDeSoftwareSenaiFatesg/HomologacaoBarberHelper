@@ -9,6 +9,7 @@ import { LojaComponent } from './view/loja/loja.component';
 import {ReservaRoutes} from "./view/reserva/reserva-routes";
 import {SobreComponent} from "./view/sobre/sobre.component";
 import {AuthGuardService} from "./auth-guard.service";
+import { PerfilComponent } from './view/perfil/perfil.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'produto', component: ProdutoComponent, canActivate: [AuthGuardService]},
   { path: 'loja', component: LojaComponent, canActivate: [AuthGuardService]},
   { path: 'sobre', component: SobreComponent},
+  { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
