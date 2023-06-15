@@ -94,7 +94,7 @@ export class MenuComponent implements OnInit {
       {
         label: 'Serviços',
         icon: 'pi pi-briefcase',
-        command:(click)=>{this.router.navigate(['']);}
+        command:(click)=>{this.router.navigate(['servicos']);}
       },
       {
         label: 'Loja',
