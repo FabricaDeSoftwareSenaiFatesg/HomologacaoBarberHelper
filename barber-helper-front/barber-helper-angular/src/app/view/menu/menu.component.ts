@@ -110,21 +110,18 @@ export class MenuComponent implements OnInit {
   }
 
   pegarUsuarioLogado() {
-
     this.service.getUsuarioLogado().subscribe(retorno => {
-
       this.usuarioLogado = retorno;
-
     });
-
   }
 
   logout() {
-
     this.service.logout().subscribe(() => {
-
-      this.ngOnInit()
-
+      if(localStorage.getItem("ads_access_token") !== null){
+        localStorage.removeItem("ads_access_token");
+      }
+      this.router.navigate(['']);
+      this.ngOnInit();
     });
 
   }
