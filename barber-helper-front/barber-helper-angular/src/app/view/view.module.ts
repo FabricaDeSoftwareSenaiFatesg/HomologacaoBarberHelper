@@ -9,6 +9,7 @@ import { ProdutoModule } from './produto/produto.module';
 import { LojaModule } from './loja/loja.module';
 import { MenuModule } from './menu/menu.module';
 import { PedidoModule } from './pedido/pedido.module';
+import {ServicosModule} from "./servicos/servicos.module";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PedidoModule } from './pedido/pedido.module';
     PessoaModule,
     ReservaModule,
     ServicoModule,
+    ServicosModule,
     HomeModule,
     UsuarioModule,
     ProdutoModule,
