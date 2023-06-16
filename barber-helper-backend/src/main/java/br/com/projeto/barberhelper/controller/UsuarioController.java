@@ -47,13 +47,4 @@ public class UsuarioController extends ManutencaoController<Usuario> {
 
     }
 
-    @PostMapping(value = "/autenticar-usuario")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean autenticarUsuario(@RequestBody Usuario entidade) {
-
-        return this.service.autenticarUsuario(entidade.getEmail(), entidade.getSenha());
-
-    }
-
 }

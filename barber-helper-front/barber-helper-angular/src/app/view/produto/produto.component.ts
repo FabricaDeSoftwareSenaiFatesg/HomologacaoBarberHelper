@@ -38,20 +38,6 @@ export class ProdutoComponent extends BaseComponent<Produto> {
 
   }
 
-  obterConteudoFormatado() {
-
-    if (this.entidade.imagem.conteudo.indexOf('base64,') > -1) {
-
-        return this.entidade.imagem.conteudo;
-
-    } else {
-
-        return 'data:' + this.entidade.imagem.tipo + ';base64,' + this.entidade.imagem.conteudo;
-
-    }
-
-  }
-
   override salvar() {
 
     this.entidade = this.entidadeForm;

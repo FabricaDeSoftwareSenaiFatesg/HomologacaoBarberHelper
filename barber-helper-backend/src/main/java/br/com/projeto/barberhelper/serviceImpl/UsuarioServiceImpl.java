@@ -40,29 +40,6 @@ public class UsuarioServiceImpl extends ServiceGenerico<Long, Usuario> implement
     }
 
     @Override
-    public boolean autenticarUsuario(String email, String senha) {
-
-        if (!Objects.isNull(email) && !Objects.isNull(senha)) {
-
-            senha = this.converterSenhaEmMD5(senha);
-
-            if (dao.existsUsuarioByEmailAndSenha(email, senha)) {
-
-                this.setUsuarioLogado(dao.getUsuarioByEmailAndSenha(email, senha));
-
-                return true;
-
-            }
-
-            return false;
-
-        }
-
-        return false;
-
-    }
-
-    @Override
     public Usuario getUsuarioLogado() {
         return super.usuarioLogado;
     }
