@@ -9,8 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jmx.support.RegistrationPolicy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.util.Date;
-
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 @SpringBootApplication
 @EntityScan(basePackages = BarberHelperApplication.PACOTE_MODELO)

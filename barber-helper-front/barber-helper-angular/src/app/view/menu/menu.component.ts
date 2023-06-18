@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MenuItem } from 'primeng/api';
-import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
-import { UsuarioService } from '../usuario/usuario.service';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MenuItem} from 'primeng/api';
+import {Usuario} from 'src/app/arquitetura/modelo/usuario.model';
+import {UsuarioService} from '../usuario/usuario.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,66 +20,103 @@ export class MenuComponent implements OnInit {
 
   items: MenuItem[];
   itemsMenuSanduiche: MenuItem[];
-
   usuarioLogado: Usuario;
+  usuarioLogadoTemAtribuicao: boolean = true;
 
   ngOnInit() {
+    this.inicializarUsuario();
+    this.inicializarItemsMenuSanduiche();
+  }
 
-    this.pegarUsuarioLogado();
+  inicializarUsuario() {
+    this.service.getUsuarioLogado().subscribe(retorno => {
+      this.usuarioLogado = retorno;
+
+      this.service.usuarioTemAtribuicao().subscribe( retorno => {
+        this.usuarioLogadoTemAtribuicao = retorno;
+        this.inicializarItemsMenuPadrao();
+      });
+
+    });
+  }
+
+  logout() {
+    this.service.logout().subscribe(() => {
+      if(localStorage.getItem("ads_access_token") !== null){
+        localStorage.removeItem("ads_access_token");
+      }
+      this.router.navigate(['']);
+      this.ngOnInit();
+    });
+  }
+
+  inicializarItemsMenuPadrao(){
 
     this.items = [
+      {
+        label: 'Reservas',
+        icon: 'pi pi-fw pi-calendar',
+        command:(click)=>{this.router.navigate(['reserva']);}
+      },
+    ];
+
+    if (this.usuarioLogadoTemAtribuicao){
+      this.adicionarComponentesAdminOuFuncionario();
+    }
+
+    this.adicionarLogoutNosItems();
+  }
+
+  adicionarComponentesAdminOuFuncionario(){
+    this.items.push(
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-chart-line',
         command:(click)=>{this.router.navigate(['dashboard']);}
       },
       {
-        label: 'Reservas',
-        icon: 'pi pi-fw pi-calendar',
-        command:(click)=>{this.router.navigate(['reserva']);}
-      },
-      {
-          label: 'Cadastros',
-          icon: 'pi pi-fw pi-pencil',
-          items: [
-              {
-                  label: 'Pessoas',
-                  icon: 'pi pi-fw pi-users',
-                  command:(click)=>{this.router.navigate(['pessoa']);}
-              },
-              {
-                  label: 'Serviços',
-                  icon: 'pi pi-fw pi-wrench',
-                  command:(click)=>{this.router.navigate(['servico']);}
-              },
-              {
-                  label: 'Usuarios',
-                  icon: 'pi pi-fw pi-user',
-                  command:(click)=>{this.router.navigate(['usuario']);}
-              },
-              {
-                label: 'Promoções',
-                icon: 'pi pi-fw pi-percentage',
-                command:(click)=>{this.router.navigate(['promocao']);}
-              },
-              {
-                label: 'Produtos',
-                icon: 'pi pi-fw pi-box',
-                command:(click)=>{this.router.navigate(['produto']);}
-              }
-          ]
-      },
-      {
-          separator: true
-      },
-      {
-          label: 'Sair',
-          icon: 'pi pi-fw pi-power-off',
-          command:(click)=>{this.logout();}
-
+        label: 'Cadastros',
+        icon: 'pi pi-fw pi-pencil',
+        items: [
+          {
+            label: 'Serviços',
+            icon: 'pi pi-fw pi-wrench',
+            command:(click)=>{this.router.navigate(['servico']);}
+          },
+          {
+            label: 'Usuarios',
+            icon: 'pi pi-fw pi-user',
+            command:(click)=>{this.router.navigate(['usuario']);}
+          },
+          {
+            label: 'Promoções',
+            icon: 'pi pi-fw pi-percentage',
+            command:(click)=>{this.router.navigate(['promocao']);}
+          },
+          {
+            label: 'Produtos',
+            icon: 'pi pi-fw pi-box',
+            command:(click)=>{this.router.navigate(['produto']);}
+          }
+        ]
       }
-    ];
+    )
+  }
 
+  adicionarLogoutNosItems(){
+    this.items.push(
+      {
+        separator: true
+      },
+      {
+        label: 'Sair',
+        icon: 'pi pi-fw pi-power-off',
+        command:(click)=>{this.logout();}
+      }
+    )
+  }
+
+  inicializarItemsMenuSanduiche(){
     this.itemsMenuSanduiche = [
       {
         label: 'Home',
@@ -107,23 +144,6 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
-  }
-
-  pegarUsuarioLogado() {
-    this.service.getUsuarioLogado().subscribe(retorno => {
-      this.usuarioLogado = retorno;
-    });
-  }
-
-  logout() {
-    this.service.logout().subscribe(() => {
-      if(localStorage.getItem("ads_access_token") !== null){
-        localStorage.removeItem("ads_access_token");
-      }
-      this.router.navigate(['']);
-      this.ngOnInit();
-    });
-
   }
 
 }
