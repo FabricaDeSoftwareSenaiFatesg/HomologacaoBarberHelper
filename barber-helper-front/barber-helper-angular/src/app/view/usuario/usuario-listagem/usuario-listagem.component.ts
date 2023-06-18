@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { BaseComponent } from 'src/app/arquitetura/component/base.component';
-import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
-import { UsuarioService } from '../usuario.service';
-import { MessageService } from 'primeng/api';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BaseComponent} from 'src/app/arquitetura/component/base.component';
+import {Usuario} from 'src/app/arquitetura/modelo/usuario.model';
+import {UsuarioService} from '../usuario.service';
+import {MessageService} from 'primeng/api';
+import {TipoUsuarioEnum} from "../../../arquitetura/modelo/tipo-usuario.enum";
 
 @Component({
   selector: 'app-usuario-listagem',
@@ -21,21 +22,27 @@ export class UsuarioListagemComponent extends BaseComponent<Usuario> implements 
     protected override messageService: MessageService) {
 
     super(changeDetectorRef, router, activatedRoute, service, messageService);
-
     super.ngOnInit();
-
   }
 
-  pessoas: Usuario[] = [];
+  tiposUsuario: TipoUsuarioEnum[] = [];
 
   override ngOnInit(): void {
-
+    super.listar();
+    this.inicializarTiposUsuario();
   }
 
   protected override newEntidade(): Usuario {
-
     return new Usuario();
+  }
 
+  inicializarTiposUsuario() {
+    this.tiposUsuario.push(TipoUsuarioEnum.CLIENTE, TipoUsuarioEnum.FUNCIONARIO, TipoUsuarioEnum.ADMINISTRADOR);
+  }
+
+  override salvar() {
+    this.entidade = this.entidadeForm;
+    super.salvar();
   }
 
 }
