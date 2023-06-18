@@ -11,4 +11,6 @@ public interface UsuarioService extends Service<Long, Usuario> {
 
     Usuario getUsuarioPeloLogin(String login);
 
+    boolean dadosValidos(Usuario usuario);
+
 }

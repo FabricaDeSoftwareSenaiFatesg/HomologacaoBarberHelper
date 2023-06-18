@@ -95,13 +95,18 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
 
   cadastrarNovoUsuario() {
 
-    if (this.validarCampos(this.novoUsuario.email, this.novoUsuario.senha, this.novoUsuario.pessoa.cpf, this.novoUsuario.pessoa.nome, this.novoUsuario.pessoa.telefone)){
+    if (this.validarCampos(this.novoUsuario.email, this.novoUsuario.senha, this.novoUsuario.pessoa.cpf, this.novoUsuario.pessoa.nome, this.novoUsuario.pessoa.telefone)) {
+
       this.service.inserirUsuarioNoServidorDeAutenticacao(this.novoUsuario.email, this.novoUsuario.senha).subscribe(() => {
-        this.service.salvar(this.novoUsuario).subscribe(() => {
-          this.voltarLogin();
-          this.adicionarMensagemSucesso("Usuario cadastrado com sucesso");
-        });
-      });
+
+          this.service.salvar(this.novoUsuario).subscribe(() => {
+            this.router.navigate(['']);
+          }, (error) => {
+            this.adicionarMensagemAlerta("Já existe um usuário com esse email ou essa senha");
+          });
+
+        }
+      );
 
     }
 
@@ -165,16 +170,16 @@ export class LoginComponent extends BaseComponent<Usuario> implements OnInit{
     for (var i=1; i<=9; i++) soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
     resto = (soma * 10) % 11;
 
-      if ((resto == 10) || (resto == 11))  resto = 0;
-      if (resto != parseInt(cpf.substring(9, 10)) ) return false;
+    if ((resto == 10) || (resto == 11))  resto = 0;
+    if (resto != parseInt(cpf.substring(9, 10)) ) return false;
 
-      soma = 0;
-      for (var i = 1; i <= 10; i++) soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
-      resto = (soma * 10) % 11;
+    soma = 0;
+    for (var i = 1; i <= 10; i++) soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
 
-      if ((resto == 10) || (resto == 11))  resto = 0;
-      if (resto != parseInt(cpf.substring(10, 11) ) ) return false;
-      return true;
+    if ((resto == 10) || (resto == 11))  resto = 0;
+    if (resto != parseInt(cpf.substring(10, 11) ) ) return false;
+    return true;
   }
 
 }

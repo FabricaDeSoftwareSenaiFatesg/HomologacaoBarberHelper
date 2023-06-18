@@ -60,7 +60,7 @@ public class ReservaController extends ManutencaoController<Reserva> {
 
         List<Reserva> reservas = service.obterReservasDoFuncionarioPorData(pesquisaHorarios.getProfissional().getId(), pesquisaHorarios.getData());
         List<String> horariosReservados = service.getHorariosReservadosDasReservas(reservas);
-        return Response.ok(service.getHorariosFiltardos(horariosReservados, pesquisaHorarios.getServicos())).build();
+        return Response.ok(service.getHorariosFiltardos(horariosReservados, pesquisaHorarios.getServicos(), pesquisaHorarios.getData())).build();
     }
 
     @PostMapping(value = "/listarFiltrado")

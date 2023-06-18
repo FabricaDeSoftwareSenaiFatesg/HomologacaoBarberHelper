@@ -29,6 +29,18 @@ public class UsuarioController extends ManutencaoController<Usuario> {
         return service;
     }
 
+    @PostMapping()
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void salvar(@RequestBody Usuario usuario) throws Exception {
+
+        if (!this.service.dadosValidos(usuario)){
+            throw new Exception("Já existe um usuário com essas informações");
+        }
+
+        super.salvar(usuario);
+    }
+
     @GetMapping(value = "/get-usuario-logado")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

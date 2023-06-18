@@ -96,7 +96,7 @@ export class MenuComponent implements OnInit {
       {
         label: 'Serviços',
         icon: 'pi pi-briefcase',
-        command:(click)=>{this.router.navigate(['']);}
+        command:(click)=>{this.router.navigate(['servicos']);}
       },
       {
         label: 'Loja',
@@ -129,26 +129,23 @@ export class MenuComponent implements OnInit {
   }
 
   pegarUsuarioLogado() {
-
     this.service.getUsuarioLogado().subscribe(retorno => {
-
       this.usuarioLogado = retorno;
-
     });
-
   }
 
   logout() {
-
     this.service.logout().subscribe(() => {
-
+      if(localStorage.getItem("ads_access_token") !== null){
+        localStorage.removeItem("ads_access_token");
+      }
+      this.router.navigate(['']);
       this.ngOnInit();
-
     });
 
   }
 
-  definirTipoUsuario() {
+  definirTipoMenuUsuario() {
     return this.usuarioLogado.tipo == TipoUsuarioEnum.CLIENTE? this.itensFuncionario : this.itensCliente;
   }
 

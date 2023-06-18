@@ -14,7 +14,7 @@ public abstract class ManutencaoController<E extends Serializable> extends Consu
     @PostMapping()
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void salvar(@RequestBody E entidade) {
+    public void salvar(@RequestBody E entidade) throws Exception {
 
         this.getServico().salvar( entidade );
 
