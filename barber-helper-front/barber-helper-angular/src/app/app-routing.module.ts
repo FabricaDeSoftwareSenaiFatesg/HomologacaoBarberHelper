@@ -11,6 +11,7 @@ import {SobreComponent} from "./view/sobre/sobre.component";
 import {AuthGuardService} from "./auth-guard.service";
 import {ServicoComponent} from "./view/servico/servico.component";
 import {ServicosComponent} from "./view/servicos/servicos.component";
+import {DashboardComponent} from "./view/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'servicos', component: ServicosComponent},
   { path: 'loja', component: LojaComponent, canActivate: [AuthGuardService]},
   { path: 'sobre', component: SobreComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

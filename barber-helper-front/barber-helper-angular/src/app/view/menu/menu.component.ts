@@ -40,16 +40,6 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  logout() {
-    this.service.logout().subscribe(() => {
-      if(localStorage.getItem("ads_access_token") !== null){
-        localStorage.removeItem("ads_access_token");
-      }
-      this.router.navigate(['']);
-      this.ngOnInit();
-    });
-  }
-
   inicializarItemsMenuPadrao(){
 
     this.items = [
@@ -144,6 +134,16 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
+  }
+
+  logout() {
+    this.service.logout().subscribe(() => {
+      if(localStorage.getItem("ads_access_token") !== null){
+        localStorage.removeItem("ads_access_token");
+      }
+      this.router.navigate(['']);
+      this.ngOnInit();
+    });
   }
 
 }
