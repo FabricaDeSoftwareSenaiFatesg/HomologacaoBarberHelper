@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -21,4 +25,7 @@ public class Servico extends EntidadeGenerica {
 
     private Long tempo;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_imagem", referencedColumnName = "id")
+    private Imagem imagem;
 }

@@ -9,6 +9,9 @@ import { LojaComponent } from './view/loja/loja.component';
 import {ReservaRoutes} from "./view/reserva/reserva-routes";
 import {SobreComponent} from "./view/sobre/sobre.component";
 import {AuthGuardService} from "./auth-guard.service";
+import {ServicoComponent} from "./view/servico/servico.component";
+import {ServicosComponent} from "./view/servicos/servicos.component";
+import {DashboardComponent} from "./view/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,8 +20,11 @@ const routes: Routes = [
   { path: 'reserva', children: ReservaRoutes, canActivate: [AuthGuardService]},
   { path: 'usuario', children: UsuarioRoutes },
   { path: 'produto', component: ProdutoComponent, canActivate: [AuthGuardService]},
+  { path: 'servico', component: ServicoComponent, canActivate: [AuthGuardService]},
+  { path: 'servicos', component: ServicosComponent},
   { path: 'loja', component: LojaComponent, canActivate: [AuthGuardService]},
   { path: 'sobre', component: SobreComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

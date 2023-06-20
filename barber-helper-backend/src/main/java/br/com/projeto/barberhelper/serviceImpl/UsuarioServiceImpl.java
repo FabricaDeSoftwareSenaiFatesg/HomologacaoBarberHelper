@@ -2,6 +2,7 @@ package br.com.projeto.barberhelper.serviceImpl;
 
 import br.com.projeto.barberhelper.generic.DAO;
 import br.com.projeto.barberhelper.generic.ServiceGenerico;
+import br.com.projeto.barberhelper.model.Pessoa;
 import br.com.projeto.barberhelper.model.Usuario;
 import br.com.projeto.barberhelper.repository.UsuarioDAO;
 import br.com.projeto.barberhelper.service.UsuarioService;
@@ -96,6 +97,35 @@ public class UsuarioServiceImpl extends ServiceGenerico<Long, Usuario> implement
         criteriaQuery.where(predicate);
 
         return em.createQuery(criteriaQuery).getSingleResult();
+    }
+
+    @Override
+    public boolean dadosValidos(Usuario usuario) {
+        return !loginJaFoiCadastrado(usuario.getEmail()) || !cpfJaFoiCadastrado(usuario.getPessoa().getCpf());
+    }
+
+    private boolean loginJaFoiCadastrado(String email){
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Long> query = criteriaBuilder.createQuery(Long.class);
+        Root<Usuario> root = query.from(Usuario.class);
+
+        Predicate predicate = criteriaBuilder.equal(root.get("email"), email);
+        query.select(criteriaBuilder.count(root)).where(predicate);
+
+        Long resultado = em.createQuery(query).getSingleResult();
+        return resultado > 0;
+    }
+
+    private boolean cpfJaFoiCadastrado(String cpf){
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Long> query = criteriaBuilder.createQuery(Long.class);
+        Root<Pessoa> root = query.from(Pessoa.class);
+
+        Predicate predicate = criteriaBuilder.equal(root.get("cpf"), cpf);
+        query.select(criteriaBuilder.count(root)).where(predicate);
+
+        Long resultado = em.createQuery(query).getSingleResult();
+        return resultado > 0;
     }
 
 }

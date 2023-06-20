@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ArquiteturaModule } from 'src/app/arquitetura/arquitetura.module';
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
 import { UsuarioListagemComponent } from './usuario-listagem/usuario-listagem.component';
+import {ToggleButtonModule} from "primeng/togglebutton";
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { UsuarioListagemComponent } from './usuario-listagem/usuario-listagem.co
   ],
   imports: [
     CommonModule,
-    ArquiteturaModule
+    ArquiteturaModule,
+    ToggleButtonModule
   ],
   exports: [
     UsuarioListagemComponent,

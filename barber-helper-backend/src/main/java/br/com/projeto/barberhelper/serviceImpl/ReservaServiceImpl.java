@@ -111,7 +111,7 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
     }
 
     @Override
-    public List<String> getHorariosFiltardos(List<String> horariosReservados, List<Servico> servicos) {
+    public List<String> getHorariosFiltardos(List<String> horariosReservados, List<Servico> servicos, Date dataPesquisada) {
         List<String> horariosDisponiveis = HorariosDisponiveis.getHorarios().stream().filter(horario -> !horariosReservados.contains(horario)).collect(Collectors.toList());
 
         int qntHorariosNecessarios = getQntHorariosNecessarios(servicos);
@@ -129,7 +129,9 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
                     .collect(Collectors.toList());
             horariosDisponiveis.removeIf(horariosRemocao::contains);
         }
-        return horariosDisponiveis;
+        return horariosDisponiveis.stream()
+                .filter(horario -> !HorariosDisponiveis.getCalendarData(horario, dataPesquisada).getTime().before(DateUtil.getCalendarDate(new Date()).getTime()))
+                .collect(Collectors.toList());
     }
 
     private int getQntHorariosNecessarios(List<Servico> servicos) {

@@ -45,11 +45,13 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
     servicos: '-',
     profissional: '-',
     dataHora: '-',
-    total: '0'
+    total: 0
   };
+  desabilitarHorarios = true;
 
   override ngOnInit(): void {
 
+    this.informacoes.total = this.informacoes.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     this.newEntidade();
     this.consultarServicos();
     this.consultarProfissionais();
@@ -68,6 +70,7 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
     this.service.consultarHorarios(pesquisaHorarios).subscribe(response => {
       this.horarios = response.entity;
     });
+    this.desabilitarHorarios = false;
   }
 
   consultarProfissionais() {
@@ -132,7 +135,7 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
     })
     servicosSelecionadosString = servicosSelecionadosString.substring(1, servicosSelecionadosString.length-2);
     this.informacoes.servicos = servicosSelecionadosString;
-    this.informacoes.total = total;
+    this.informacoes.total = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   }
 
   onChangeProfissional() {
@@ -151,5 +154,14 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
     const horaFinal = dataFim.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
     this.informacoes.dataHora = data + " - " + horaInicial + " às " + horaFinal;
+  }
+
+  redirecionarParaRota(rota: string): void {
+    this.router.navigateByUrl(rota);
+  }
+
+  confirmarReserva() {
+    this.salvarReserva();
+    this.redirecionarParaRota('');
   }
 }
