@@ -26,10 +26,14 @@ export class UsuarioListagemComponent extends BaseComponent<Usuario> implements 
   }
 
   tiposUsuario: TipoUsuarioEnum[] = [];
+  usuarioLogadoTemAtribuicao: boolean = true;
 
   override ngOnInit(): void {
     super.listar();
     this.inicializarTiposUsuario();
+    this.service.usuarioTemAtribuicao().subscribe( retorno => {
+      this.usuarioLogadoTemAtribuicao = retorno;
+    });
   }
 
   protected override newEntidade(): Usuario {
@@ -41,8 +45,18 @@ export class UsuarioListagemComponent extends BaseComponent<Usuario> implements 
   }
 
   override salvar() {
-    this.entidade = this.entidadeForm;
-    super.salvar();
+
+    this.service.inserirUsuarioNoServidorDeAutenticacao(this.entidadeForm.email, this.entidadeForm.senha).subscribe(() => {
+
+        this.service.salvar(this.entidadeForm).subscribe(() => {
+          this.router.navigate(['']);
+        }, (error) => {
+          this.adicionarMensagemAlerta("Já existe um usuário com esse email ou essa senha");
+        });
+
+      }
+    );
+
   }
 
 }

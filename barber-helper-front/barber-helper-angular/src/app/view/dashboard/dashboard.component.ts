@@ -43,7 +43,6 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
   optionsGraficoServicos: any;
 
   override ngOnInit(): void {
-    console.log(this.basicData);
     this.consultarValoresParaDashboard();
   }
 

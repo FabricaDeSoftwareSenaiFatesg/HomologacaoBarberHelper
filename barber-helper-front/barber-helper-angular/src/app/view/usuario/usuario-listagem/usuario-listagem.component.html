@@ -1,9 +1,9 @@
 <div class="tela-listagem">
-  <!--<div class="div-novo-cadastro">
+  <div class="div-novo-cadastro" *ngIf="usuarioLogadoTemAtribuicao">
     <button class="btn-editar" (click)="cadastrar()">NOVO</button>
-  </div>-->
+  </div>
 
-  <div class="tabela-dados">
+  <div class="tabela-dados" *ngIf="usuarioLogadoTemAtribuicao">
     <p-table [value]="listaEntidades" [responsive]="true" emptyMessage="Nenhum registro encontrado." [tableStyle]="{ 'min-width': '50rem' }" [lazy]="true" (onLazyLoad)="listar()">
       <ng-template pTemplate="header">
         <tr>
@@ -45,8 +45,40 @@
           <div class="row">
             <div class="col input-grupo">
               <label class="label-input">Nome do Usuário</label>
-              <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText
-                     [(ngModel)]="entidadeForm.pessoa.nome"/>
+              <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText placeholder="Ex.: Oliveira..."
+                      [(ngModel)]="entidadeForm.pessoa.nome"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col input-grupo">
+              <label class="label-input">CPF</label>
+              <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText placeholder="Ex.: 999.999.999-99"
+                     [(ngModel)]="entidadeForm.pessoa.cpf"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col input-grupo">
+              <label class="label-input">Telefone</label>
+              <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText placeholder="Ex.: (99)99999-9999"
+                     [(ngModel)]="entidadeForm.pessoa.telefone"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col input-grupo">
+              <label class="label-input">Email</label>
+              <input [disabled]="isVisualizacao" type="text" class="input-personalizado" pInputText placeholder="seu_email@gmail.com"
+                     [(ngModel)]="entidadeForm.email"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col input-grupo">
+              <label class="label-input">Senha</label>
+              <input [disabled]="isVisualizacao" type="password" class="input-personalizado" pInputText
+                     [(ngModel)]="entidadeForm.senha"/>
             </div>
           </div>
 
