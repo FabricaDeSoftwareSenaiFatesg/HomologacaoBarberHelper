@@ -16,5 +16,7 @@ public class DashboardDTO extends DTO implements Serializable {
 
     private List<Pedido> pedidos = new ArrayList<>();
     private List<Reserva> reservas = new ArrayList<>();
+    private List<FuncionarioPorReservaDTO> funcionariosPorReserva = new ArrayList<>();
+    private List<ServicoPorQuantidadeDTO> servicosPorQuantidade = new ArrayList<>();
 
 }
