@@ -6,6 +6,8 @@ import {MessageService} from "primeng/api";
 import {DashboardService} from "./dashboard.service";
 import {Produto} from "../../arquitetura/modelo/produto.model";
 import {Servico} from "../../arquitetura/modelo/servico.model";
+import {FuncionarioPorReserva} from "../../arquitetura/modelo/funcionarioPorReserva.model";
+import {ServicoPorQuantidade} from "../../arquitetura/modelo/servicoPorQuantidade.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -27,15 +29,21 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
   }
 
   reservas: Servico[] = [];
-
   pedidos: Produto[] = [];
+  funcionariosPorReserva: FuncionarioPorReserva[] = [];
+  servicosPorQuantidade: ServicoPorQuantidade[] = [];
 
   basicData: any;
   basicOptions: any;
   data: any;
   options: any;
+  dataGraficoFuncionarios: any;
+  optionsGraficoFuncionario: any;
+  dataGraficoServicos: any;
+  optionsGraficoServicos: any;
 
   override ngOnInit(): void {
+    console.log(this.basicData);
     this.consultarValoresParaDashboard();
   }
 
@@ -43,9 +51,13 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
     this.service.listarDashboardDTO().subscribe(retorno => {
       this.reservas = retorno.reservas;
       this.pedidos = retorno.pedidos;
+      this.funcionariosPorReserva = retorno.funcionariosPorReserva;
+      this.servicosPorQuantidade = retorno.servicosPorQuantidade;
 
       this.inicializarGraficoVendas();
       this.inicializarGraficoReservas();
+      this.inicializarGraficoFuncionarios();
+      this.inicializarGraficoServicosMaisUtilizados();
     });
   }
 
@@ -55,8 +67,10 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
+    const dataFormatada = this.getDataDosPedidos().map(date => (new Date(date)).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
     this.basicData = {
-      labels: this.getDataDosPedidos(),
+      labels: dataFormatada,
       datasets: [
         {
           label: 'Quantidade de Produtos',
@@ -112,8 +126,8 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
   getDataDosPedidos(): Date[]{
     let datas: Date[] = [];
 
-    this.pedidos.forEach((pedido: any) => {
-      datas.push(pedido.dataCadastro);
+    this.pedidos?.forEach((pedido: any) => {
+      datas.push(pedido?.dataCadastro);
     })
 
     return datas;
@@ -123,8 +137,8 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
     let quantidadeProdutos: number[] = [];
 
     this.pedidos.forEach((pedido: any) => {
-      pedido.produtos.forEach((produto: any) => {
-        quantidadeProdutos.push(produto.quantidade);
+      pedido?.produtos.forEach((produto: any) => {
+        quantidadeProdutos.push(produto?.quantidade);
       });
     });
 
@@ -137,8 +151,10 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
+    const dataFormatada = this.getDataDasReservas().map(date => (new Date(date)).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
     this.data = {
-      labels: this.getDataDasReservas(),
+      labels: dataFormatada,
       datasets: [
         {
           label: 'Quantidade de Serviços',
@@ -195,7 +211,7 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
     let datas: Date[] = [];
 
     this.reservas.forEach((reserva: any) => {
-      datas.push(reserva.dataCadastro);
+        datas.push(reserva?.dataCadastro);
     })
 
     return datas;
@@ -204,11 +220,136 @@ export class DashboardComponent extends BaseComponent<Dashboard> implements OnIn
   getDadosReservas(): number[] {
     let quantidadeServicos: number[] = [];
 
-    this.reservas.forEach((reserva: any) => {
-      quantidadeServicos.push(reserva.servicos.length);
+    this.reservas?.forEach((reserva: any) => {
+      quantidadeServicos.push(reserva?.servicos?.length);
     });
 
     return quantidadeServicos;
+  }
+
+  inicializarGraficoFuncionarios() {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+    this.dataGraficoFuncionarios = {
+      datasets: [
+        {
+          data: this.getQuantidadeDeServicoDeCadaFuncionario(),
+          backgroundColor: [
+            documentStyle.getPropertyValue('--red-500'),
+            documentStyle.getPropertyValue('--green-500'),
+            documentStyle.getPropertyValue('--yellow-500'),
+            documentStyle.getPropertyValue('--bluegray-500'),
+            documentStyle.getPropertyValue('--blue-500')
+          ],
+          label: 'Serviços Prestados'
+        }
+      ],
+      labels: this.getNomeDosFuncionarios()
+    };
+
+    this.optionsGraficoFuncionario = {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Quantidade de Serviço por Funcionário',
+          font: {
+            size: 18,
+            family: 'Poppins',
+            weight: 500
+          }
+        },
+        legend: {
+          labels: {
+            color: textColor
+          }
+        }
+      },
+      scales: {
+        r: {
+          grid: {
+            color: surfaceBorder
+          }
+        }
+      }
+    };
+  }
+
+  getQuantidadeDeServicoDeCadaFuncionario(): number[]{
+    let quantidadeDeServicoPorFuncionario: number[] = [];
+
+    this.funcionariosPorReserva.forEach((funcionario: any) => {
+      quantidadeDeServicoPorFuncionario.push(funcionario.quantidadeServicos);
+    })
+
+    return quantidadeDeServicoPorFuncionario;
+  }
+
+  getNomeDosFuncionarios(): string[] {
+    let nomeDosFuncionarios: string[] = [];
+
+    this.funcionariosPorReserva.forEach((funcionario: any) => {
+      nomeDosFuncionarios.push(funcionario.nomeFuncionario);
+    });
+
+    return nomeDosFuncionarios;
+  }
+
+  inicializarGraficoServicosMaisUtilizados() {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+
+    this.dataGraficoServicos = {
+      labels: this.getNomeDoServico(),
+      datasets: [
+        {
+          data: this.getQuantidadeDeServico(),
+          backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
+          hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+        }
+      ]
+    };
+
+    this.optionsGraficoServicos = {
+      cutout: '60%',
+      plugins: {
+        title: {
+          display: true,
+          text: 'Serviços Mais Utilizados',
+          font: {
+            size: 18,
+            family: 'Poppins',
+            weight: 500
+          }
+        },
+        legend: {
+          labels: {
+            color: textColor
+          }
+        }
+      }
+    };
+  }
+
+  getQuantidadeDeServico(): number[]{
+    let quantidadeDeServicos: number[] = [];
+
+    this.servicosPorQuantidade?.forEach((servico: any) => {
+      quantidadeDeServicos.push(servico?.quantidadeServico);
+    })
+
+    return quantidadeDeServicos;
+  }
+
+  getNomeDoServico(): string[] {
+    let nomeDosServicos: string[] = [];
+
+    this.servicosPorQuantidade?.forEach((servico: any) => {
+      nomeDosServicos.push(servico?.nomeServico);
+    });
+
+    return nomeDosServicos;
   }
 
   protected newEntidade(): Dashboard {
