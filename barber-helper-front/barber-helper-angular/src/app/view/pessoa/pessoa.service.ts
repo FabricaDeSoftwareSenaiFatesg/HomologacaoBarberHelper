@@ -19,4 +19,8 @@ export class PessoaService extends BaseService<Pessoa> {
 
   }
 
+  getFuncionarios(){
+    return this.httpClient.get<any>(`${this.API}/${this.path}/valores-dashboard`);
+  }
+
 }
