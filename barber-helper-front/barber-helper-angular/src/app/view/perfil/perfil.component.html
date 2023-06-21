@@ -1,17 +1,39 @@
 <div class="row cards">
 
   <div class="col card-perfil">
-    perfil
+
+    <div class="col row titulo-perfil">
+      PERFIL
+    </div>
+
+    <div class="col row icone-perfil">
+      <img src="assets/icone-user.svg" alt="user" height="300" style="max-height: 200px;">
+    </div>
+
+    <div class="col dados-perfil">
+      <label for="nome">{{usuarioLogado.pessoa.nome}}</label>
+      <label for="telefone">{{usuarioLogado.pessoa.telefone}}</label>
+      <label for="email">{{usuarioLogado.email}}</label>
+    </div>
+
   </div>
 
   <div class="col" style="height: 100%; padding-top: 0;">
 
     <div class="col row card-reserva">
-      reservas
+
+      <div class="col row titulo-reserva">
+        RESERVAS
+      </div>
+
     </div>
 
     <div class="col row card-pedido">
-      pedidos
+
+      <div class="col row titulo-pedido">
+        PEDIDOS
+      </div>
+
     </div>
 
   </div>

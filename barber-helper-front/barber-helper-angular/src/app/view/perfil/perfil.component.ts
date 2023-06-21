@@ -4,6 +4,8 @@ import { MenuItem } from 'primeng/api';
 import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
 import { UsuarioService } from '../usuario/usuario.service';
 import { TipoUsuarioEnum } from 'src/app/arquitetura/modelo/tipo-usuario.enum';
+import { ReservaService } from '../reserva/reserva.service';
+import { PerfilDTO } from 'src/app/arquitetura/modelo/perfilDTO.model';
 
 @Component({
   selector: 'app-perfil',
@@ -16,22 +18,33 @@ export class PerfilComponent implements OnInit {
     protected changeDetectorRef: ChangeDetectorRef,
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
-    protected service: UsuarioService
+    protected usuarioService: UsuarioService,
+    protected reservaService: ReservaService
   ) {}
 
   usuarioLogado: Usuario;
 
+  perfilUsuario: PerfilDTO;
+
   ngOnInit() {
 
-    this.pegarUsuarioLogado();
+    this.pegarDadosUsuario();
 
   }
 
-  pegarUsuarioLogado() {
+  pegarDadosUsuario() {
 
-    this.service.getUsuarioLogado().subscribe(retorno => {
+    this.usuarioService.getUsuarioLogado().subscribe(retorno => {
 
       this.usuarioLogado = retorno;
+
+      this.reservaService.consultarDadosPerfil(3).subscribe(retorno => {//this.usuarioLogado.pessoa.id
+
+        console.log(retorno);
+
+        this.perfilUsuario = retorno;
+
+      });
 
     });
 

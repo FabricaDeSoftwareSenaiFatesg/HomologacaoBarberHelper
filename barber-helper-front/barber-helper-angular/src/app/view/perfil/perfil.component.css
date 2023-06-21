@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   align-content: center;
-  margin: 20px 20px;
+  margin: 10px;
   width: auto;
   height: 90%;
 }
@@ -13,6 +13,9 @@
   margin-right: 15px;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card-reserva {
@@ -20,10 +23,48 @@
   border-radius: 5px;
   margin-bottom: 10px;
   height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card-pedido {
   background-color: white;
   border-radius: 5px;
   height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo-perfil {
+  max-height: 50px;
+  font-family: 'Khand', sans-serif;
+  font-size: 20px;
+}
+
+.icone-perfil {
+  max-height: 200px;
+  padding: 0;
+}
+
+.dados-perfil {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo-reserva {
+  max-height: 50px;
+  font-family: 'Khand', sans-serif;
+  font-size: 20px;
+  justify-content: center;
+}
+
+.titulo-pedido {
+  max-height: 50px;
+  font-family: 'Khand', sans-serif;
+  font-size: 20px;
+  justify-content: center;
 }

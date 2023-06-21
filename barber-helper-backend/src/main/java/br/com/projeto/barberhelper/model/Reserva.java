@@ -4,14 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -48,6 +41,7 @@ public class Reserva extends EntidadeGenerica {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
 
+    @Enumerated(EnumType.STRING)
     private StatusReservaEnum statusReserva = StatusReservaEnum.RESERVADO;
 
     @Transient
