@@ -74,7 +74,7 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
   }
 
   consultarProfissionais() {
-    this.pessoaService.listar().subscribe(response => {
+    this.pessoaService.getFuncionarios().subscribe(response => {
       this.profissionais = response;
     });
   }
