@@ -40,26 +40,23 @@
 .titulo-perfil {
   max-height: 35px;
   font-family: 'Khand', sans-serif;
-  font-size: 20px;
+  font-size: 2rem;
   align-content: center;
 }
 
 .icone-perfil {
-  max-height: 200px;
   padding: 0;
 }
 
 .dados-perfil {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .titulo-reserva {
   max-height: 35px;
   font-family: 'Khand', sans-serif;
-  font-size: 20px;
+  font-size: 2rem;
   justify-content: center;
   align-content: center;
 }
@@ -67,7 +64,7 @@
 .titulo-pedido {
   max-height: 35px;
   font-family: 'Khand', sans-serif;
-  font-size: 20px;
+  font-size: 2rem;
   justify-content: center;
   align-content: center;
 }

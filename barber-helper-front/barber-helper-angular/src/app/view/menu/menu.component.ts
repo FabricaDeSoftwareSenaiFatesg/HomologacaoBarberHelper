@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
 import { UsuarioService } from '../usuario/usuario.service';
-import { TipoUsuarioEnum } from 'src/app/arquitetura/modelo/tipo-usuario.enum';
 
 @Component({
   selector: 'app-menu',
@@ -29,6 +28,10 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.inicializarUsuario();
     this.inicializarItemsMenuSanduiche();
+  }
+
+  verificaUsuarioPopulado() {
+    return this.usuarioLogado != undefined ? true : false;
   }
 
   inicializarUsuario() {

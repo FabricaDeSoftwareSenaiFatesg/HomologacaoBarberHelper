@@ -1,10 +1,10 @@
 <div class="panel">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <li class="main-nav config"  *ngIf="!usuarioLogado">
+      <li class="main-nav config"  *ngIf="!verificaUsuarioPopulado()">
         <a href="login" class="login" pTooltip="Login"><i class="pi pi-sign-in"></i></a>
       </li>
-      <li class="main-nav config" style="margin-right: 22px;" *ngIf="usuarioLogado">
+      <li class="main-nav config" style="margin-right: 22px;" *ngIf="verificaUsuarioPopulado()">
         <a title="Configurações"><i class="pi pi-cog" (click)="menu.toggle($event)"></i></a>
         <p-tieredMenu #menu [model]="itens" [popup]="true"></p-tieredMenu>
       </li>

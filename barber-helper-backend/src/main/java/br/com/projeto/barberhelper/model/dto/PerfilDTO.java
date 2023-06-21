@@ -15,6 +15,8 @@ public class PerfilDTO {
 
     private StatusReservaEnum statusUltimaReserva;
 
+    private String statusUltimaReservaFormatado;
+
     private String dtUltimaCompra;
 
     private int qtdPedidosFeito;
