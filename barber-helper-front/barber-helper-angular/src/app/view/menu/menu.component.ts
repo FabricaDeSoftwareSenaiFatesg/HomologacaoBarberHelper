@@ -79,11 +79,6 @@ export class MenuComponent implements OnInit {
             command:(click)=>{this.router.navigate(['usuario']);}
           },
           {
-            label: 'Promoções',
-            icon: 'pi pi-fw pi-percentage',
-            command:(click)=>{this.router.navigate(['promocao']);}
-          },
-          {
             label: 'Produtos',
             icon: 'pi pi-fw pi-box',
             command:(click)=>{this.router.navigate(['produto']);}
