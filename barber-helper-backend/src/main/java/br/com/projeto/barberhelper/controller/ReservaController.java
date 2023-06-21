@@ -68,7 +68,6 @@ public class ReservaController extends ManutencaoController<Reserva> {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarFiltrado(@RequestBody PesquisaHorarios pesquisaHorarios) {
-
         List<Reserva> reservas = service.listarFiltrado(pesquisaHorarios.getProfissional().getId(), pesquisaHorarios.getData());
         return Response.ok(ReservaMapper.toListReservaListagemDTO(reservas)).build();
     }
