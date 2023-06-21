@@ -32,16 +32,34 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
   modalFiltro: boolean = false;
 
   reservas: Reserva[] = [];
-  data: any[] = [];
+  data: string;
 
   profissionais: any = [];
-  profissionalSelecionado: any = [];
+  profissionalSelecionado: any;
 
   reservaVizualizacao: any = null;
 
-  override ngOnInit(): void {
+  override async ngOnInit(): Promise<void> {
     this.consultarProfissionais();
+    await this.inicializarFiltros();
     this.listarFiltrado();
+  }
+
+  async inicializarFiltros(): Promise<void>{
+    const formatter = new Intl.DateTimeFormat('en-US', {year:'numeric', month:'2-digit', day:'2-digit'});
+    const parts = formatter.formatToParts(new Date());
+    this.data = `${parts[4].value}-${parts[0].value}-${parts[2].value}`;
+    this.profissionalSelecionado = await this.getIdUsuarioLogado();
+  }
+
+  getIdUsuarioLogado(): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      this.service.getUsuarioLogado().subscribe(response => {
+        resolve(response.id);
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   protected override newEntidade(): Reserva {
@@ -59,18 +77,17 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
   }
 
   listarFiltrado() {
+    let dataSelecionadaMaisTresHoras = new Date(this.data);
+    dataSelecionadaMaisTresHoras.setHours(dataSelecionadaMaisTresHoras.getHours() + 3);
     let pesquisaHorarios = {
-      profissional: Array.isArray(this.profissionalSelecionado) ? {id:1} : this.profissionalSelecionado,
-      data: Array.isArray(this.data) ? new Date(): this.data
+      profissional: {id:this.profissionalSelecionado},
+      data: dataSelecionadaMaisTresHoras
     };
+    console.log(pesquisaHorarios);
 
     this.service.listarFiltrado(pesquisaHorarios).subscribe(response => {
       this.listaEntidades = response.entity;
     });
-  }
-
-  override getUsuarioLogado() {
-    return {id: 1};
   }
 
   override visualizar(entidadeConsulta: Reserva) {
@@ -78,5 +95,9 @@ export class ReservaListagemComponent extends BaseComponent<Reserva> implements 
     this.service.consultarServicosDaReserva(entidadeConsulta.id).subscribe(response => {
       this.reservaVizualizacao = {...entidadeConsulta, ...response.entity};
     });
+  }
+
+  redirecionarParaAgendamento(rota: string): void {
+    this.router.navigateByUrl(rota);
   }
 }
