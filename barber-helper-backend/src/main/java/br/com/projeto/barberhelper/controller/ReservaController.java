@@ -9,6 +9,7 @@ import br.com.projeto.barberhelper.generic.Service;
 import br.com.projeto.barberhelper.model.HorariosDisponiveis;
 import br.com.projeto.barberhelper.model.dto.FidelidadeDTO;
 import br.com.projeto.barberhelper.model.Reserva;
+import br.com.projeto.barberhelper.model.dto.PerfilDTO;
 import br.com.projeto.barberhelper.model.dto.PesquisaHorarios;
 import br.com.projeto.barberhelper.model.dto.listagem.ReservaListagemDTO;
 import br.com.projeto.barberhelper.model.mapper.ReservaMapper;
@@ -88,5 +89,14 @@ public class ReservaController extends ManutencaoController<Reserva> {
         }
         service.salvar(reserva);
         return Response.ok().build();
+    }
+
+    @GetMapping(value = "/dadosReservaPorPessoa/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public PerfilDTO consultarDadosReservaPorPessoa(@PathVariable Long id) {
+
+        return service.consultarDadosParaPerfil(id);
+
     }
 }

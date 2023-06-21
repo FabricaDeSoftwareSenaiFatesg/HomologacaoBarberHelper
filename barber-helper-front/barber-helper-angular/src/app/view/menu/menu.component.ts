@@ -1,8 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MenuItem} from 'primeng/api';
-import {Usuario} from 'src/app/arquitetura/modelo/usuario.model';
-import {UsuarioService} from '../usuario/usuario.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
+import { UsuarioService } from '../usuario/usuario.service';
+import { TipoUsuarioEnum } from 'src/app/arquitetura/modelo/tipo-usuario.enum';
 
 @Component({
   selector: 'app-menu',
@@ -18,8 +19,10 @@ export class MenuComponent implements OnInit {
     protected service: UsuarioService
   ) {}
 
-  items: MenuItem[];
-  itemsMenuSanduiche: MenuItem[];
+  itens: MenuItem[];
+  itensMenuSanduiche: MenuItem[];
+  itensCliente: MenuItem[];
+
   usuarioLogado: Usuario;
   usuarioLogadoTemAtribuicao: boolean = true;
 
@@ -42,7 +45,7 @@ export class MenuComponent implements OnInit {
 
   inicializarItemsMenuPadrao(){
 
-    this.items = [
+    this.itens = [
       {
         label: 'Reservas',
         icon: 'pi pi-fw pi-calendar',
@@ -52,13 +55,15 @@ export class MenuComponent implements OnInit {
 
     if (this.usuarioLogadoTemAtribuicao){
       this.adicionarComponentesAdminOuFuncionario();
+    } else {
+      this.adicionarComponentesCliente();
     }
 
     this.adicionarLogoutNosItems();
   }
 
   adicionarComponentesAdminOuFuncionario(){
-    this.items.push(
+    this.itens.push(
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-chart-line',
@@ -89,7 +94,7 @@ export class MenuComponent implements OnInit {
   }
 
   adicionarLogoutNosItems(){
-    this.items.push(
+    this.itens.push(
       {
         separator: true
       },
@@ -102,7 +107,7 @@ export class MenuComponent implements OnInit {
   }
 
   inicializarItemsMenuSanduiche(){
-    this.itemsMenuSanduiche = [
+    this.itensMenuSanduiche = [
       {
         label: 'Home',
         icon: 'pi pi-home',
@@ -129,6 +134,16 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
+  }
+
+  adicionarComponentesCliente(){
+    this.itens.push(
+      {
+        label: 'Perfil',
+        icon: 'pi pi-fw pi-user',
+        command:(click)=>{this.router.navigate(['perfil']);}
+      }
+    )
   }
 
   logout() {

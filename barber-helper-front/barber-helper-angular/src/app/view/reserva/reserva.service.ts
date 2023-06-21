@@ -27,4 +27,9 @@ export class ReservaService extends BaseService<Reserva>{
   salvarReserva(reserva: any) {
     return this.httpClient.post<any>(`${this.API}/${this.path}/salvarReserva`, reserva);
   }
+
+  consultarDadosPerfil(idPessoa: any) {
+    return this.httpClient.get<any>(`${this.API}/${this.path}/dadosReservaPorPessoa/${idPessoa}`);
+  }
+
 }

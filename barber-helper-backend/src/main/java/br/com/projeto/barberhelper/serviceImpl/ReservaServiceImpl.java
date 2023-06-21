@@ -12,15 +12,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
+import br.com.projeto.barberhelper.model.*;
+import br.com.projeto.barberhelper.model.dto.PerfilDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.barberhelper.generic.DAO;
 import br.com.projeto.barberhelper.generic.ServiceGenerico;
-import br.com.projeto.barberhelper.model.HorariosDisponiveis;
-import br.com.projeto.barberhelper.model.Pessoa;
-import br.com.projeto.barberhelper.model.Reserva;
-import br.com.projeto.barberhelper.model.Servico;
 import br.com.projeto.barberhelper.model.dto.FidelidadeDTO;
 import br.com.projeto.barberhelper.model.enuns.StatusReservaEnum;
 import br.com.projeto.barberhelper.repository.ReservaDAO;
@@ -190,4 +188,69 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
 
         return this.executeQueryAndTransforResult(query, Servico.class);
     }
+
+    public PerfilDTO consultarDadosParaPerfil(Long idPessoa) {
+
+        List<Reserva> listaReservas = this.consultarReservasPorCliente(idPessoa);
+
+        List<Pedido> listaPedidos = this.consultarPedidosPorCliente(idPessoa);
+
+        PerfilDTO dto = new PerfilDTO();
+
+        dto.setDtUltimaReserva(listaReservas.get(0).getDataInicial().toString());
+
+        dto.setStatusUltimaReserva(listaReservas.get(0).getStatusReserva());
+
+        dto.setQtdReservasFeitas(listaReservas.size());
+
+        dto.setDtUltimaCompra(listaPedidos.get(0).getDataPedido().toString());
+
+        dto.setStatusUltimaCompra(listaPedidos.get(0).getStatusPedido());
+
+        dto.setQtdPedidosFeito(listaPedidos.size());
+
+        return dto;
+
+    }
+
+    public List<Reserva> consultarReservasPorCliente(Long idPessoa) {
+        final CriteriaBuilder builder = em.getCriteriaBuilder();
+        final CriteriaQuery<Tuple> query = builder.createTupleQuery();
+        final Root<Reserva> root = query.from(Reserva.class);
+        final Join<Reserva, Pessoa> rootPessoa = root.join("cliente");
+
+        query.select(builder.tuple(
+                root.get("statusReserva").alias("statusReserva"),
+                root.get("dataInicial").alias("dataInicial")
+                ));
+
+        query.where(
+                builder.equal(rootPessoa.get("id"), idPessoa)
+        );
+
+        query.orderBy(builder.desc(root.get("dataInicial")));
+
+        return this.executeQueryAndTransforResult(query, Reserva.class);
+    }
+
+    public List<Pedido> consultarPedidosPorCliente(Long idPessoa) {
+        final CriteriaBuilder builder = em.getCriteriaBuilder();
+        final CriteriaQuery<Tuple> query = builder.createTupleQuery();
+        final Root<Pedido> root = query.from(Pedido.class);
+        final Join<Pedido, Pessoa> rootPessoa = root.join("cliente");
+
+        query.select(builder.tuple(
+                root.get("statusPedido").alias("statusPedido"),
+                root.get("dataPedido").alias("dataPedido")
+                ));
+
+        query.where(
+                builder.equal(rootPessoa.get("id"), idPessoa)
+        );
+
+        query.orderBy(builder.desc(root.get("dataPedido")));
+
+        return this.executeQueryAndTransforResult(query, Pedido.class);
+    }
+
 }
