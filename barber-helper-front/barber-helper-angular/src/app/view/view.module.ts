@@ -11,6 +11,7 @@ import { MenuModule } from './menu/menu.module';
 import { PedidoModule } from './pedido/pedido.module';
 import { PerfilModule } from './perfil/perfil.module';
 import {ServicosModule} from "./servicos/servicos.module";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {ServicosModule} from "./servicos/servicos.module";
     MenuModule,
     PedidoModule,
     PerfilModule
+    DashboardModule
   ]
 })
 export class ViewModule { }

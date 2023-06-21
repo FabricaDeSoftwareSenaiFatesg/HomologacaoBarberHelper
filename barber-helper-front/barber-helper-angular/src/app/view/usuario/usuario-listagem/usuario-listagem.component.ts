@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { BaseComponent } from 'src/app/arquitetura/component/base.component';
-import { Usuario } from 'src/app/arquitetura/modelo/usuario.model';
-import { UsuarioService } from '../usuario.service';
-import { MessageService } from 'primeng/api';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BaseComponent} from 'src/app/arquitetura/component/base.component';
+import {Usuario} from 'src/app/arquitetura/modelo/usuario.model';
+import {UsuarioService} from '../usuario.service';
+import {MessageService} from 'primeng/api';
+import {TipoUsuarioEnum} from "../../../arquitetura/modelo/tipo-usuario.enum";
 
 @Component({
   selector: 'app-usuario-listagem',
@@ -21,20 +22,40 @@ export class UsuarioListagemComponent extends BaseComponent<Usuario> implements 
     protected override messageService: MessageService) {
 
     super(changeDetectorRef, router, activatedRoute, service, messageService);
-
     super.ngOnInit();
-
   }
 
-  pessoas: Usuario[] = [];
+  tiposUsuario: TipoUsuarioEnum[] = [];
+  usuarioLogadoTemAtribuicao: boolean = true;
 
   override ngOnInit(): void {
-
+    super.listar();
+    this.inicializarTiposUsuario();
+    this.service.usuarioTemAtribuicao().subscribe( retorno => {
+      this.usuarioLogadoTemAtribuicao = retorno;
+    });
   }
 
   protected override newEntidade(): Usuario {
-
     return new Usuario();
+  }
+
+  inicializarTiposUsuario() {
+    this.tiposUsuario.push(TipoUsuarioEnum.CLIENTE, TipoUsuarioEnum.FUNCIONARIO, TipoUsuarioEnum.ADMINISTRADOR);
+  }
+
+  override salvar() {
+
+    this.service.inserirUsuarioNoServidorDeAutenticacao(this.entidadeForm.email, this.entidadeForm.senha).subscribe(() => {
+
+        this.service.salvar(this.entidadeForm).subscribe(() => {
+          this.router.navigate(['']);
+        }, (error) => {
+          this.adicionarMensagemAlerta("Já existe um usuário com esse email ou essa senha");
+        });
+
+      }
+    );
 
   }
 

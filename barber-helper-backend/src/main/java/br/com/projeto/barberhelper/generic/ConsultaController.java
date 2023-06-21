@@ -1,11 +1,11 @@
 package br.com.projeto.barberhelper.generic;
 
-import br.com.projeto.barberhelper.model.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ public abstract class ConsultaController<E extends Serializable> {
     @GetMapping()
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<List<E>> listar() {
+    public ResponseEntity<List<E>> listar() throws Exception {
 
         return ResponseEntity.ok().body(this.getServico().listar());
 

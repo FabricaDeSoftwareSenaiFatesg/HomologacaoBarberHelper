@@ -1,0 +1,23 @@
+<div class="mt-5 col-md-12">
+
+  <div class="d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="ml-3 card" *ngIf="basicData != null && basicData != undefined">
+        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+      </div>
+      <div class="card flex justify-content-center ml-3 mt-4" *ngIf="basicData != null && basicData != undefined">
+        <p-chart type="doughnut" [data]="dataGraficoServicos" [options]="optionsGraficoServicos"></p-chart>
+      </div>
+    </div>
+
+    <div class="col-md-6 d-flex row justify-content-center">
+      <div class="card col-md-11 row" *ngIf="basicData != null && basicData != undefined">
+        <p-chart type="line" [data]="data" [options]="options"></p-chart>
+      </div>
+      <div class="card col-md-11 row m-4" *ngIf="basicData != null && basicData != undefined">
+        <p-chart type="polarArea" [data]="dataGraficoFuncionarios" [options]="optionsGraficoFuncionario"></p-chart>
+      </div>
+    </div>
+  </div>
+
+</div>

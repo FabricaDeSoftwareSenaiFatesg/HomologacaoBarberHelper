@@ -19,69 +19,94 @@ export class MenuComponent implements OnInit {
     protected service: UsuarioService
   ) {}
 
-  itensFuncionario: MenuItem[];
+  itens: MenuItem[];
   itensMenuSanduiche: MenuItem[];
   itensCliente: MenuItem[];
 
   usuarioLogado: Usuario;
+  usuarioLogadoTemAtribuicao: boolean = true;
 
   ngOnInit() {
+    this.inicializarUsuario();
+    this.inicializarItemsMenuSanduiche();
+  }
 
-    this.pegarUsuarioLogado();
+  inicializarUsuario() {
+    this.service.getUsuarioLogado().subscribe(retorno => {
+      this.usuarioLogado = retorno;
 
-    this.itensFuncionario = [
+      this.service.usuarioTemAtribuicao().subscribe( retorno => {
+        this.usuarioLogadoTemAtribuicao = retorno;
+        this.inicializarItemsMenuPadrao();
+      });
+
+    });
+  }
+
+  inicializarItemsMenuPadrao(){
+
+    this.itens = [
+      {
+        label: 'Reservas',
+        icon: 'pi pi-fw pi-calendar',
+        command:(click)=>{this.router.navigate(['reserva']);}
+      },
+    ];
+
+    if (this.usuarioLogadoTemAtribuicao){
+      this.adicionarComponentesAdminOuFuncionario();
+    } else {
+      this.adicionarComponentesCliente();
+    }
+
+    this.adicionarLogoutNosItems();
+  }
+
+  adicionarComponentesAdminOuFuncionario(){
+    this.itens.push(
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-chart-line',
         command:(click)=>{this.router.navigate(['dashboard']);}
       },
       {
-        label: 'Reservas',
-        icon: 'pi pi-fw pi-calendar',
-        command:(click)=>{this.router.navigate(['reserva']);}
-      },
-      {
-          label: 'Cadastros',
-          icon: 'pi pi-fw pi-pencil',
-          items: [
-              {
-                  label: 'Pessoas',
-                  icon: 'pi pi-fw pi-users',
-                  command:(click)=>{this.router.navigate(['pessoa']);}
-              },
-              {
-                  label: 'Serviços',
-                  icon: 'pi pi-fw pi-wrench',
-                  command:(click)=>{this.router.navigate(['servico']);}
-              },
-              {
-                  label: 'Usuarios',
-                  icon: 'pi pi-fw pi-user',
-                  command:(click)=>{this.router.navigate(['usuario']);}
-              },
-              {
-                label: 'Promoções',
-                icon: 'pi pi-fw pi-percentage',
-                command:(click)=>{this.router.navigate(['promocao']);}
-              },
-              {
-                label: 'Produtos',
-                icon: 'pi pi-fw pi-box',
-                command:(click)=>{this.router.navigate(['produto']);}
-              }
-          ]
-      },
-      {
-          separator: true
-      },
-      {
-          label: 'Sair',
-          icon: 'pi pi-fw pi-power-off',
-          command:(click)=>{this.logout();}
-
+        label: 'Cadastros',
+        icon: 'pi pi-fw pi-pencil',
+        items: [
+          {
+            label: 'Serviços',
+            icon: 'pi pi-fw pi-wrench',
+            command:(click)=>{this.router.navigate(['servico']);}
+          },
+          {
+            label: 'Usuarios',
+            icon: 'pi pi-fw pi-user',
+            command:(click)=>{this.router.navigate(['usuario']);}
+          },
+          {
+            label: 'Produtos',
+            icon: 'pi pi-fw pi-box',
+            command:(click)=>{this.router.navigate(['produto']);}
+          }
+        ]
       }
-    ];
+    )
+  }
 
+  adicionarLogoutNosItems(){
+    this.itens.push(
+      {
+        separator: true
+      },
+      {
+        label: 'Sair',
+        icon: 'pi pi-fw pi-power-off',
+        command:(click)=>{this.logout();}
+      }
+    )
+  }
+
+  inicializarItemsMenuSanduiche(){
     this.itensMenuSanduiche = [
       {
         label: 'Home',
@@ -109,29 +134,16 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
+  }
 
-    this.itensCliente = [
+  adicionarComponentesCliente(){
+    this.itens.push(
       {
         label: 'Perfil',
         icon: 'pi pi-fw pi-user',
         command:(click)=>{this.router.navigate(['perfil']);}
-      },
-      {
-          separator: true
-      },
-      {
-          label: 'Sair',
-          icon: 'pi pi-fw pi-power-off',
-          command:(click)=>{this.logout();}
-
       }
-    ];
-  }
-
-  pegarUsuarioLogado() {
-    this.service.getUsuarioLogado().subscribe(retorno => {
-      this.usuarioLogado = retorno;
-    });
+    )
   }
 
   logout() {
@@ -142,11 +154,6 @@ export class MenuComponent implements OnInit {
       this.router.navigate(['']);
       this.ngOnInit();
     });
-
-  }
-
-  definirTipoMenuUsuario() {
-    return this.usuarioLogado.tipo == TipoUsuarioEnum.CLIENTE? this.itensFuncionario : this.itensCliente;
   }
 
 }
