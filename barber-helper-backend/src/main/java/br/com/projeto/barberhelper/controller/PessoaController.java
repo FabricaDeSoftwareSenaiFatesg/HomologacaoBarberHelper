@@ -1,10 +1,9 @@
 package br.com.projeto.barberhelper.controller;
 
 import br.com.projeto.barberhelper.generic.ManutencaoController;
-import br.com.projeto.barberhelper.model.Pessoa;
-import br.com.projeto.barberhelper.model.dto.FidelidadeDTO;
-import br.com.projeto.barberhelper.service.PessoaService;
 import br.com.projeto.barberhelper.generic.Service;
+import br.com.projeto.barberhelper.model.Pessoa;
+import br.com.projeto.barberhelper.service.PessoaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -37,6 +37,13 @@ public class PessoaController extends ManutencaoController<Pessoa> {
 
         return Response.ok(cpf).build();
 
+    }
+
+    @GetMapping(value = "valores-dashboard")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Pessoa> obterDadosDashboard() {
+        return ResponseEntity.ok().body(pessoaService.listarFuncionarios()).getBody();
     }
 
 }
