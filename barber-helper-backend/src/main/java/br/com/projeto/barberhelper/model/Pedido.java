@@ -25,7 +25,7 @@ public class Pedido extends EntidadeGenerica {
     @JoinTable(name = "tb_pedido_produto", joinColumns = {@JoinColumn(name = "id_pedido")}, inverseJoinColumns = {@JoinColumn(name = "id_produto")})
     private List<Produto> produtos;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Pessoa cliente;
 

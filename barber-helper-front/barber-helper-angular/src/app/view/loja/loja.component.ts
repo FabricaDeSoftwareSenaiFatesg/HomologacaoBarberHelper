@@ -7,6 +7,7 @@ import { BaseComponent } from 'src/app/arquitetura/component/base.component';
 import { PedidoService } from './pedido.service';
 import { MessageService } from 'primeng/api';
 import { StatusPedidoEnum } from 'src/app/arquitetura/modelo/status-pedido.enum';
+import {Usuario} from "../../arquitetura/modelo/usuario.model";
 
 @Component({
   selector: 'app-loja',
@@ -54,11 +55,16 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
 
     this.produtoService.listarProdutosDTO().subscribe(retorno => {
 
+      this.service.getUsuarioLogado().subscribe(retorno => {
+        this.usuarioLogado = retorno;
+      });
+
       this.produtos = retorno;
 
       this.changeDetectorRef.detectChanges();
 
     });
+
 
   }
 
@@ -165,6 +171,8 @@ export class LojaComponent extends BaseComponent<Pedido> implements OnInit {
       this.entidade.produtos = this.produtosSelecionados;
 
       this.entidade.statusPedido = StatusPedidoEnum.EM_ESPERA;
+
+      this.entidade.cliente = this.usuarioLogado.pessoa;
 
       super.salvar(this.entidade);
 
