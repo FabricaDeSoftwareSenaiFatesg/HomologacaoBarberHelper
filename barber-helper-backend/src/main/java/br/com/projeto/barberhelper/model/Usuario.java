@@ -16,10 +16,8 @@ import javax.persistence.*;
 @Entity(name = "tb_usuario")
 public class Usuario extends EntidadeGenerica {
 
-    @Column(unique = true)
     private String email;
 
-    @Transient
     private String senha;
 
     @Enumerated(EnumType.STRING)

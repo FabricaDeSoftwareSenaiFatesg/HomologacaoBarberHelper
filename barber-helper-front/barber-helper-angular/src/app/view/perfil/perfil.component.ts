@@ -38,7 +38,7 @@ export class PerfilComponent implements OnInit {
 
       this.usuarioLogado = retorno;
 
-      this.reservaService.consultarDadosPerfil(3).subscribe(retorno => {//this.usuarioLogado.pessoa.id
+      this.reservaService.consultarDadosPerfil(this.usuarioLogado.pessoa.id).subscribe(retorno => {//this.usuarioLogado.pessoa.id
 
         console.log(retorno);
 

@@ -144,7 +144,7 @@ input {
 .form-cadastro {
 }
 
-.pi:not(.pi-th-large, .pi-bars, .pi-plus, .pi-minus) {
+.pi:not(.pi-th-large, .pi-bars, .pi-plus, .pi-minus, .pi-calendar) {
   cursor: pointer;
   margin: 3px;
   color: #c07c5a;

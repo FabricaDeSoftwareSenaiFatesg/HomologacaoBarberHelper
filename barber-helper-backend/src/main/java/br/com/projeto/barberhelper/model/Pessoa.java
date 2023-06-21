@@ -15,7 +15,6 @@ public class Pessoa extends EntidadeGenerica {
 
     private String nome;
 
-    @Column(unique = true)
     private String cpf;
 
     private String telefone;

@@ -38,9 +38,10 @@
 }
 
 .titulo-perfil {
-  max-height: 50px;
+  max-height: 35px;
   font-family: 'Khand', sans-serif;
   font-size: 20px;
+  align-content: center;
 }
 
 .icone-perfil {
@@ -56,15 +57,59 @@
 }
 
 .titulo-reserva {
-  max-height: 50px;
+  max-height: 35px;
   font-family: 'Khand', sans-serif;
   font-size: 20px;
   justify-content: center;
+  align-content: center;
 }
 
 .titulo-pedido {
-  max-height: 50px;
+  max-height: 35px;
   font-family: 'Khand', sans-serif;
   font-size: 20px;
   justify-content: center;
+  align-content: center;
+}
+
+.dados-reserva {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.criar-reserva {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dados-pedido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.criar-pedido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listar-dados {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.info-reserva {
+  display: flex;
+  flex-direction: column;
+}
+
+.pi {
+  color: #c07c5a;
 }

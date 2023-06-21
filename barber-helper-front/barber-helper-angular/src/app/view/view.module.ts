@@ -30,7 +30,7 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     LojaModule,
     MenuModule,
     PedidoModule,
-    PerfilModule
+    PerfilModule,
     DashboardModule
   ]
 })

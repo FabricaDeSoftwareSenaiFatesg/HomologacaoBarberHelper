@@ -26,12 +26,72 @@
         RESERVAS
       </div>
 
+      <div class="col dados-reserva">
+        <div class="listar-dados" *ngIf="perfilUsuario">
+
+          <i class="pi pi-calendar icone-reserva" style="font-size: 9rem"></i>
+
+          <div class="info-reserva">
+
+            <label for="dtReserva" style="margin: 5px; font-weight: 600;">Data ultima reserva:
+              <span style="font-weight: 100;">{{perfilUsuario.dtUltimaReserva}}</span>
+            </label>
+            <label for="dtReserva" style="margin: 5px; font-weight: 600;">Status ultima reserva:
+              <span style="font-weight: 100;">{{perfilUsuario.statusUltimaReserva}}</span>
+            </label>
+            <label for="dtReserva" style="margin: 5px; font-weight: 600;">QTD Reservas feitas:
+              <span style="font-weight: 100;">{{perfilUsuario.qtdReservasFeitas}}</span>
+            </label>
+
+          </div>
+
+        </div>
+
+        <div class="criar-reserva" *ngIf="!perfilUsuario">
+
+          <label for="reservas" style="margin-bottom: 10px;">Faça sua primeira reserva!</label>
+          <button class="btn-confimar" style="margin-top: 10px;" (click)="this.router.navigate(['reserva'])">AGENDAR</button>
+
+        </div>
+      </div>
+
     </div>
 
     <div class="col row card-pedido">
 
       <div class="col row titulo-pedido">
         PEDIDOS
+      </div>
+
+      <div class="col dados-pedido">
+
+        <div class="listar-dados" *ngIf="perfilUsuario">
+
+          <i class="pi pi-shopping-cart icone-pedido" style="font-size: 9rem"></i>
+
+          <div class="info-reserva">
+
+            <label for="dtReserva" style="margin: 5px; font-weight: 600;">Data ultimo pedido:
+              <span style="font-weight: 100;">{{perfilUsuario.dtUltimaCompra}}</span>
+            </label>
+            <label for="dtReserva" style="margin: 5px; font-weight: 600;">Status ultimo pedido:
+              <span style="font-weight: 100;">{{perfilUsuario.statusUltimaCompra}}</span>
+            </label>
+            <label for="dtReserva" style="margin: 5px; font-weight: 600;">QTD Pedidos feitos:
+              <span style="font-weight: 100;">{{perfilUsuario.qtdPedidosFeito}}</span>
+            </label>
+
+          </div>
+
+        </div>
+
+        <div class="criar-pedido" *ngIf="!perfilUsuario">
+
+          <label for="reservas" style="margin-bottom: 10px;">Faça seu primeiro pedido!</label>
+          <button class="btn-confimar" style="margin-top: 10px;" (click)="this.router.navigate(['loja'])">LOJA</button>
+
+        </div>
+
       </div>
 
     </div>

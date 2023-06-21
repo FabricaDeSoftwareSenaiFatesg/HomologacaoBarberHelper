@@ -6,7 +6,7 @@
       </li>
       <li class="main-nav config" style="margin-right: 22px;" *ngIf="usuarioLogado">
         <a title="Configurações"><i class="pi pi-cog" (click)="menu.toggle($event)"></i></a>
-        <p-tieredMenu #menu [model]="definirTipoMenuUsuario()" [popup]="true"></p-tieredMenu>
+        <p-tieredMenu #menu [model]="itens" [popup]="true"></p-tieredMenu>
       </li>
 
       <button class="navbar-toggler" type="button" (click)="menuSanduiche.toggle($event)" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
