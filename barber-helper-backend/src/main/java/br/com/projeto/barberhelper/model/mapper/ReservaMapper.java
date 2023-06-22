@@ -12,7 +12,7 @@ public class ReservaMapper {
     public static ReservaListagemDTO toReservaListagemDTO(Reserva reserva) {
         ReservaListagemDTO reservaListagemDTO = new ReservaListagemDTO();
         reservaListagemDTO.setId(reserva.getId());
-//        reservaListagemDTO.setClienteNome(reserva.getCliente().getNome());
+        reservaListagemDTO.setClienteNome(reserva.getCliente().getNome());
         reservaListagemDTO.setFuncionarioNome(reserva.getFuncionario().getNome());
         reservaListagemDTO.setData(DateUtil.getStringData(reserva.getDataInicial()));
         reservaListagemDTO.setInicio(DateUtil.getStringHorario(DateUtil.getCalendarDate(reserva.getDataInicial())));

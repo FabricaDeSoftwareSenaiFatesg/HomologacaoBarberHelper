@@ -141,14 +141,14 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<Tuple> query = builder.createTupleQuery();
         final Root<Reserva> root = query.from(Reserva.class);
-//        final Join<Reserva, Pessoa> rootCliente = root.join("cliente");
+        final Join<Reserva, Pessoa> rootCliente = root.join("cliente");
         final Join<Reserva, Pessoa> rootFuncionario = root.join("funcionario");
 
         query.select(builder.tuple(
                 root.get("id").alias("id"),
 
-//                rootCliente.get("id").alias("cliente.id"),
-//                rootCliente.get("nome").alias("cliente.nome"),
+                rootCliente.get("id").alias("cliente.id"),
+                rootCliente.get("nome").alias("cliente.nome"),
 
                 rootFuncionario.get("id").alias("funcionario.id"),
                 rootFuncionario.get("nome").alias("funcionario.nome"),
