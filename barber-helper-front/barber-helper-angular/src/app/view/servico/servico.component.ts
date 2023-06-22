@@ -35,6 +35,6 @@ export class ServicoComponent extends BaseComponent<Servico> implements OnInit{
   override salvar() {
     this.entidade = this.entidadeForm;
     super.salvar();
-    // this.adicionarMensagemSucesso("Incluído com sucesso!");
+    this.adicionarMensagemSucesso("Incluído com sucesso!");
   }
 }

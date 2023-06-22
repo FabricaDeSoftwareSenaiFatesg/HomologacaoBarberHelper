@@ -35,7 +35,7 @@
       </div>
 
       <div class="col dados-reserva">
-        <div class="listar-dados" *ngIf="perfilUsuario">
+        <div class="listar-dados" *ngIf="perfilUsuario.dtUltimaReserva">
 
           <i class="pi pi-calendar icone-reserva" style="font-size: 9rem"></i>
 
@@ -55,7 +55,7 @@
 
         </div>
 
-        <div class="criar-reserva" *ngIf="!perfilUsuario">
+        <div class="criar-reserva" *ngIf="!perfilUsuario.dtUltimaReserva">
 
           <label for="reservas" style="margin-bottom: 10px;">Faça sua primeira reserva!</label>
           <button class="btn-confimar" style="margin-top: 10px;" (click)="this.router.navigate(['reserva'])">AGENDAR</button>
@@ -73,7 +73,7 @@
 
       <div class="col dados-pedido">
 
-        <div class="listar-dados" *ngIf="perfilUsuario">
+        <div class="listar-dados" *ngIf="perfilUsuario.dtUltimaCompra">
 
           <i class="pi pi-shopping-cart icone-pedido" style="font-size: 9rem"></i>
 
@@ -93,7 +93,7 @@
 
         </div>
 
-        <div class="criar-pedido" *ngIf="!perfilUsuario">
+        <div class="criar-pedido" *ngIf="!perfilUsuario.dtUltimaCompra">
 
           <label for="reservas" style="margin-bottom: 10px;">Faça seu primeiro pedido!</label>
           <button class="btn-confimar" style="margin-top: 10px;" (click)="this.router.navigate(['loja'])">LOJA</button>
