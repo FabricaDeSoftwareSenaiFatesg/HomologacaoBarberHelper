@@ -44,6 +44,8 @@ export class ProdutoComponent extends BaseComponent<Produto> {
 
     super.salvar();
 
+    this.adicionarMensagemSucesso("Incluído com sucesso!");
+
   }
 
 }

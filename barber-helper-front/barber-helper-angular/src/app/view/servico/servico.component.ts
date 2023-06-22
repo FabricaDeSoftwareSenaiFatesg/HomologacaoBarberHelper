@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {ServicoService} from "./servico.service";
@@ -11,7 +11,7 @@ import {BaseComponent} from "../../arquitetura/component/base.component";
   styleUrls: ['./servico.component.css'],
   providers: [MessageService]
 })
-export class ServicoComponent extends BaseComponent<Servico>{
+export class ServicoComponent extends BaseComponent<Servico> implements OnInit{
 
   constructor(
     protected changeDetectorRef: ChangeDetectorRef,
@@ -35,5 +35,6 @@ export class ServicoComponent extends BaseComponent<Servico>{
   override salvar() {
     this.entidade = this.entidadeForm;
     super.salvar();
+    this.adicionarMensagemSucesso("Incluído com sucesso!");
   }
 }

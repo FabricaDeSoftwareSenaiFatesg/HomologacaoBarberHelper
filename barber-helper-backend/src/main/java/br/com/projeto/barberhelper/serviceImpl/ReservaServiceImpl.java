@@ -141,14 +141,14 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<Tuple> query = builder.createTupleQuery();
         final Root<Reserva> root = query.from(Reserva.class);
-//        final Join<Reserva, Pessoa> rootCliente = root.join("cliente");
+        final Join<Reserva, Pessoa> rootCliente = root.join("cliente");
         final Join<Reserva, Pessoa> rootFuncionario = root.join("funcionario");
 
         query.select(builder.tuple(
                 root.get("id").alias("id"),
 
-//                rootCliente.get("id").alias("cliente.id"),
-//                rootCliente.get("nome").alias("cliente.nome"),
+                rootCliente.get("id").alias("cliente.id"),
+                rootCliente.get("nome").alias("cliente.nome"),
 
                 rootFuncionario.get("id").alias("funcionario.id"),
                 rootFuncionario.get("nome").alias("funcionario.nome"),
@@ -197,17 +197,25 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
 
         PerfilDTO dto = new PerfilDTO();
 
-        dto.setDtUltimaReserva(listaReservas.get(0).getDataInicial().toString());
+        if (!listaReservas.isEmpty()) {
 
-        dto.setStatusUltimaReserva(listaReservas.get(0).getStatusReserva());
+            dto.setDtUltimaReserva(listaReservas.get(0).getDataInicial().toString());
 
-        dto.setQtdReservasFeitas(listaReservas.size());
+            dto.setStatusUltimaReserva(listaReservas.get(0).getStatusReserva());
 
-        dto.setDtUltimaCompra(listaPedidos.get(0).getDataPedido().toString());
+            dto.setQtdReservasFeitas(listaReservas.size());
 
-        dto.setStatusUltimaCompra(listaPedidos.get(0).getStatusPedido());
+        }
 
-        dto.setQtdPedidosFeito(listaPedidos.size());
+        if (!listaPedidos.isEmpty()) {
+
+            dto.setDtUltimaCompra(listaPedidos.get(0).getDataPedido().toString());
+
+            dto.setStatusUltimaCompra(listaPedidos.get(0).getStatusPedido());
+
+            dto.setQtdPedidosFeito(listaPedidos.size());
+
+        }
 
         return dto;
 

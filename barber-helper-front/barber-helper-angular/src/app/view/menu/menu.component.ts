@@ -20,7 +20,6 @@ export class MenuComponent implements OnInit {
 
   itens: MenuItem[];
   itensMenuSanduiche: MenuItem[];
-  itensCliente: MenuItem[];
 
   usuarioLogado: Usuario;
   usuarioLogadoTemAtribuicao: boolean = true;
@@ -50,16 +49,14 @@ export class MenuComponent implements OnInit {
 
     this.itens = [
       {
-        label: 'Reservas',
-        icon: 'pi pi-fw pi-calendar',
-        command:(click)=>{this.router.navigate(['reserva']);}
+        label: 'Perfil',
+        icon: 'pi pi-fw pi-user',
+        command:(click)=>{this.router.navigate(['perfil']);}
       },
     ];
 
     if (this.usuarioLogadoTemAtribuicao){
       this.adicionarComponentesAdminOuFuncionario();
-    } else {
-      this.adicionarComponentesCliente();
     }
 
     this.adicionarLogoutNosItems();
@@ -67,6 +64,11 @@ export class MenuComponent implements OnInit {
 
   adicionarComponentesAdminOuFuncionario(){
     this.itens.push(
+      {
+        label: 'Reservas',
+        icon: 'pi pi-fw pi-calendar',
+        command:(click)=>{this.router.navigate(['reserva']);}
+      },
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-chart-line',
@@ -137,16 +139,6 @@ export class MenuComponent implements OnInit {
         command:(click)=>{this.router.navigate(['reserva']);}
       },
     ];
-  }
-
-  adicionarComponentesCliente(){
-    this.itens.push(
-      {
-        label: 'Perfil',
-        icon: 'pi pi-fw pi-user',
-        command:(click)=>{this.router.navigate(['perfil']);}
-      }
-    )
   }
 
   logout() {
