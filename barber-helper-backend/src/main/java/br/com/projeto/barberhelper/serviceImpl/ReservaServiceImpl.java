@@ -197,17 +197,25 @@ public class ReservaServiceImpl extends ServiceGenerico<Long, Reserva> implement
 
         PerfilDTO dto = new PerfilDTO();
 
-        dto.setDtUltimaReserva(listaReservas.get(0).getDataInicial().toString());
+        if (!listaReservas.isEmpty()) {
 
-        dto.setStatusUltimaReserva(listaReservas.get(0).getStatusReserva());
+            dto.setDtUltimaReserva(listaReservas.get(0).getDataInicial().toString());
 
-        dto.setQtdReservasFeitas(listaReservas.size());
+            dto.setStatusUltimaReserva(listaReservas.get(0).getStatusReserva());
 
-        dto.setDtUltimaCompra(listaPedidos.get(0).getDataPedido().toString());
+            dto.setQtdReservasFeitas(listaReservas.size());
 
-        dto.setStatusUltimaCompra(listaPedidos.get(0).getStatusPedido());
+        }
 
-        dto.setQtdPedidosFeito(listaPedidos.size());
+        if (!listaPedidos.isEmpty()) {
+
+            dto.setDtUltimaCompra(listaPedidos.get(0).getDataPedido().toString());
+
+            dto.setStatusUltimaCompra(listaPedidos.get(0).getStatusPedido());
+
+            dto.setQtdPedidosFeito(listaPedidos.size());
+
+        }
 
         return dto;
 
