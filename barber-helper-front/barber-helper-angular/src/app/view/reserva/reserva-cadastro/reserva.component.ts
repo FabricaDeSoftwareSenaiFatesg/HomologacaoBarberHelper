@@ -171,6 +171,7 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
 
   confirmarReserva() {
     this.salvarReserva();
+    // this.adicionarMensagemSucesso("Agendamento realizado com sucesso!");
     this.redirecionarParaRota('');
   }
 }
