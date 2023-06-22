@@ -55,6 +55,7 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
     this.newEntidade();
     this.consultarServicos();
     this.consultarProfissionais();
+    this.consultarUsuarioLogado();
   }
 
   protected override newEntidade(): Reserva {
@@ -85,8 +86,15 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
     })
   }
 
+  consultarUsuarioLogado() {
+    this.service.getUsuarioLogado().subscribe(response => {
+      this.usuarioLogado = response;
+    });
+  }
+
   salvarReserva() {
     let reserva = {
+      cliente: this.usuarioLogado.pessoa,
       funcionario: this.profissionalSelecionado,
       servicos: this.servicosSelecionados,
       dataInicial: this.getDataInicial(),
@@ -97,7 +105,8 @@ export class ReservaCadastroComponent extends BaseComponent<Reserva> implements 
   }
 
   getDataInicial() {
-    let dataInicial = new Date();
+    let dataInicial = this.data;
+    console.log(dataInicial);
     let horaInicial = Number(this.horarioSelecionado.substring(0, 2));
     let minutoInicial = Number(this.horarioSelecionado.substring(3, 5));
     dataInicial.setHours(horaInicial, minutoInicial, 0, 0);
