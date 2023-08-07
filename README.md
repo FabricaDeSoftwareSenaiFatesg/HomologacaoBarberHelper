@@ -175,3 +175,27 @@ Pagamento;
 <ul>
 <li>E-mail: magnolevi2011@gmail.com</li>
 </ul>
+
+<h3> Requisitos Funcionais </h3>
+<li>Agendar Horario</li>
+<li>Manter Agendamento</li>
+<li>Manter Cliente</li>
+<li>Manter Funcionário</li>
+<li>Manter Serviço</li>
+<li>Manter Produto</li>
+<li>Comprar Produto</li>
+<li>Manter Relatórios / Dashboards</li>
+
+<h3> Requisitos Não Funcionais </h3>
+<li>O sistema deve ter autenticação de usuário</li>
+<li>O sistema deve estar disponível sempre que necessário</li>
+<li>O sistema deve ter performance otimizada</li>
+<li>O sistema deve respeitar as restrições de acordo com atribuição do usuário</li>
+
+<h3> Regras de Negócio </h3>
+<li>Não deve permitir selecionar uma data anterior a atual</li>
+<li>Não deve permitir marcar um horário que já esteja ocupado</li>
+
+<h3> Restrições </h3>
+<li>O sistema deve ser feito na linguagem Java</li>
+<li>O banco de dados deve ser PostgreSQL</li>
